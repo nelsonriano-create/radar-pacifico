@@ -74,6 +74,7 @@ function tipoUNGM(t) {
 // Texto limpio de un pedazo de HTML
 function limpiar(html) {
   return String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")     // programas de la página: no son texto
     .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
@@ -93,15 +94,16 @@ function leerFilasUNGM(html) {
     const celdas = p.split(/<div[^>]*class="tableCell/).slice(1);
     if (celdas.length < 8) continue;
     // Orden de columnas: [opciones, título, fecha límite, publicado, agencia, tipo, referencia, país]
+    const span = c => limpiar((c.match(/<span[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "");  // primer <span> de la celda
     const titulo = limpiar((celdas[1].match(/<span[^>]*ungm-title[^>]*>([\s\S]*?)<\/span>/) || [])[1] || "");
     const limite = limpiar((celdas[2].match(/<span>([\s\S]*?)<\/span>/) || [])[1] || celdas[2]);
     filas.push({
       id, titulo, limite,
-      publicado: limpiar(celdas[3].replace(/^[^>]*>/, "")),
-      agencia:   limpiar(celdas[4].replace(/^[^>]*>/, "")),
-      tipo:      limpiar(celdas[5].replace(/^[^>]*>/, "")),
-      referencia:limpiar(celdas[6].replace(/^[^>]*>/, "")),
-      pais:      limpiar(celdas[7].replace(/^[^>]*>/, ""))
+      publicado: span(celdas[3]),
+      agencia:   span(celdas[4]),
+      tipo:      span(celdas[5]),
+      referencia:span(celdas[6]),
+      pais:      span(celdas[7])
     });
   }
   return filas;
@@ -181,7 +183,6 @@ async function descargarUNGM({ hoy = new Date() } = {}) {
     const filas = await paginaUNGM(sesion, i);
     informe.paginas++;
     if (!filas.length) break;
-    if (!informe.muestra) informe.muestra = filas[0];      // diagnóstico: cómo llega una fila
     for (const f of filas) {
       informe.recibidos++;
       const p = normalizar(f.pais);
