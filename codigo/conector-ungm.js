@@ -181,12 +181,18 @@ async function descargarUNGM({ hoy = new Date() } = {}) {
     const filas = await paginaUNGM(sesion, i);
     informe.paginas++;
     if (!filas.length) break;
+    if (!informe.muestra) informe.muestra = filas[0];      // diagnóstico: cómo llega una fila
     for (const f of filas) {
       informe.recibidos++;
       const p = normalizar(f.pais);
       if (VARIOS.includes(p)) { informe.variasLocalizaciones++; continue; }
       const paisEs = PAISES_UNGM[p] || PAISES_UNGM_N[p];
-      if (!paisEs) { informe.otrasRegiones++; continue; }
+      if (!paisEs) {
+        informe.otrasRegiones++;
+        informe.paisesVistos = informe.paisesVistos || {};
+        informe.paisesVistos[f.pais] = (informe.paisesVistos[f.pais] || 0) + 1;
+        continue;
+      }
       const ficha = fichaUNGM(f, paisEs);
       if (!ficha.fecha_cierre) { informe.sinFecha++; continue; }
       if (ficha.fecha_cierre < inicioHoy) { informe.yaCerro++; continue; }
@@ -198,6 +204,9 @@ async function descargarUNGM({ hoy = new Date() } = {}) {
     await new Promise(x => setTimeout(x, UNGM.pausaMs));
   }
   if (informe.recibidos === 0) throw new Error("UNGM respondió, pero sin avisos (¿cambió la página?)");
+  // Diagnóstico: solo los 25 países más frecuentes que no se reconocieron
+  if (informe.paisesVistos) informe.paisesVistos = Object.fromEntries(
+    Object.entries(informe.paisesVistos).sort((a, b) => b[1] - a[1]).slice(0, 25));
   informe.mostrados = fichas.length;
   return { fichas, informe };
 }
