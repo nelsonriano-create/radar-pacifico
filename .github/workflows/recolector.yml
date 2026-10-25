@@ -19,12 +19,12 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Traer el código del Radar
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Preparar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Recolectar oportunidades
         env:
