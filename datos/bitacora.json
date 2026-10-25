@@ -1,0 +1,48 @@
+[
+ {
+  "fecha": "2026-10-25T20:30:21.211Z",
+  "segundos": 19,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2711,
+    "segundos": 3,
+    "informe": {
+     "recibidos": 3175,
+     "directa": 0,
+     "adjudicado": 79,
+     "cerrado": 0,
+     "yaCerro": 8,
+     "enCurso": 48,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 329,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Estimate Phase": 15,
+      "Clarification submission": 13,
+      "Pré-Calificación de competidores": 1
+     },
+     "mostrados": 2711
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 30,
+    "segundos": 16,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1765,
+     "yaCerro": 281,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 30
+    }
+   }
+  ]
+ }
+]
