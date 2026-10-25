@@ -17,6 +17,7 @@ const path = require("path");
 Object.assign(global, require("../codigo/expansor.js"));
 const { descargarSecop } = require("../codigo/conector-secop.js");
 const { descargarBancoMundial } = require("../codigo/conector-bancomundial.js");
+const { descargarUNGM } = require("../codigo/conector-ungm.js");
 
 const CARPETA = path.join(__dirname, "..", "datos");
 const ARCHIVO = path.join(CARPETA, "oportunidades.json");
@@ -25,7 +26,8 @@ const BITACORA = path.join(CARPETA, "bitacora.json");
 // Lista de fuentes activas. Agregar una fuente = agregar una línea.
 const FUENTES = [
   { nombre: "SECOP II",      correr: () => descargarSecop({ token: process.env.SECOP_TOKEN || "" }) },
-  { nombre: "Banco Mundial", correr: () => descargarBancoMundial() }
+  { nombre: "Banco Mundial", correr: () => descargarBancoMundial() },
+  { nombre: "UNGM (ONU)",    correr: () => descargarUNGM() }
 ];
 
 // La ficha que se guarda (sin los datos originales, para que el archivo sea liviano)
