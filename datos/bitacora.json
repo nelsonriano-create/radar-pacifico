@@ -1,5 +1,68 @@
 [
  {
+  "fecha": "2026-10-25T21:01:43.658Z",
+  "segundos": 247,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2711,
+    "segundos": 3,
+    "informe": {
+     "recibidos": 3175,
+     "directa": 0,
+     "adjudicado": 79,
+     "cerrado": 0,
+     "yaCerro": 8,
+     "enCurso": 48,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 329,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Estimate Phase": 15,
+      "Clarification submission": 13,
+      "Pré-Calificación de competidores": 1
+     },
+     "mostrados": 2711
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 30,
+    "segundos": 11,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1765,
+     "yaCerro": 281,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 30
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 0,
+    "segundos": 233,
+    "informe": {
+     "paginas": 110,
+     "recibidos": 1625,
+     "otrasRegiones": 1625,
+     "variasLocalizaciones": 0,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {},
+     "mostrados": 0
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-25T20:41:23.296Z",
   "segundos": 14,
   "fuentes": [
