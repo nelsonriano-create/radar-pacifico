@@ -20,6 +20,8 @@
 //  - Solo avisos con fecha límite vigente (se toma solo el día).
 //  - Se descartan "Varias localizaciones" (casi siempre globales).
 //  - Monto y moneda: UNGM no los publica → No informado.
+//  - Entidad: sigla en español + "· Naciones Unidas" (UNDP → PNUD).
+//  - Modalidad traducida al español.
 //
 // La página puede responder en español o en inglés: el conector
 // entiende los dos idiomas (meses, tipos y países).
@@ -62,6 +64,35 @@ function fechaUNGM(txt) {
   const d = new Date(Date.UTC(Number(m[3]), MESES[m[2]] - 1, Number(m[1])));
   return isNaN(d) ? null : d;
 }
+
+// Siglas de las agencias en inglés → como se conocen en español
+const AGENCIAS = {
+  "UNDP": "PNUD", "ILO": "OIT", "IOM": "OIM", "UNIDO": "ONUDI", "WHO": "OMS", "PAHO": "OPS", "PAHO/WHO": "OPS/OMS",
+  "UNHCR": "ACNUR", "WFP": "PMA", "UN WOMEN": "ONU Mujeres", "UN-WOMEN": "ONU Mujeres", "UNEP": "PNUMA",
+  "UN-HABITAT": "ONU-Hábitat", "UNHABITAT": "ONU-Hábitat", "IFAD": "FIDA", "UNAIDS": "ONUSIDA", "ECLAC": "CEPAL",
+  "WIPO": "OMPI", "ITU": "UIT", "IAEA": "OIEA", "ICAO": "OACI", "WMO": "OMM", "UNV": "VNU", "UPU": "UPU",
+  "UNWTO": "ONU Turismo", "UN TOURISM": "ONU Turismo", "UNRWA": "UNRWA", "UNICEF": "UNICEF", "FAO": "FAO",
+  "UNFPA": "UNFPA", "UNESCO": "UNESCO", "UNOPS": "UNOPS", "UNODC": "UNODC", "OCHA": "OCHA", "UNFCCC": "CMNUCC",
+  "UNCDF": "FENU", "ITC": "ITC", "UNITAR": "UNITAR", "UNU": "UNU", "UNSSC": "UNSSC", "IMO": "OMI", "ILO-ITC": "CIF-OIT"
+};
+// Se agrega "· Naciones Unidas": así el nombre queda claro y el buscador no pasa las siglas a minúsculas
+function agenciaUNGM(a) {
+  const sigla = AGENCIAS[String(a || "").trim().toUpperCase()] || String(a || "").trim();
+  return sigla ? sigla + " · Naciones Unidas" : "No informado";
+}
+
+// Modalidad: UNGM en inglés → español
+const MODALIDADES = {
+  "call for individual consultants": "Llamado a consultores", "llamado a consultores as": "Llamado a consultores",
+  "request for quotation": "Solicitud de cotización", "solicitud de presupuesto": "Solicitud de cotización",
+  "request for proposal": "Solicitud de propuesta", "invitation to bid": "Invitación a licitar",
+  "llamado a licitacion": "Invitación a licitar", "request for eoi": "Solicitud de manifestación de interés",
+  "request for information": "Solicitud de información", "not set": "Sin especificar",
+  "call for implementing partners": "Llamado a socios ejecutores",
+  "llamado a entidades asociadas en la ejecucion": "Llamado a socios ejecutores",
+  "grant support call for proposal": "Convocatoria de subvenciones"
+};
+function modalidadUNGM(t) { return MODALIDADES[normalizar(t)] || t; }
 
 function tipoUNGM(t) {
   const n = normalizar(t);
@@ -115,8 +146,8 @@ function fichaUNGM(f, paisEs) {
     fuente: UNGM.nombre,
     id_fuente: f.id,
     tipo: tipoUNGM(f.tipo),
-    modalidad: f.tipo,
-    entidad: f.agencia || "No informado",
+    modalidad: modalidadUNGM(f.tipo),
+    entidad: agenciaUNGM(f.agencia),
     titulo: f.titulo,
     objeto: "",
     monto: null,
