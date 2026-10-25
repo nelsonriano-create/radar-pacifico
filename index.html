@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>radar·pacífico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   COLORES (modo oscuro por defecto y modo claro)
+   Cambiar un color = cambiarlo solo aquí.
+   ============================================================ */
+:root, :root[data-tema="oscuro"] {
+  --fondo:#0B1B33; --cabecera:#0A1830; --superficie:#102544; --borde:#1E3352; --borde-campo:#2A4268;
+  --texto:#FFFFFF; --suave:#9AA7B8; --suave2:#B8C4D4; --etiqueta:#DCE3EC; --tenue:#8A98AC;
+  --enlace:#3CC4C4; --enlace-hover:#7FDCDC; --naranja:#F28C28; --urgente:#F5A55A;
+  --plazo-bg:#173257; --plazo-fg:#B8C4D4; --plazo-urg-bg:#5A2E10; --plazo-urg-fg:#FFB877;
+  --heroe-bg:#102544; --heroe-borde:#1E3352; --heroe-texto:#FFFFFF; --campo-bg:#0B1B33; --campo-texto:#FFFFFF;
+  --boton-bg:#0FA3A3; --boton-texto:#06141F; --nav-activo:#13294B;
+  --chip-on-bg:#E6F6F6; --chip-on-fg:#0B1B33; --chip-fg:#DCE3EC;
+  --logo-anillo:#FFFFFF; --logo-centro:#FFFFFF;
+  --t-licitacion:#7FA8F2; --t-consultoria:#3CC4C4; --t-convocatoria:#C9A6F2; --t-subvencion:#E8C15A; --t-fondo:#8FD18B; --t-otro:#B8C4D4;
+}
+:root[data-tema="claro"] {
+  --fondo:#F4F6F9; --cabecera:#FFFFFF; --superficie:#FFFFFF; --borde:#E1E6EE; --borde-campo:#CBD3DE;
+  --texto:#0B1B33; --suave:#5B6573; --suave2:#4A5566; --etiqueta:#DCE3EC; --tenue:#5B6573;
+  --enlace:#0B7F80; --enlace-hover:#075E5F; --naranja:#E07510; --urgente:#C2560C;
+  --plazo-bg:#EEF2F7; --plazo-fg:#4A5566; --plazo-urg-bg:#FDEBDC; --plazo-urg-fg:#A2470A;
+  --heroe-bg:#0B1B33; --heroe-borde:#0B1B33; --heroe-texto:#FFFFFF; --campo-bg:#FFFFFF; --campo-texto:#0B1B33;
+  --boton-bg:#F28C28; --boton-texto:#0B1B33; --nav-activo:#E8F4F4;
+  --chip-on-bg:#0B1B33; --chip-on-fg:#FFFFFF; --chip-fg:#24344F;
+  --logo-anillo:#0B1B33; --logo-centro:#0B1B33;
+  --t-licitacion:#2F66C9; --t-consultoria:#0B7F80; --t-convocatoria:#7C4BC2; --t-subvencion:#8C6500; --t-fondo:#2E7D32; --t-otro:#5B6573;
+}
+
+* { box-sizing:border-box; }
+body { margin:0; background:var(--fondo); color:var(--texto); font-family:'Sora',system-ui,sans-serif; }
+a { color:var(--enlace); } a:hover { color:var(--enlace-hover); }
+.contenedor { max-width:1280px; margin:0 auto; padding:0 32px; }
+@media (max-width:640px) { .contenedor { padding:0 16px; } }
+.titulo-fuente { font-family:'Outfit',sans-serif; font-weight:600; }
+
+/* --- Cabecera --- */
+header { background:var(--cabecera); border-bottom:1px solid var(--borde); }
+header .contenedor { padding-top:14px; padding-bottom:14px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }
+.marca { display:flex; align-items:center; gap:10px; }
+.marca .nombre { font-family:'Outfit',sans-serif; font-size:22px; font-weight:600; letter-spacing:-.4px; }
+.marca .punto { color:var(--naranja); padding:0 3px; }
+nav { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+nav a { padding:10px 14px; border-radius:8px; color:var(--suave2); text-decoration:none; font-size:14px; }
+nav a.activo { background:var(--nav-activo); color:var(--texto); font-weight:600; }
+nav a.pronto { opacity:.55; cursor:default; }
+.boton-icono { margin-left:8px; width:44px; height:44px; border-radius:10px; border:1px solid var(--borde-campo); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.avatar { margin-left:4px; width:40px; height:40px; border-radius:50%; border:1px solid var(--borde-campo); background:var(--nav-activo); color:var(--texto); font:600 13px 'Sora',sans-serif; }
+
+/* --- Héroe de búsqueda --- */
+main.contenedor { padding-top:32px; padding-bottom:56px; display:flex; flex-direction:column; gap:28px; }
+.heroe { position:relative; overflow:hidden; padding:28px; border-radius:16px; background:var(--heroe-bg); border:1px solid var(--heroe-borde); color:var(--heroe-texto); display:flex; flex-direction:column; gap:18px; }
+.heroe > * { position:relative; }
+.heroe .radar-fondo { position:absolute; right:-120px; top:-150px; opacity:.5; pointer-events:none; }
+.heroe-arriba { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+.heroe h1 { margin:0; font-size:28px; }
+.sello { padding:6px 10px; border-radius:999px; border:1px dashed #6A82A8; font-size:12px; color:#DCE3EC; }
+.buscador { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; }
+.buscador .campo { flex:1 1 420px; min-width:0; display:flex; flex-direction:column; gap:8px; }
+.buscador label { font-size:13px; font-weight:600; color:var(--etiqueta); }
+.buscador input { height:52px; padding:0 18px; border-radius:12px; border:1px solid var(--borde-campo); background:var(--campo-bg); color:var(--campo-texto); font:16px 'Sora',sans-serif; }
+.buscador button { height:52px; padding:0 26px; border:none; border-radius:12px; background:var(--boton-bg); color:var(--boton-texto); font:600 15px 'Sora',sans-serif; cursor:pointer; }
+.buscador button:disabled { opacity:.6; cursor:wait; }
+.tambien { margin:0; font-size:13px; line-height:1.7; color:#B8C4D4; }
+.tambien span { color:#FFFFFF; }
+:root[data-tema="oscuro"] .tambien, :root:not([data-tema]) .tambien { color:var(--suave); }
+:root[data-tema="oscuro"] .tambien span, :root:not([data-tema]) .tambien span { color:var(--etiqueta); }
+
+/* --- Chips de tipo --- */
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { min-height:40px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--chip-fg); font:600 13px 'Sora',sans-serif; cursor:pointer; display:flex; align-items:center; gap:8px; }
+:root[data-tema="claro"] .chip { background:#FFFFFF; }
+.chip .punto { width:8px; height:8px; border-radius:50%; }
+.chip[aria-pressed="true"], :root[data-tema="claro"] .chip[aria-pressed="true"] { background:var(--chip-on-bg); color:var(--chip-on-fg); border-color:var(--chip-on-bg); }
+.chip .cuenta { font-weight:400; opacity:.75; }
+
+/* --- Indicadores --- */
+.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+.kpi { padding:20px 22px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); display:flex; flex-direction:column; gap:6px; }
+.kpi span:first-child { font-size:13px; color:var(--suave); }
+.kpi b { font-family:'Outfit',sans-serif; font-size:36px; font-weight:600; }
+.kpi b.urgente { color:var(--urgente); }
+.kpi small { font-size:18px; color:var(--suave); font-weight:400; }
+
+/* --- Resultados --- */
+.resultados-cabeza { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+.resultados-cabeza h2 { margin:0; font-size:22px; }
+.orden { display:flex; align-items:center; gap:10px; }
+.orden label { font-size:13px; color:var(--suave); }
+.orden select { height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--superficie); color:var(--texto); font:13px 'Sora',sans-serif; }
+.rejilla { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; }
+@media (max-width:420px) { .rejilla { grid-template-columns:1fr; } }
+.tarjeta { padding:20px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); display:flex; flex-direction:column; gap:14px; }
+:root[data-tema="claro"] .tarjeta { box-shadow:0 1px 2px rgba(11,27,51,.04); }
+.tarjeta-arriba { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.tipo { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; }
+.tipo .punto { width:8px; height:8px; border-radius:50%; background:currentColor; }
+.estrella { width:44px; height:44px; margin:-10px -10px -10px 0; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.tarjeta h3 { margin:0; font-size:16px; font-weight:600; line-height:1.4; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.entidad { font-size:13px; color:var(--suave2); }
+.nota { font-size:12px; color:var(--urgente); }
+dl { margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+dl div { display:flex; flex-direction:column; gap:2px; }
+dt { font-size:11px; color:var(--tenue); }
+dd { margin:0; font-size:14px; font-weight:600; }
+.tarjeta-pie { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:12px; border-top:1px solid var(--borde); }
+.plazo { padding:5px 10px; border-radius:999px; background:var(--plazo-bg); color:var(--plazo-fg); font-size:12px; font-weight:600; }
+.plazo.urgente { background:var(--plazo-urg-bg); color:var(--plazo-urg-fg); }
+.tarjeta-pie a { font-size:13px; font-weight:600; }
+.tarjeta-pie .sin-enlace { font-size:13px; color:var(--suave); }
+
+/* --- Mensajes (inicio, cargando, error, vacío) --- */
+.mensaje { padding:40px 24px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); text-align:center; color:var(--suave2); line-height:1.6; }
+.mensaje b { color:var(--texto); }
+.mensaje.error b { color:var(--urgente); }
+.barrido { animation:girar 2.4s linear infinite; transform-origin:60px 60px; }
+@keyframes girar { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .barrido { animation:none; } }
+.ver-mas { align-self:center; height:44px; padding:0 22px; border-radius:10px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:600 14px 'Sora',sans-serif; cursor:pointer; }
+.oculto { display:none !important; }
+
+/* --- Panel de filtros --- */
+.filtros { background:var(--superficie); border:1px solid var(--borde); border-radius:14px; }
+.filtros summary { padding:16px 20px; cursor:pointer; list-style:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
+.filtros summary::-webkit-details-marker { display:none; }
+.filtros summary .rotulo-panel { font-family:'Outfit',sans-serif; font-size:17px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.filtros summary .rotulo-panel::before { content:"▸"; color:var(--suave); transition:transform .15s; }
+.filtros[open] summary .rotulo-panel::before { transform:rotate(90deg); }
+.filtros summary .resumen { font-size:13px; color:var(--suave); }
+.contador { background:var(--naranja); color:#0B1B33; border-radius:999px; padding:2px 9px; font:600 12px 'Sora',sans-serif; }
+.filtros-cuerpo { padding:4px 20px 20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px 24px; }
+.filtro { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.filtro .rotulo, .filtro > label:not(.casilla) { font-size:12px; font-weight:600; color:var(--suave); text-transform:uppercase; letter-spacing:.04em; }
+.filtro select, .filtro input[type=text], .filtro input[type=number] { width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--fondo); color:var(--texto); font:13px 'Sora',sans-serif; }
+.casilla { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--suave2); cursor:pointer; line-height:1.3; }
+.casilla input { width:18px; height:18px; margin:0; flex:none; accent-color:#0FA3A3; }
+.casilla .n { color:var(--tenue); }
+.dos { display:flex; gap:8px; } .dos input { flex:1; min-width:0; }
+.atajo { align-self:flex-start; min-height:34px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:600 12px 'Sora',sans-serif; cursor:pointer; }
+.atajo[aria-pressed="true"] { background:var(--chip-on-bg); color:var(--chip-on-fg); border-color:var(--chip-on-bg); }
+.lista-modalidades { display:flex; flex-direction:column; gap:7px; max-height:180px; overflow:auto; padding-right:4px; }
+.ayuda-f { font-size:12px; color:var(--tenue); line-height:1.4; }
+.filtros-pie { grid-column:1/-1; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid var(--borde); padding-top:14px; font-size:13px; color:var(--suave); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <div class="marca">
+      <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="16" fill="none" stroke="var(--logo-anillo)" stroke-width="3" opacity=".3"/>
+        <circle cx="60" cy="60" r="33" fill="none" stroke="var(--logo-anillo)" stroke-width="4" opacity=".45"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--logo-anillo)" stroke-width="6" opacity=".65"/>
+        <path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="83.1" cy="32.4" r="11" fill="var(--naranja)"/>
+        <circle cx="60" cy="60" r="7" fill="var(--logo-centro)"/>
+      </svg>
+      <div class="nombre"><span>radar</span><span class="punto">·</span><span>pacífico</span></div>
+    </div>
+    <nav aria-label="Principal">
+      <a href="#" class="activo">Buscar</a>
+      <a class="pronto" title="Llega en la etapa 5">Favoritos</a>
+      <a class="pronto" title="Llega más adelante">Fuentes</a>
+      <button type="button" class="boton-icono" id="tema" aria-label="Cambiar tema"></button>
+      <button type="button" class="avatar" aria-label="Cuenta de Nelson Riaño">NR</button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+  <section class="heroe">
+    <svg class="radar-fondo" width="420" height="420" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="16" fill="none" stroke="#FFFFFF" stroke-width=".4" opacity=".3"/>
+      <circle cx="60" cy="60" r="33" fill="none" stroke="#FFFFFF" stroke-width=".6" opacity=".35"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#FFFFFF" stroke-width=".9" opacity=".4"/>
+      <path d="M60 60 L60 10 A50 50 0 0 1 103.3 35 Z" fill="#0FA3A3" opacity=".25"/>
+      <path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <div class="heroe-arriba">
+      <h1 class="titulo-fuente">¿Qué oportunidad buscas hoy?</h1>
+      <span class="sello" id="sello">Prototipo · datos reales</span>
+    </div>
+    <form class="buscador" id="formulario">
+      <div class="campo">
+        <label for="clave">Palabras clave</label>
+        <input id="clave" type="search" placeholder="Ej.: cctv · apicultura · mejora de procesos" autocomplete="off">
+      </div>
+      <button type="submit" id="botonBuscar">Buscar en el radar</button>
+    </form>
+    <p class="tambien" id="tambien">Varias ideas se separan con coma: <span>apicultura, cctv</span></p>
+  </section>
+
+  <div class="chips oculto" role="group" aria-label="Tipo de oportunidad" id="chips"></div>
+
+  <details class="filtros oculto" id="filtros" open>
+    <summary>
+      <span class="rotulo-panel">Filtros <span class="contador oculto" id="contadorFiltros"></span></span>
+      <span class="resumen" id="resumenFiltros"></span>
+    </summary>
+    <div class="filtros-cuerpo">
+      <div class="filtro">
+        <label for="fCierre">Cierre</label>
+        <select id="fCierre">
+          <option value="">Cualquier fecha</option>
+          <option value="7">En 7 días o menos</option>
+          <option value="15">En 15 días o menos</option>
+          <option value="30">En 30 días o menos</option>
+        </select>
+        <label class="casilla"><input type="checkbox" id="fMin3"> Ocultar los que cierran en menos de 3 días</label>
+        <label class="casilla"><input type="checkbox" id="fProx"> Incluir «Próximamente»</label>
+      </div>
+      <div class="filtro">
+        <span class="rotulo">Monto (millones de pesos)</span>
+        <div class="dos">
+          <input type="number" id="fMin" min="0" step="1" placeholder="Desde" aria-label="Monto desde, en millones de pesos">
+          <input type="number" id="fMax" min="0" step="1" placeholder="Hasta" aria-label="Monto hasta, en millones de pesos">
+        </div>
+        <button type="button" class="atajo" id="fTope" aria-pressed="false">Hasta $200 millones</button>
+        <label class="casilla"><input type="checkbox" id="fSinMonto"> Incluir sin monto informado</label>
+        <span class="ayuda-f">Por ahora aplica a montos en pesos colombianos.</span>
+      </div>
+      <div class="filtro">
+        <span class="rotulo">Modalidad</span>
+        <div class="lista-modalidades" id="fModalidades"></div>
+      </div>
+      <div class="filtro">
+        <label for="fPais">País</label>
+        <select id="fPais"></select>
+        <label for="fDepto">Departamento (Colombia)</label>
+        <select id="fDepto"></select>
+      </div>
+      <div class="filtro">
+        <label for="fPublicado">Publicado</label>
+        <select id="fPublicado">
+          <option value="">Cualquier fecha</option>
+          <option value="7">Últimos 7 días</option>
+          <option value="30">Últimos 30 días</option>
+          <option value="90">Últimos 90 días</option>
+        </select>
+        <label for="fFuente">Fuente</label>
+        <select id="fFuente"></select>
+      </div>
+      <div class="filtro">
+        <label for="fExcluir">Excluir palabras</label>
+        <input type="text" id="fExcluir" placeholder="Ej.: obra, alimentos, transporte" autocomplete="off">
+        <span class="ayuda-f">Separe con coma. Oculta los resultados que contengan esas palabras.</span>
+      </div>
+      <div class="filtros-pie">
+        <span id="pieFiltros"></span>
+        <button type="button" class="atajo" id="fLimpiar">Limpiar filtros</button>
+      </div>
+    </div>
+  </details>
+
+  <section class="kpis oculto" aria-label="Indicadores" id="kpis"></section>
+
+  <section aria-label="Resultados" style="display:flex;flex-direction:column;gap:16px">
+    <div class="resultados-cabeza oculto" id="cabezaResultados">
+      <h2 class="titulo-fuente" id="totalResultados"></h2>
+      <div class="orden">
+        <label for="orden">Ordenar por</label>
+        <select id="orden">
+          <option value="cierre">Fecha de cierre más próxima</option>
+          <option value="reciente">Publicación más reciente</option>
+          <option value="monto">Monto (mayor primero)</option>
+        </select>
+      </div>
+    </div>
+    <div id="zonaMensaje"></div>
+    <div class="rejilla" id="rejilla"></div>
+    <button type="button" class="ver-mas oculto" id="verMas">Ver más resultados</button>
+  </section>
+</main>
+
+<script>
+/* ===== diccionario.js ===== */
+// ============================================================
+// RADAR PACÍFICO — Diccionario de familias de términos (v1, PMV)
+// ============================================================
+// Cada familia agrupa palabras que significan lo mismo para el
+// buscador. Si el usuario escribe cualquiera de ellas, se buscan
+// TODAS las de la familia.
+//
+// Cómo editar (no hace falta saber programar):
+//  - Cada término va entre comillas y separado por coma.
+//  - Las tildes y mayúsculas dan igual ("Apícola" = "apicola").
+//  - Los plurales simples se reconocen solos (abeja = abejas).
+//  - "excluir": frases que NO deben contar como coincidencia
+//    (p. ej. "luna de miel" no es apicultura).
+// ============================================================
+
+const DICCIONARIO = [
+  {
+    familia: "Apicultura",
+    es: ["apicultura", "apicola", "miel", "abejas", "colmenas", "apicultores"],
+    en: ["beekeeping", "apiculture", "honey", "bees", "beekeepers"],
+    pt: ["apicultura", "mel", "abelhas", "apicultores"],
+    excluir: ["luna de miel"]
+  },
+  {
+    familia: "Videovigilancia",
+    es: ["cctv", "videovigilancia", "camaras de seguridad", "camaras de vigilancia",
+         "circuito cerrado de television", "videocamaras"],
+    en: ["cctv", "video surveillance", "security cameras", "surveillance cameras"],
+    pt: ["cftv", "videomonitoramento", "cameras de seguranca"],
+    excluir: ["camara de comercio", "camara de representantes"]
+  },
+  {
+    familia: "Control de acceso",
+    es: ["control de acceso", "control de accesos", "biometria", "biometrico",
+         "reconocimiento facial", "torniquetes"],
+    en: ["access control", "biometric", "facial recognition", "turnstiles"],
+    pt: ["controle de acesso", "biometria", "reconhecimento facial", "catracas"],
+    excluir: []
+  },
+  {
+    familia: "Alarmas e intrusión",
+    es: ["alarmas", "deteccion de intrusion", "sistema de seguridad electronica",
+         "seguridad electronica", "sensores de movimiento"],
+    en: ["alarm system", "intrusion detection", "electronic security"],
+    pt: ["alarme", "seguranca eletronica", "deteccao de intrusao"],
+    excluir: []
+  },
+  {
+    familia: "Cableado estructurado",
+    es: ["cableado estructurado", "red de datos", "redes de datos", "puntos de red",
+         "cableado de red"],
+    en: ["structured cabling", "data network", "network cabling"],
+    pt: ["cabeamento estruturado", "rede de dados"],
+    excluir: []
+  },
+  {
+    familia: "Mejora de procesos",
+    es: ["mejoramiento de procesos", "mejora de procesos", "optimizacion de procesos",
+         "lean", "six sigma", "lean six sigma", "productividad", "cuellos de botella",
+         "teoria de restricciones"],
+    en: ["process improvement", "process optimization", "lean", "six sigma",
+         "productivity"],
+    pt: ["melhoria de processos", "otimizacao de processos", "produtividade"],
+    excluir: []
+  },
+  {
+    familia: "Logística",
+    es: ["logistica", "cadena de suministro", "cadena de abastecimiento",
+         "distribucion en planta", "inventarios", "almacenamiento"],
+    en: ["logistics", "supply chain", "plant layout", "inventory management"],
+    pt: ["logistica", "cadeia de suprimentos", "cadeia de abastecimento"],
+    excluir: []
+  },
+  {
+    familia: "Planeación y diagnóstico",
+    es: ["planeacion estrategica", "planificacion estrategica", "plan estrategico",
+         "diagnostico organizacional", "reorganizacion", "rediseño organizacional",
+         "estructura de costos", "sistema de costos"],
+    en: ["strategic planning", "strategic plan", "organizational assessment",
+         "organizational diagnosis", "restructuring"],
+    pt: ["planejamento estrategico", "diagnostico organizacional"],
+    excluir: []
+  },
+  {
+    familia: "Proyectos",
+    es: ["formulacion de proyectos", "gestion de proyectos", "gerencia de proyectos",
+         "pmo", "oficina de proyectos", "estructuracion de proyectos"],
+    en: ["project design", "project management", "project formulation"],
+    pt: ["gestao de projetos", "elaboracao de projetos"],
+    excluir: []
+  },
+  {
+    familia: "Transformación digital",
+    es: ["transformacion digital", "analitica de datos", "inteligencia artificial",
+         "automatizacion de procesos", "ciencia de datos"],
+    en: ["digital transformation", "data analytics", "artificial intelligence",
+         "process automation", "data science"],
+    pt: ["transformacao digital", "analise de dados", "inteligencia artificial"],
+    excluir: []
+  },
+  {
+    familia: "Certificaciones",
+    es: ["iso 9001", "iso 14001", "iso 45001", "basc", "sistema de gestion de calidad",
+         "sistema integrado de gestion", "certificacion iso"],
+    en: ["quality management system", "iso certification", "iso 9001"],
+    pt: ["sistema de gestao da qualidade", "certificacao iso"],
+    excluir: []
+  }
+];
+
+// (Línea técnica: permite usar este archivo también en pruebas automáticas.)
+if (typeof module !== "undefined") module.exports = { DICCIONARIO };
+
+/* ===== expansor.js ===== */
+// ============================================================
+// RADAR PACÍFICO — Expansor de términos (v1, PMV)
+// ============================================================
+// Recibe lo que escribe el usuario (p. ej. "apicultura") y:
+//  1. Detecta a qué familia del diccionario pertenece.
+//  2. Devuelve todos los términos de esa familia (ES, EN, PT).
+//  3. Permite revisar si un texto (título u objeto de una
+//     oportunidad) coincide con la búsqueda.
+//
+// Reglas:
+//  - Sin tildes ni mayúsculas.
+//  - Plurales simples (abeja = abejas, red = redes).
+//  - Solo palabras completas ("miel" no encuentra "familiar").
+//  - Frases exactas ("control de acceso").
+//  - Varias ideas se separan con coma: "apicultura, cctv".
+//  - Si la palabra no está en el diccionario, se busca tal cual.
+// ============================================================
+
+// --- 1. Normalizar: quitar tildes, mayúsculas y signos -------
+function normalizar(texto) {
+  return String(texto || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")   // quita tildes y la virgulilla de la ñ
+    .replace(/[^a-z0-9]+/g, " ")                        // signos y guiones → espacio
+    .trim();
+}
+
+// --- 2. Raíz de una palabra (para reconocer plurales) --------
+function raiz(palabra) {
+  if (palabra.length <= 3) return palabra;              // "de", "red", "pmo": se dejan igual
+  if (/[lrndzj]es$/.test(palabra)) return palabra.slice(0, -2); // redes → red, sensores → sensor
+  if (palabra.endsWith("s")) return palabra.slice(0, -1);       // abejas → abeja
+  return palabra;
+}
+
+// --- 3. Patrón de búsqueda de una frase ----------------------
+// Convierte "camaras de seguridad" en un patrón que acepta
+// "cámara de seguridad", "cámaras de seguridad", etc.,
+// y solo como palabras completas.
+function patron(frase) {
+  const palabras = normalizar(frase).split(" ").filter(Boolean);
+  const partes = palabras.map(p => {
+    if (p.length <= 2) return p;                        // "de", "la", "en": exactas
+    return raiz(p) + "(?:s|es)?";
+  });
+  return new RegExp("(?:^| )" + partes.join(" ") + "(?= |$)");
+}
+
+function clave(frase) {
+  return normalizar(frase).split(" ").map(raiz).join(" ");
+}
+
+// --- 4. Expandir la consulta del usuario ---------------------
+// Devuelve una lista de "grupos". Cada grupo es una idea de la
+// consulta con sus términos y exclusiones.
+function expandir(consulta, diccionario) {
+  const partes = String(consulta || "").split(",").map(normalizar).filter(Boolean);
+  const grupos = [];
+
+  for (const parte of partes) {
+    const familias = diccionario.filter(f => {
+      const terminos = [...f.es, ...f.en, ...f.pt];
+      return terminos.some(t => clave(t) === clave(parte) || patron(t).test(parte));
+    });
+
+    if (familias.length === 0) {
+      // No está en el diccionario: se busca la palabra tal cual.
+      grupos.push({ escrito: parte, familias: [], terminos: [parte], excluir: [] });
+    } else {
+      const terminos = new Set([parte]);
+      const excluir = new Set();
+      for (const f of familias) {
+        [...f.es, ...f.en, ...f.pt].forEach(t => terminos.add(normalizar(t)));
+        (f.excluir || []).forEach(e => excluir.add(normalizar(e)));
+      }
+      grupos.push({
+        escrito: parte,
+        familias: familias.map(f => f.familia),
+        terminos: [...terminos],
+        excluir: [...excluir]
+      });
+    }
+  }
+  return grupos;
+}
+
+// --- 5. ¿Este texto coincide con la búsqueda? ----------------
+// Devuelve los términos encontrados (lista vacía = no coincide).
+function coincide(texto, grupos) {
+  const base = normalizar(texto);
+  const encontrados = [];
+  for (const g of grupos) {
+    // Primero se borran las frases trampa del texto
+    let limpio = " " + base + " ";
+    for (const e of g.excluir) limpio = limpio.replace(new RegExp(patron(e).source, "g"), " ");
+    limpio = limpio.trim();
+    for (const t of g.terminos) {
+      if (patron(t).test(limpio) && !encontrados.includes(t)) encontrados.push(t);
+    }
+  }
+  return encontrados;
+}
+
+if (typeof module !== "undefined") module.exports = { normalizar, raiz, expandir, coincide, patron };
+
+</script>
+<script>
+/* ============================================================
+   PANTALLA DEL BUSCADOR
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const TIPOS = [
+  { id:"Licitación",   color:"var(--t-licitacion)" },
+  { id:"Consultoría",  color:"var(--t-consultoria)" },
+  { id:"Convocatoria", color:"var(--t-convocatoria)" },
+  { id:"Subvención",   color:"var(--t-subvencion)" },
+  { id:"Fondo de financiamiento", color:"var(--t-fondo)" }
+];
+const colorTipo = t => (TIPOS.find(x => x.id === t) || { color:"var(--t-otro)" }).color;
+let FUENTES_ACTIVAS = 0;            // se lee del archivo diario
+
+/* ============================================================
+   DATOS DEL DÍA
+   El recolector deja cada mañana todas las oportunidades abiertas
+   en este archivo del repositorio. El buscador lo descarga una
+   vez y busca ahí (en vez de consultar cada portal en vivo).
+   ============================================================ */
+const DATOS_URL = "https://raw.githubusercontent.com/nelsonriano-create/radar-pacifico/main/datos/oportunidades.json";
+let DATOS = null;
+
+// "2026-10-28T00:00:00.000Z" → 28 oct (se toma solo el día, sin zona horaria)
+function soloDia(iso) {
+  if (!iso) return null;
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+}
+
+async function cargarDatos() {
+  if (DATOS) return DATOS;
+  const r = await fetch(DATOS_URL + "?v=" + Date.now());   // evita copias viejas guardadas
+  if (!r.ok) throw new Error("No se pudo leer el archivo del día (" + r.status + ")");
+  const j = await r.json();
+  j.oportunidades.forEach(o => {
+    o.fecha_cierre = soloDia(o.fecha_cierre);
+    o.fecha_publicacion = soloDia(o.fecha_publicacion);
+    o.departamento = o.departamento || "";
+    o.objeto = o.objeto || "";
+    if (o.monto == null) o.monto = null;
+  });
+  FUENTES_ACTIVAS = (j.fuentes || []).length;
+  const g = new Date(j.generado);
+  $("sello").textContent = `Datos del ${g.getDate()} ${MESES[g.getMonth()]}, ${g.toLocaleTimeString("es-CO", { hour: "numeric", minute: "2-digit" })} · ${j.total.toLocaleString("es-CO")} abiertas`;
+  DATOS = j;
+  return j;
+}
+const POR_PAGINA = 30;
+
+const estado = { fichas: [], tipo: "todas", orden: "cierre", mostrar: POR_PAGINA, favs: {} };
+
+/* --- Tema claro / oscuro (recuerda la elección) --- */
+const SOL  = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="#F28C28" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="#F28C28" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const LUNA = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z" fill="none" stroke="#0B1B33" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+function ponerTema(t) {
+  document.documentElement.dataset.tema = t;
+  $("tema").innerHTML = t === "oscuro" ? SOL : LUNA;
+  $("tema").setAttribute("aria-label", t === "oscuro" ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+}
+(function () {
+  let guardado = null;
+  try { guardado = localStorage.getItem("radar-tema"); } catch (e) {}
+  const delSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "oscuro";
+  ponerTema(guardado || delSistema);
+})();
+$("tema").addEventListener("click", () => {
+  const nuevo = document.documentElement.dataset.tema === "oscuro" ? "claro" : "oscuro";
+  ponerTema(nuevo);
+  try { localStorage.setItem("radar-tema", nuevo); } catch (e) {}
+});
+
+/* --- Textos más legibles: SECOP escribe muchos títulos EN MAYÚSCULAS --- */
+const SIGLAS = ["CCTV","UPS","DVR","NVR","IP","TIC","TICS","ISO","BASC","PMO","SST","SG-SST","ESE","IPS","SENA","ICBF","PAE","LED","CFTV","SIES","ICPA","UNSPSC","PDET","ODS","PNUD","BID","ONU","UE","USB","GPS","CO","NIT","S.A.S","SAS","EPS","SGSST","PQRS","ERP","CRM","IA"];
+const MENORES = ["de","del","la","las","el","los","y","e","en","a","al","para","por","con","o","u"];
+function legible(texto, tipo) {
+  const t = String(texto || "").trim();
+  const mayus = (t.match(/[A-ZÁÉÍÓÚÑ]/g) || []).length, minus = (t.match(/[a-záéíóúñ]/g) || []).length;
+  if (!t || mayus <= minus * 2) return t;                   // casi todo en minúsculas: se deja igual
+  return t.toLowerCase().split(/(\s+)/).map((p, i) => {
+    const limpia = p.replace(/[^\wáéíóúñ.-]/gi, "").toUpperCase();
+    if (SIGLAS.includes(limpia)) return p.toUpperCase();
+    if (tipo === "nombre" && p.trim() && (i === 0 || !MENORES.includes(p)))
+      return p.charAt(0).toUpperCase() + p.slice(1);
+    return p;
+  }).join("").replace(/^\s*\S/, c => c.toUpperCase());
+}
+
+/* --- Formatos --- */
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const fechaCorta = d => d ? `${d.getDate()} ${MESES[d.getMonth()]} ${d.getFullYear()}` : "No informado";
+function montoTexto(f) {
+  if (f.monto == null) return "No informado";
+  return f.moneda + " " + Math.round(f.monto).toLocaleString("es-CO");
+}
+function diasParaCierre(f) {
+  if (!f.fecha_cierre) return null;
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  const c = new Date(f.fecha_cierre); c.setHours(0,0,0,0);
+  return Math.round((c - hoy) / 86400000);
+}
+
+/* --- Dibujar --- */
+function mensaje(html, clase = "") {
+  $("zonaMensaje").innerHTML = html ? `<div class="mensaje ${clase}">${html}</div>` : "";
+}
+const RADAR_GIRANDO = `<svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true" style="display:block;margin:0 auto 12px">
+  <circle cx="60" cy="60" r="16" fill="none" stroke="currentColor" stroke-width="3" opacity=".3"/>
+  <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="4" opacity=".45"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="6" opacity=".6"/>
+  <g class="barrido"><path d="M60 60 L60 10 A50 50 0 0 1 103.3 35 Z" fill="#0FA3A3" opacity=".3"/><path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/></g>
+  <circle cx="60" cy="60" r="6" fill="currentColor"/></svg>`;
+
+function visibles() {
+  let lista = filtradas().filter(f => estado.tipo === "todas" || f.tipo === estado.tipo);
+  const fin = 8.64e15;
+  if (estado.orden === "cierre") lista.sort((a, b) =>
+    (a.estado === "Próximamente") - (b.estado === "Próximamente") || (a.fecha_cierre || fin) - (b.fecha_cierre || fin));
+  if (estado.orden === "reciente") lista.sort((a, b) => (b.fecha_publicacion || 0) - (a.fecha_publicacion || 0));
+  if (estado.orden === "monto") lista.sort((a, b) => (b.monto ?? -1) - (a.monto ?? -1));
+  return lista;
+}
+
+function dibujarChips() {
+  const base = filtradas();
+  const cuenta = t => base.filter(f => t === "todas" || f.tipo === t).length;
+  const defs = [{ id:"todas", label:"Todas", color:"currentColor" }]
+    .concat(TIPOS.map(t => ({ id:t.id, label:t.id, color:t.color })));
+  $("chips").innerHTML = defs.map(c =>
+    `<button type="button" class="chip" data-tipo="${esc(c.id)}" aria-pressed="${estado.tipo === c.id}">
+      <span class="punto" style="background:${c.color}"></span>${esc(c.label)} <span class="cuenta">${cuenta(c.id)}</span></button>`).join("");
+}
+
+function dibujarKpis(lista) {
+  const urgentes = lista.filter(f => { const d = diasParaCierre(f); return f.estado !== "Próximamente" && d != null && d <= 7; }).length;
+  const fuentes = new Set(lista.map(f => f.fuente)).size;
+  const paises = new Set(lista.map(f => f.pais)).size;
+  $("kpis").innerHTML = `
+    <div class="kpi"><span>Oportunidades encontradas</span><b>${lista.length}</b></div>
+    <div class="kpi"><span>Cierran en 7 días o menos</span><b class="urgente">${urgentes}</b></div>
+    <div class="kpi"><span>Fuentes con resultados</span><b>${fuentes} <small>de ${FUENTES_ACTIVAS}</small></b></div>
+    <div class="kpi"><span>Países</span><b>${paises}</b></div>`;
+}
+
+function tarjeta(f) {
+  const dias = diasParaCierre(f);
+  const urg = dias != null && dias <= 7;
+  const plazo = f.estado === "Próximamente" ? "Próximamente"
+    : dias == null ? "Cierre no informado"
+    : dias === 0 ? "Cierra hoy" : dias === 1 ? "Cierra mañana" : `Cierra en ${dias} días`;
+  const fav = !!estado.favs[f.id];
+  return `<article class="tarjeta">
+    <div class="tarjeta-arriba">
+      <span class="tipo" style="color:${colorTipo(f.tipo)}"><span class="punto"></span>${esc(f.tipo)}</span>
+      <button type="button" class="estrella" data-fav="${esc(f.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de favoritos" : "Guardar en favoritos"}">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="${fav ? "var(--naranja)" : "none"}" stroke="${fav ? "var(--naranja)" : "var(--tenue)"}" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h3 title="${esc(legible(f.objeto || f.titulo))}">${esc(legible(f.titulo))}</h3>
+      <span class="entidad">${esc(legible(f.entidad, "nombre"))}${f.modalidad ? " · " + esc(f.modalidad) : ""}</span>
+      ${f.nota ? `<span class="nota">⚠ ${esc(f.nota)}</span>` : ""}
+    </div>
+    <dl>
+      <div><dt>Monto</dt><dd>${esc(montoTexto(f))}</dd></div>
+      <div><dt>País</dt><dd>${esc(f.pais)}</dd></div>
+      <div><dt>Cierre</dt><dd>${esc(fechaCorta(f.fecha_cierre))}</dd></div>
+      <div><dt>Fuente</dt><dd>${esc(f.fuente)}</dd></div>
+    </dl>
+    <div class="tarjeta-pie">
+      <span class="plazo${urg && f.estado !== "Próximamente" ? " urgente" : ""}">${plazo}</span>
+      ${f.enlace ? `<a href="${esc(f.enlace)}" target="_blank" rel="noopener">Ver en el portal</a>` : `<span class="sin-enlace">Aún sin enlace</span>`}
+    </div>
+  </article>`;
+}
+
+function dibujarResultados() {
+  const lista = visibles();
+  dibujarChips();
+  dibujarKpis(lista);
+  $("totalResultados").textContent = `${lista.length} resultado${lista.length === 1 ? "" : "s"}`;
+  $("rejilla").innerHTML = lista.slice(0, estado.mostrar).map(tarjeta).join("");
+  $("verMas").classList.toggle("oculto", lista.length <= estado.mostrar);
+  $("verMas").textContent = `Ver más resultados (${lista.length - estado.mostrar} restantes)`;
+  actualizarResumenFiltros();
+  if (estado.fichas.length && !filtradas().length) mensaje("<b>Ningún resultado cumple los filtros.</b><br>Afloje alguno o use «Limpiar filtros».");
+  else if (estado.fichas.length && !lista.length) mensaje("No hay resultados de este tipo. Pruebe con <b>Todas</b>.");
+  else if (estado.fichas.length) mensaje("");
+}
+
+function mostrarZonaResultados(si) {
+  ["chips", "filtros", "kpis", "cabezaResultados"].forEach(id => $(id).classList.toggle("oculto", !si));
+}
+
+/* --- "También buscamos" --- */
+function dibujarTambien(grupos) {
+  const escritos = new Set(grupos.map(g => g.escrito));
+  const extra = [...new Set(grupos.flatMap(g => g.terminos))].filter(t => !escritos.has(t));
+  const sinFamilia = grupos.filter(g => !g.familias.length).map(g => "«" + g.escrito + "»");
+  let html = extra.length ? `También buscamos: <span>${esc(extra.join(" · "))}</span>` : "";
+  if (sinFamilia.length) html += `${html ? "<br>" : ""}Sin sinónimos en el diccionario: ${esc(sinFamilia.join(", "))} (se busca tal cual).`;
+  $("tambien").innerHTML = html;
+}
+
+/* --- Buscar --- */
+async function buscar(e) {
+  if (e) e.preventDefault();
+  const consulta = $("clave").value.trim();
+  if (!consulta) { $("clave").focus(); return; }
+  const grupos = expandir(consulta, DICCIONARIO);
+  dibujarTambien(grupos);
+  $("botonBuscar").disabled = true;
+  $("rejilla").innerHTML = "";
+  $("verMas").classList.add("oculto");
+  mostrarZonaResultados(false);
+  mensaje(`${RADAR_GIRANDO}<b>Rastreando el radar…</b><br>${DATOS ? "" : "La primera búsqueda descarga los datos del día (unos segundos)."}`);
+  try {
+    const datos = await cargarDatos();
+    const fichas = [];
+    for (const o of datos.oportunidades) {
+      const encontrados = coincide(o.titulo + " " + o.objeto, grupos);
+      if (encontrados.length) fichas.push({ ...o, encontrados });
+    }
+    estado.fichas = fichas;
+    estado.tipo = "todas";
+    estado.mostrar = POR_PAGINA;
+    if (!fichas.length) {
+      mensaje(`<b>No encontramos oportunidades abiertas para «${esc(consulta)}».</b><br>Pruebe con otra palabra o un sinónimo.`);
+      return;
+    }
+    mostrarZonaResultados(true);
+    dibujarFiltros();
+    dibujarResultados();
+  } catch (err) {
+    mensaje(`<b>No pudimos leer los datos del radar.</b><br>Revise su conexión a internet e intente de nuevo.<br><small>${esc(err.message)}</small>`, "error");
+  } finally {
+    $("botonBuscar").disabled = false;
+  }
+}
+
+/* ============================================================
+   FILTROS
+   Se aplican sobre los resultados ya traídos: no vuelven a
+   consultar la fuente, por eso responden al instante.
+   La elección se recuerda en este navegador.
+   ============================================================ */
+const PACIFICO = ["Colombia", "Honduras", "Paraguay", "Nicaragua", "Bolivia", "Ecuador", "Perú"];
+const FILTROS_INICIALES = {
+  cierre: "", min3: false, prox: true, min: "", max: "", sinMonto: true,
+  modalidadesFuera: [], pais: "pacifico", depto: "", publicado: "", fuente: "", excluir: ""
+};
+estado.filtros = { ...FILTROS_INICIALES };
+try { Object.assign(estado.filtros, JSON.parse(localStorage.getItem("radar-filtros") || "{}")); } catch (e) {}
+let gruposExcluir = [];
+
+function guardarFiltros() {
+  try { localStorage.setItem("radar-filtros", JSON.stringify(estado.filtros)); } catch (e) {}
+}
+
+function pasaFiltros(f) {
+  const F = estado.filtros;
+  const dias = diasParaCierre(f);
+  if (!F.prox && f.estado === "Próximamente") return false;
+  if (F.cierre && (dias == null || dias > Number(F.cierre))) return false;
+  if (F.min3 && dias != null && dias < 3) return false;
+  if (f.monto == null) { if (!F.sinMonto) return false; }
+  else if (f.moneda === "COP") {
+    if (F.min !== "" && f.monto < Number(F.min) * 1e6) return false;
+    if (F.max !== "" && f.monto > Number(F.max) * 1e6) return false;
+  }
+  if (F.modalidadesFuera.includes(f.modalidad || "Sin modalidad")) return false;
+  if (F.pais === "pacifico" && !PACIFICO.includes(f.pais)) return false;
+  if (F.pais && F.pais !== "pacifico" && f.pais !== F.pais) return false;
+  if (F.depto && legible(f.departamento, "nombre") !== F.depto) return false;
+  if (F.publicado && (!f.fecha_publicacion || (Date.now() - f.fecha_publicacion) > Number(F.publicado) * 86400000)) return false;
+  if (F.fuente && f.fuente !== F.fuente) return false;
+  if (gruposExcluir.length && coincide(f.titulo + " " + (f.objeto || ""), gruposExcluir).length) return false;
+  return true;
+}
+const filtradas = () => estado.fichas.filter(pasaFiltros);
+
+function contarActivos() {
+  const F = estado.filtros, I = FILTROS_INICIALES;
+  return ["cierre","min3","prox","sinMonto","pais","depto","publicado","fuente"].filter(k => F[k] !== I[k]).length
+    + (F.min !== "" || F.max !== "" ? 1 : 0) + (F.modalidadesFuera.length ? 1 : 0) + (F.excluir.trim() ? 1 : 0);
+}
+
+function actualizarResumenFiltros() {
+  const n = contarActivos();
+  $("contadorFiltros").textContent = n;
+  $("contadorFiltros").classList.toggle("oculto", n === 0);
+  const vistas = filtradas().length, total = estado.fichas.length;
+  $("resumenFiltros").textContent = n ? `${vistas} de ${total} pasan los filtros` : "Sin filtros activos";
+  $("pieFiltros").textContent = `Mostrando ${vistas} de ${total} oportunidades encontradas.`;
+  $("fTope").setAttribute("aria-pressed", String(estado.filtros.max === "200" && estado.filtros.min === ""));
+}
+
+// Llena las listas que dependen de los resultados (modalidades, países, departamentos, fuentes)
+function dibujarFiltros() {
+  const F = estado.filtros;
+  const contar = clave => estado.fichas.reduce((m, f) => (m[clave(f)] = (m[clave(f)] || 0) + 1, m), {});
+  const opcion = (valor, texto, actual) => `<option value="${esc(valor)}"${valor === actual ? " selected" : ""}>${esc(texto)}</option>`;
+
+  const mods = contar(f => f.modalidad || "Sin modalidad");
+  $("fModalidades").innerHTML = Object.keys(mods).sort().map(m =>
+    `<label class="casilla"><input type="checkbox" data-mod="${esc(m)}"${F.modalidadesFuera.includes(m) ? "" : " checked"}> ${esc(m)} <span class="n">(${mods[m]})</span></label>`
+  ).join("") || '<span class="ayuda-f">Sin datos de modalidad.</span>';
+
+  const paises = contar(f => f.pais);
+  $("fPais").innerHTML = opcion("pacifico", "Países de Pacífico (7)", F.pais) + opcion("", "Todos los países", F.pais) +
+    Object.keys(paises).sort().map(p => opcion(p, `${p} (${paises[p]})`, F.pais)).join("");
+
+  const deptos = contar(f => f.pais === "Colombia" && f.departamento ? legible(f.departamento, "nombre") : "");
+  delete deptos[""];
+  $("fDepto").innerHTML = opcion("", "Todos", F.depto) +
+    Object.keys(deptos).sort((a, b) => a.localeCompare(b, "es")).map(d => opcion(d, `${d} (${deptos[d]})`, F.depto)).join("");
+  $("fDepto").disabled = !Object.keys(deptos).length;
+
+  const fuentes = contar(f => f.fuente);
+  $("fFuente").innerHTML = opcion("", "Todas", F.fuente) + Object.keys(fuentes).sort().map(x => opcion(x, `${x} (${fuentes[x]})`, F.fuente)).join("");
+
+  $("fCierre").value = F.cierre; $("fMin3").checked = F.min3; $("fProx").checked = F.prox;
+  $("fMin").value = F.min; $("fMax").value = F.max; $("fSinMonto").checked = F.sinMonto;
+  $("fPublicado").value = F.publicado; $("fExcluir").value = F.excluir;
+  gruposExcluir = expandir(F.excluir, []);
+}
+
+// Lee los controles cada vez que el usuario cambia algo
+function leerFiltros() {
+  const F = estado.filtros;
+  F.cierre = $("fCierre").value; F.min3 = $("fMin3").checked; F.prox = $("fProx").checked;
+  F.min = $("fMin").value.trim(); F.max = $("fMax").value.trim(); F.sinMonto = $("fSinMonto").checked;
+  F.modalidadesFuera = [...document.querySelectorAll("[data-mod]")].filter(c => !c.checked).map(c => c.dataset.mod);
+  F.pais = $("fPais").value; F.depto = $("fDepto").value;
+  F.publicado = $("fPublicado").value; F.fuente = $("fFuente").value; F.excluir = $("fExcluir").value;
+  gruposExcluir = expandir(F.excluir, []);
+  guardarFiltros();
+  estado.mostrar = POR_PAGINA;
+  dibujarResultados();
+}
+
+$("filtros").addEventListener("change", leerFiltros);
+$("fExcluir").addEventListener("input", leerFiltros);
+$("fMin").addEventListener("input", leerFiltros);
+$("fMax").addEventListener("input", leerFiltros);
+$("fTope").addEventListener("click", () => {
+  const activo = $("fTope").getAttribute("aria-pressed") === "true";
+  $("fMin").value = ""; $("fMax").value = activo ? "" : "200";
+  leerFiltros();
+});
+$("fLimpiar").addEventListener("click", () => {
+  estado.filtros = { ...FILTROS_INICIALES, modalidadesFuera: [] };
+  guardarFiltros(); dibujarFiltros(); estado.mostrar = POR_PAGINA; dibujarResultados();
+});
+
+/* --- Eventos --- */
+$("formulario").addEventListener("submit", buscar);
+$("orden").addEventListener("change", e => { estado.orden = e.target.value; estado.mostrar = POR_PAGINA; dibujarResultados(); });
+$("chips").addEventListener("click", e => {
+  const b = e.target.closest("[data-tipo]"); if (!b) return;
+  estado.tipo = b.dataset.tipo; estado.mostrar = POR_PAGINA; dibujarResultados();
+});
+$("rejilla").addEventListener("click", e => {
+  const b = e.target.closest("[data-fav]"); if (!b) return;
+  estado.favs[b.dataset.fav] = !estado.favs[b.dataset.fav]; dibujarResultados();
+});
+$("verMas").addEventListener("click", () => { estado.mostrar += POR_PAGINA; dibujarResultados(); });
+
+mensaje(`<b>Escriba una o varias palabras y pulse «Buscar en el radar».</b><br>Buscamos en las oportunidades abiertas que el recolector reúne cada mañana.`);
+cargarDatos().catch(() => {});   // descarga los datos en segundo plano mientras usted escribe
+</script>
+</body>
+</html>
