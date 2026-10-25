@@ -45,7 +45,8 @@ function textoBM(v) {
 
 function fichaBM(n, paisEs) {
   const grupo = String(n.procurement_group || "").toUpperCase();
-  const tipo = grupo === "CS" ? "Consultoría" : (["GO", "WK", "NC"].includes(grupo) ? "Licitación" : "Sin clasificar");
+  // CS = servicios de consultoría; todo lo demás (bienes, obras, servicios, "CW"…) es licitación
+  const tipo = grupo === "CS" ? "Consultoría" : "Licitación";
   const cierre = n.submission_deadline_date ? new Date(n.submission_deadline_date) : null;
   const pub = n.noticedate ? new Date(n.noticedate) : null;
   return {
