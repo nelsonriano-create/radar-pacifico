@@ -1,5 +1,103 @@
 [
  {
+  "fecha": "2026-10-26T11:37:00.745Z",
+  "segundos": 256,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2710,
+    "segundos": 5,
+    "informe": {
+     "recibidos": 3174,
+     "directa": 0,
+     "adjudicado": 79,
+     "cerrado": 0,
+     "yaCerro": 8,
+     "enCurso": 48,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 329,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 13,
+      "Estimate Phase": 16,
+      "Pré-Calificación de competidores": 1
+     },
+     "mostrados": 2710
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 30,
+    "segundos": 26,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1765,
+     "yaCerro": 281,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 30
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 258,
+    "segundos": 224,
+    "informe": {
+     "paginas": 109,
+     "recibidos": 1620,
+     "otrasRegiones": 1284,
+     "variasLocalizaciones": 78,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 106,
+      "Call for individual consultants": 17,
+      "Invitation to bid": 65,
+      "Request for proposal": 58,
+      "Not set": 3,
+      "Request for EOI": 4,
+      "Request for information": 5
+     },
+     "paisesVistos": {
+      "Pakistan": 45,
+      "Kenya": 41,
+      "Philippines": 41,
+      "Afghanistan": 40,
+      "Jordan": 37,
+      "Syrian Arab Republic": 35,
+      "Ukraine": 29,
+      "Lebanon": 28,
+      "Nigeria": 27,
+      "Congo, The Democratic Republic of the": 27,
+      "Sri Lanka": 26,
+      "Switzerland": 25,
+      "Uganda": 25,
+      "Sudan": 24,
+      "Sierra Leone": 24,
+      "Austria": 24,
+      "Bangladesh": 23,
+      "Moldova, Republic of": 23,
+      "Ethiopia": 22,
+      "India": 22,
+      "Egypt": 22,
+      "South Sudan": 20,
+      "Mongolia": 19,
+      "Tunisia": 18,
+      "South Africa": 17
+     },
+     "mostrados": 258
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-25T21:23:09.966Z",
   "segundos": 273,
   "fuentes": [
