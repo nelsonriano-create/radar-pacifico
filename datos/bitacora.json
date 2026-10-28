@@ -1,5 +1,102 @@
 [
  {
+  "fecha": "2026-10-28T11:36:46.215Z",
+  "segundos": 283,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2021,
+    "segundos": 2,
+    "informe": {
+     "recibidos": 2289,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 10,
+     "enCurso": 42,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 216,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 15,
+      "Estimate Phase": 8
+     },
+     "mostrados": 2021
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 31,
+    "segundos": 43,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1762,
+     "yaCerro": 283,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 31
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 261,
+    "segundos": 238,
+    "informe": {
+     "paginas": 113,
+     "recibidos": 1668,
+     "otrasRegiones": 1329,
+     "variasLocalizaciones": 77,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 1,
+     "tipos": {
+      "Invitation to bid": 66,
+      "Call for individual consultants": 16,
+      "Request for quotation": 106,
+      "Request for proposal": 60,
+      "Not set": 4,
+      "Request for EOI": 4,
+      "Request for information": 5
+     },
+     "paisesVistos": {
+      "Afghanistan": 48,
+      "Philippines": 45,
+      "Pakistan": 42,
+      "Syrian Arab Republic": 41,
+      "Kenya": 37,
+      "Jordan": 34,
+      "Lebanon": 32,
+      "Ukraine": 31,
+      "Sierra Leone": 30,
+      "India": 28,
+      "Nigeria": 28,
+      "Sri Lanka": 26,
+      "Ethiopia": 26,
+      "Tunisia": 25,
+      "Austria": 24,
+      "Congo, The Democratic Republic of the": 23,
+      "Sudan": 23,
+      "Switzerland": 23,
+      "Egypt": 22,
+      "Uganda": 22,
+      "Bangladesh": 20,
+      "Moldova, Republic of": 20,
+      "Palestine, State of": 19,
+      "Mozambique": 18,
+      "Madagascar": 17
+     },
+     "mostrados": 261
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-27T11:33:14.350Z",
   "segundos": 271,
   "fuentes": [
