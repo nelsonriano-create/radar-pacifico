@@ -1,5 +1,103 @@
 [
  {
+  "fecha": "2026-10-29T11:37:29.362Z",
+  "segundos": 274,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2418,
+    "segundos": 3,
+    "informe": {
+     "recibidos": 2824,
+     "directa": 0,
+     "adjudicado": 70,
+     "cerrado": 0,
+     "yaCerro": 11,
+     "enCurso": 47,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 278,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Pré-Calificación de competidores": 2,
+      "Clarification submission": 21,
+      "Estimate Phase": 6
+     },
+     "mostrados": 2418
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 34,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1755,
+     "yaCerro": 287,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 34
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 267,
+    "segundos": 258,
+    "informe": {
+     "paginas": 115,
+     "recibidos": 1704,
+     "otrasRegiones": 1360,
+     "variasLocalizaciones": 77,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 111,
+      "Invitation to bid": 72,
+      "Request for proposal": 58,
+      "Call for individual consultants": 14,
+      "Not set": 4,
+      "Request for EOI": 3,
+      "Request for information": 5
+     },
+     "paisesVistos": {
+      "Afghanistan": 49,
+      "Philippines": 48,
+      "Syrian Arab Republic": 41,
+      "Pakistan": 40,
+      "Kenya": 37,
+      "Ukraine": 35,
+      "Lebanon": 33,
+      "Jordan": 32,
+      "India": 29,
+      "Sri Lanka": 29,
+      "Nigeria": 29,
+      "Sierra Leone": 28,
+      "Tunisia": 28,
+      "Austria": 27,
+      "Ethiopia": 27,
+      "Egypt": 26,
+      "Uganda": 24,
+      "Bangladesh": 22,
+      "Sudan": 22,
+      "Congo, The Democratic Republic of the": 21,
+      "Switzerland": 21,
+      "Yemen": 20,
+      "Moldova, Republic of": 19,
+      "Madagascar": 19,
+      "Somalia": 18
+     },
+     "mostrados": 267
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-28T11:36:46.215Z",
   "segundos": 283,
   "fuentes": [
