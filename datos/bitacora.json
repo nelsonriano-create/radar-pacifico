@@ -1,5 +1,102 @@
 [
  {
+  "fecha": "2026-10-30T11:34:18.867Z",
+  "segundos": 305,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2263,
+    "segundos": 4,
+    "informe": {
+     "recibidos": 2605,
+     "directa": 0,
+     "adjudicado": 8,
+     "cerrado": 0,
+     "yaCerro": 10,
+     "enCurso": 53,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 271,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 20,
+      "Estimate Phase": 6
+     },
+     "mostrados": 2263
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 31,
+    "segundos": 13,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1759,
+     "yaCerro": 286,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 31
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 273,
+    "segundos": 288,
+    "informe": {
+     "paginas": 118,
+     "recibidos": 1747,
+     "otrasRegiones": 1395,
+     "variasLocalizaciones": 78,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 1,
+     "tipos": {
+      "Request for proposal": 57,
+      "Request for quotation": 118,
+      "Invitation to bid": 73,
+      "Call for individual consultants": 14,
+      "Not set": 3,
+      "Request for EOI": 3,
+      "Request for information": 5
+     },
+     "paisesVistos": {
+      "Afghanistan": 51,
+      "Philippines": 46,
+      "Nigeria": 42,
+      "Pakistan": 39,
+      "Syrian Arab Republic": 39,
+      "Ukraine": 38,
+      "Kenya": 33,
+      "Lebanon": 32,
+      "Jordan": 30,
+      "Austria": 29,
+      "Ethiopia": 28,
+      "Sri Lanka": 28,
+      "Tunisia": 27,
+      "Egypt": 27,
+      "India": 26,
+      "Madagascar": 24,
+      "Sierra Leone": 24,
+      "Congo, The Democratic Republic of the": 23,
+      "Uganda": 23,
+      "Sudan": 22,
+      "Bangladesh": 22,
+      "Switzerland": 21,
+      "Cameroon": 21,
+      "Yemen": 21,
+      "Viet Nam": 20
+     },
+     "mostrados": 273
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-29T11:37:29.362Z",
   "segundos": 274,
   "fuentes": [
