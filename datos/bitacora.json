@@ -1,5 +1,102 @@
 [
  {
+  "fecha": "2026-11-01T11:29:37.189Z",
+  "segundos": 302,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2515,
+    "segundos": 3,
+    "informe": {
+     "recibidos": 2990,
+     "directa": 0,
+     "adjudicado": 91,
+     "cerrado": 0,
+     "yaCerro": 8,
+     "enCurso": 65,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 311,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 19,
+      "Estimate Phase": 2
+     },
+     "mostrados": 2515
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 30,
+    "segundos": 13,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1758,
+     "yaCerro": 288,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 30
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 280,
+    "segundos": 286,
+    "informe": {
+     "paginas": 117,
+     "recibidos": 1730,
+     "otrasRegiones": 1375,
+     "variasLocalizaciones": 75,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Invitation to bid": 74,
+      "Request for quotation": 125,
+      "Request for proposal": 57,
+      "Call for individual consultants": 15,
+      "Request for EOI": 3,
+      "Not set": 1,
+      "Request for information": 5
+     },
+     "paisesVistos": {
+      "Afghanistan": 50,
+      "Philippines": 48,
+      "Nigeria": 43,
+      "Ukraine": 37,
+      "Syrian Arab Republic": 36,
+      "Pakistan": 36,
+      "Lebanon": 32,
+      "Tunisia": 31,
+      "Madagascar": 29,
+      "Sri Lanka": 29,
+      "Cameroon": 27,
+      "Kenya": 27,
+      "Austria": 27,
+      "India": 26,
+      "Egypt": 24,
+      "Congo, The Democratic Republic of the": 24,
+      "Ethiopia": 23,
+      "Jordan": 22,
+      "Uganda": 22,
+      "Somalia": 21,
+      "Palestine, State of": 21,
+      "Bangladesh": 20,
+      "Switzerland": 20,
+      "Bosnia and Herzegovina": 20,
+      "Moldova, Republic of": 20
+     },
+     "mostrados": 280
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-10-31T11:30:53.373Z",
   "segundos": 308,
   "fuentes": [
