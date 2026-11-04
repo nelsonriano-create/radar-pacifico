@@ -1,5 +1,103 @@
 [
  {
+  "fecha": "2026-11-04T11:54:02.758Z",
+  "segundos": 304,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2390,
+    "segundos": 2,
+    "informe": {
+     "recibidos": 2759,
+     "directa": 0,
+     "adjudicado": 1,
+     "cerrado": 0,
+     "yaCerro": 8,
+     "enCurso": 63,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 297,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 16,
+      "Estimate Phase": 2
+     },
+     "mostrados": 2390
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 28,
+    "segundos": 11,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1758,
+     "yaCerro": 290,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 28
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 291,
+    "segundos": 290,
+    "informe": {
+     "paginas": 119,
+     "recibidos": 1757,
+     "otrasRegiones": 1386,
+     "variasLocalizaciones": 80,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 142,
+      "Call for individual consultants": 16,
+      "Request for information": 5,
+      "Request for EOI": 2,
+      "Invitation to bid": 69,
+      "Request for proposal": 54,
+      "Not set": 2,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Afghanistan": 50,
+      "Nigeria": 42,
+      "Kenya": 37,
+      "Syrian Arab Republic": 36,
+      "Pakistan": 36,
+      "Philippines": 36,
+      "Ukraine": 36,
+      "Lebanon": 35,
+      "Sri Lanka": 32,
+      "Jordan": 32,
+      "Tunisia": 31,
+      "India": 31,
+      "Madagascar": 30,
+      "Egypt": 27,
+      "Ethiopia": 27,
+      "Bangladesh": 26,
+      "Austria": 26,
+      "Yemen": 24,
+      "Uganda": 23,
+      "Bosnia and Herzegovina": 22,
+      "Congo, The Democratic Republic of the": 21,
+      "Somalia": 21,
+      "Switzerland": 20,
+      "Cameroon": 19,
+      "Viet Nam": 19
+     },
+     "mostrados": 291
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-03T11:47:52.445Z",
   "segundos": 321,
   "fuentes": [
