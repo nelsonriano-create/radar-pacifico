@@ -1,5 +1,102 @@
 [
  {
+  "fecha": "2026-11-05T11:53:15.240Z",
+  "segundos": 305,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2248,
+    "segundos": 3,
+    "informe": {
+     "recibidos": 2601,
+     "directa": 0,
+     "adjudicado": 21,
+     "cerrado": 0,
+     "yaCerro": 9,
+     "enCurso": 59,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 264,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 15
+     },
+     "mostrados": 2248
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 29,
+    "segundos": 11,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1759,
+     "yaCerro": 288,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 29
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 298,
+    "segundos": 291,
+    "informe": {
+     "paginas": 120,
+     "recibidos": 1800,
+     "otrasRegiones": 1415,
+     "variasLocalizaciones": 87,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 141,
+      "Call for individual consultants": 17,
+      "Request for proposal": 55,
+      "Invitation to bid": 74,
+      "Not set": 3,
+      "Request for information": 5,
+      "Request for EOI": 2,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Afghanistan": 58,
+      "Syrian Arab Republic": 44,
+      "Nigeria": 43,
+      "Ukraine": 39,
+      "Kenya": 37,
+      "Philippines": 35,
+      "Lebanon": 35,
+      "Pakistan": 34,
+      "Jordan": 33,
+      "Tunisia": 32,
+      "India": 31,
+      "Sri Lanka": 31,
+      "Egypt": 30,
+      "Uganda": 30,
+      "Ethiopia": 27,
+      "Bangladesh": 26,
+      "Austria": 26,
+      "Madagascar": 25,
+      "Yemen": 24,
+      "Palestine, State of": 21,
+      "Morocco": 21,
+      "Switzerland": 21,
+      "Bosnia and Herzegovina": 21,
+      "Viet Nam": 20,
+      "Congo, The Democratic Republic of the": 20
+     },
+     "mostrados": 298
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-04T11:54:02.758Z",
   "segundos": 304,
   "fuentes": [
