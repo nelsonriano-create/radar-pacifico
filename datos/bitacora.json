@@ -1,5 +1,103 @@
 [
  {
+  "fecha": "2026-11-09T11:52:54.187Z",
+  "segundos": 302,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2807,
+    "segundos": 6,
+    "informe": {
+     "recibidos": 3174,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 9,
+     "enCurso": 68,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 290,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 7,
+      "Estimate Phase": 3
+     },
+     "mostrados": 2807
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 33,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1762,
+     "yaCerro": 281,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 33
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 281,
+    "segundos": 284,
+    "informe": {
+     "paginas": 115,
+     "recibidos": 1701,
+     "otrasRegiones": 1339,
+     "variasLocalizaciones": 81,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 130,
+      "Call for individual consultants": 21,
+      "Invitation to bid": 67,
+      "Request for proposal": 55,
+      "Not set": 1,
+      "Request for information": 5,
+      "Request for EOI": 1,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Afghanistan": 54,
+      "Syrian Arab Republic": 47,
+      "Ukraine": 39,
+      "Jordan": 37,
+      "Uganda": 34,
+      "Philippines": 34,
+      "Nigeria": 34,
+      "Pakistan": 32,
+      "Tunisia": 32,
+      "Ethiopia": 30,
+      "Egypt": 29,
+      "Bangladesh": 29,
+      "India": 29,
+      "Chad": 26,
+      "Lebanon": 25,
+      "Kenya": 25,
+      "Congo, The Democratic Republic of the": 24,
+      "Austria": 23,
+      "Madagascar": 23,
+      "Sudan": 23,
+      "Bosnia and Herzegovina": 23,
+      "Viet Nam": 22,
+      "Palestine, State of": 22,
+      "Morocco": 22,
+      "Sri Lanka": 21
+     },
+     "mostrados": 281
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-08T11:33:46.378Z",
   "segundos": 331,
   "fuentes": [
