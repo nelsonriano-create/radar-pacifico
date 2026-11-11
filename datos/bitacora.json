@@ -1,5 +1,103 @@
 [
  {
+  "fecha": "2026-11-11T11:51:04.233Z",
+  "segundos": 254,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2353,
+    "segundos": 6,
+    "informe": {
+     "recibidos": 2758,
+     "directa": 0,
+     "adjudicado": 68,
+     "cerrado": 0,
+     "yaCerro": 10,
+     "enCurso": 52,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 275,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 9,
+      "Estimate Phase": 2
+     },
+     "mostrados": 2353
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 31,
+    "segundos": 13,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1765,
+     "yaCerro": 280,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 31
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 264,
+    "segundos": 235,
+    "informe": {
+     "paginas": 113,
+     "recibidos": 1666,
+     "otrasRegiones": 1322,
+     "variasLocalizaciones": 80,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for proposal": 55,
+      "Invitation to bid": 62,
+      "Request for quotation": 122,
+      "Request for EOI": 3,
+      "Call for individual consultants": 17,
+      "Not set": 1,
+      "Request for information": 3,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Afghanistan": 50,
+      "Syrian Arab Republic": 48,
+      "Ukraine": 47,
+      "Uganda": 36,
+      "Nigeria": 32,
+      "Bangladesh": 31,
+      "Jordan": 31,
+      "Pakistan": 30,
+      "Philippines": 30,
+      "Kenya": 28,
+      "Chad": 27,
+      "Lebanon": 26,
+      "Tunisia": 26,
+      "Sudan": 26,
+      "India": 26,
+      "Egypt": 25,
+      "Congo, The Democratic Republic of the": 25,
+      "Ethiopia": 22,
+      "Bosnia and Herzegovina": 22,
+      "Viet Nam": 21,
+      "Sri Lanka": 21,
+      "Madagascar": 20,
+      "Morocco": 19,
+      "Austria": 19,
+      "Somalia": 17
+     },
+     "mostrados": 264
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-10T11:48:50.117Z",
   "segundos": 275,
   "fuentes": [
