@@ -1,5 +1,100 @@
 [
  {
+  "fecha": "2026-11-15T11:35:15.115Z",
+  "segundos": 286,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 0,
+    "segundos": 1,
+    "informe": {
+     "recibidos": 0,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 0,
+     "enCurso": 0,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 0,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {},
+     "mostrados": 0
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 32,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1765,
+     "yaCerro": 279,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 32
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 256,
+    "segundos": 273,
+    "informe": {
+     "paginas": 108,
+     "recibidos": 1597,
+     "otrasRegiones": 1268,
+     "variasLocalizaciones": 73,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 111,
+      "Invitation to bid": 63,
+      "Not set": 3,
+      "Request for proposal": 54,
+      "Call for individual consultants": 17,
+      "Request for EOI": 4,
+      "Request for information": 3,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Afghanistan": 47,
+      "Ukraine": 47,
+      "Syrian Arab Republic": 47,
+      "Uganda": 40,
+      "Chad": 32,
+      "Philippines": 31,
+      "India": 30,
+      "Bangladesh": 28,
+      "Jordan": 28,
+      "Madagascar": 27,
+      "Congo, The Democratic Republic of the": 26,
+      "Pakistan": 26,
+      "Egypt": 26,
+      "Lebanon": 26,
+      "Sri Lanka": 24,
+      "Nigeria": 24,
+      "Sudan": 23,
+      "Ethiopia": 22,
+      "Kenya": 21,
+      "Moldova, Republic of": 20,
+      "Morocco": 20,
+      "Tunisia": 20,
+      "Bosnia and Herzegovina": 19,
+      "Nepal": 19,
+      "Yemen": 16
+     },
+     "mostrados": 256
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-14T11:33:29.789Z",
   "segundos": 308,
   "fuentes": [
