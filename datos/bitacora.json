@@ -5,8 +5,8 @@
   "fuentes": [
    {
     "fuente": "SECOP II",
-    "estado": "ok",
-    "oportunidades": 0,
+    "estado": "advertencia",
+    "oportunidades": 2144,
     "segundos": 1,
     "informe": {
      "recibidos": 0,
@@ -22,7 +22,10 @@
      "otrosEstados": {},
      "otrasFases": {},
      "mostrados": 0
-    }
+    },
+    "mensaje": "Trajo 0 y ayer había 2144: daño en datos.gov.co; se recuperaron manualmente las de ayer",
+    "recibidasHoy": 0,
+    "conservadasDeAyer": true
    },
    {
     "fuente": "Banco Mundial",
