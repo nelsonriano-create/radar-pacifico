@@ -1,5 +1,104 @@
 [
  {
+  "fecha": "2026-11-16T12:03:00.617Z",
+  "segundos": 287,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 3137,
+    "segundos": 5,
+    "informe": {
+     "recibidos": 3210,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 9,
+     "enCurso": 59,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 5,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 21,
+      "Estimate Phase": 8,
+      "Pré-Calificación de competidores": 2
+     },
+     "mostrados": 3137
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 26,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1771,
+     "yaCerro": 279,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 26
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 247,
+    "segundos": 270,
+    "informe": {
+     "paginas": 102,
+     "recibidos": 1501,
+     "otrasRegiones": 1187,
+     "variasLocalizaciones": 67,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Request for quotation": 111,
+      "Invitation to bid": 56,
+      "Not set": 3,
+      "Request for proposal": 52,
+      "Call for individual consultants": 17,
+      "Request for EOI": 4,
+      "Request for information": 3,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Ukraine": 45,
+      "Afghanistan": 41,
+      "Syrian Arab Republic": 40,
+      "Uganda": 38,
+      "Philippines": 35,
+      "Bangladesh": 30,
+      "Pakistan": 28,
+      "Egypt": 28,
+      "Chad": 27,
+      "Jordan": 26,
+      "India": 25,
+      "Lebanon": 25,
+      "Madagascar": 25,
+      "Ethiopia": 24,
+      "Congo, The Democratic Republic of the": 24,
+      "Sri Lanka": 22,
+      "Sudan": 21,
+      "Nigeria": 20,
+      "Moldova, Republic of": 20,
+      "Bosnia and Herzegovina": 19,
+      "Kenya": 19,
+      "Morocco": 18,
+      "Cameroon": 16,
+      "Austria": 16,
+      "Yemen": 15
+     },
+     "mostrados": 247
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-15T11:35:15.115Z",
   "segundos": 286,
   "fuentes": [
