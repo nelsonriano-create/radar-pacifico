@@ -8,6 +8,9 @@
 //  3. Anota en una bitácora cómo le fue a cada fuente.
 // Si una fuente falla, las demás siguen; y se conservan los datos
 // de ayer de la fuente que falló, para no dejar el buscador vacío.
+// También se conservan si la fuente responde "bien" pero trae muy
+// pocos resultados (menos de la mitad que ayer): eso suele ser un
+// daño en el portal (como pasó con datos.gov.co el 15-nov-2026).
 // ============================================================
 
 const fs = require("fs");
@@ -48,6 +51,21 @@ function leerJson(ruta, porDefecto) {
   try { return JSON.parse(fs.readFileSync(ruta, "utf8")); } catch (e) { return porDefecto; }
 }
 
+// Si hoy una fuente trae menos de esta fracción de lo de ayer, se
+// considera sospechosa y se conservan los datos de ayer.
+const UMBRAL_CAIDA = 0.5;
+// Solo se aplica si ayer la fuente tenía al menos esta cantidad
+// (para que una fuente pequeña, que varía mucho, no se bloquee).
+const MINIMO_PARA_COMPARAR = 50;
+
+// Devuelve las oportunidades de ayer de una fuente que siguen abiertas
+// (quita las que ya cerraron; las "Próximamente" sin fecha se quedan).
+function conservarDeAyer(anterior, nombre) {
+  const hoy = new Date().toISOString().slice(0, 10);
+  return (anterior.oportunidades || []).filter(o =>
+    o.fuente === nombre && (!o.fecha_cierre || String(o.fecha_cierre).slice(0, 10) >= hoy));
+}
+
 (async () => {
   const inicio = Date.now();
   const anterior = leerJson(ARCHIVO, { oportunidades: [] });
@@ -58,13 +76,25 @@ function leerJson(ruta, porDefecto) {
     const t0 = Date.now();
     try {
       const { fichas, informe } = await fuente.correr();
-      todas.push(...fichas.map(liviana));
-      resumen.push({ fuente: fuente.nombre, estado: "ok", oportunidades: fichas.length,
-        segundos: Math.round((Date.now() - t0) / 1000), informe });
-      console.log(`✔ ${fuente.nombre}: ${fichas.length} oportunidades abiertas`);
+      const deAyer = conservarDeAyer(anterior, fuente.nombre);
+      const sospechosa = deAyer.length >= MINIMO_PARA_COMPARAR && fichas.length < deAyer.length * UMBRAL_CAIDA;
+      if (sospechosa) {
+        // Respondió, pero trajo muy poco: se usan las de ayer
+        todas.push(...deAyer);
+        resumen.push({ fuente: fuente.nombre, estado: "advertencia",
+          mensaje: `Trajo ${fichas.length} y ayer había ${deAyer.length}: posible daño en la fuente; se conservan las de ayer`,
+          oportunidades: deAyer.length, recibidasHoy: fichas.length, conservadasDeAyer: true,
+          segundos: Math.round((Date.now() - t0) / 1000), informe });
+        console.log(`⚠ ${fuente.nombre}: trajo ${fichas.length} (ayer ${deAyer.length}); se conservan las de ayer`);
+      } else {
+        todas.push(...fichas.map(liviana));
+        resumen.push({ fuente: fuente.nombre, estado: "ok", oportunidades: fichas.length,
+          segundos: Math.round((Date.now() - t0) / 1000), informe });
+        console.log(`✔ ${fuente.nombre}: ${fichas.length} oportunidades abiertas`);
+      }
     } catch (e) {
-      // Falló: se conservan las de ayer de esta fuente
-      const deAyer = (anterior.oportunidades || []).filter(o => o.fuente === fuente.nombre);
+      // Falló: se conservan las de ayer de esta fuente (solo las que siguen abiertas)
+      const deAyer = conservarDeAyer(anterior, fuente.nombre);
       todas.push(...deAyer);
       resumen.push({ fuente: fuente.nombre, estado: "error", mensaje: String(e.message || e).slice(0, 300),
         oportunidades: deAyer.length, conservadasDeAyer: true });
