@@ -3,81 +3,99 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>radar·pacífico</title>
+<title>radar·pacífico · Pacífico Consultores</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230F1F3A'/%3E%3Ccircle cx='60' cy='60' r='40' fill='none' stroke='%23FFFFFF' stroke-width='7' opacity='.75'/%3E%3Ccircle cx='60' cy='60' r='23' fill='none' stroke='%23FFFFFF' stroke-width='6' opacity='.45'/%3E%3Cpath d='M60 60 L95 40' stroke='%238EC5FF' stroke-width='9' stroke-linecap='round'/%3E%3Ccircle cx='82' cy='36' r='9' fill='%238EC5FF'/%3E%3Ccircle cx='60' cy='60' r='7' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0F1F3A">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   COLORES (modo oscuro por defecto y modo claro)
+   COLORES (modo claro por defecto y modo oscuro)
    Cambiar un color = cambiarlo solo aquí.
    ============================================================ */
-:root, :root[data-tema="oscuro"] {
-  --fondo:#0B1B33; --cabecera:#0A1830; --superficie:#102544; --borde:#1E3352; --borde-campo:#2A4268;
-  --texto:#FFFFFF; --suave:#9AA7B8; --suave2:#B8C4D4; --etiqueta:#DCE3EC; --tenue:#8A98AC;
-  --enlace:#3CC4C4; --enlace-hover:#7FDCDC; --naranja:#F28C28; --urgente:#F5A55A;
-  --plazo-bg:#173257; --plazo-fg:#B8C4D4; --plazo-urg-bg:#5A2E10; --plazo-urg-fg:#FFB877;
-  --heroe-bg:#102544; --heroe-borde:#1E3352; --heroe-texto:#FFFFFF; --campo-bg:#0B1B33; --campo-texto:#FFFFFF;
-  --boton-bg:#0FA3A3; --boton-texto:#06141F; --nav-activo:#13294B;
-  --chip-on-bg:#E6F6F6; --chip-on-fg:#0B1B33; --chip-fg:#DCE3EC;
-  --logo-anillo:#FFFFFF; --logo-centro:#FFFFFF;
-  --t-licitacion:#7FA8F2; --t-consultoria:#3CC4C4; --t-convocatoria:#C9A6F2; --t-subvencion:#E8C15A; --t-fondo:#8FD18B; --t-otro:#B8C4D4;
+:root, :root[data-tema="claro"] {
+  --fondo:#F6F8FB; --superficie:#FFFFFF; --superficie2:#F7F9FC; --borde:#E3E9F1; --borde-campo:#D3DCE7;
+  --texto:#15202E; --texto2:#3A4656; --suave:#5B6878; --tenue:#6B7685;
+  --enlace:#1D4E89; --enlace-hover:#123764; --urgente:#B42318;
+  --plazo-bg:#EEF2F7; --plazo-fg:#3A4656; --plazo-urg-bg:#FCEBEA; --plazo-urg-fg:#9B1C14;
+  --franja:#0F1F3A; --franja-texto:#FFFFFF; --franja-suave:#C9D6E8; --celeste:#8EC5FF;
+  --boton-bg:#1D4E89; --boton-texto:#FFFFFF;
+  --chip-on-bg:#15202E; --chip-on-fg:#FFFFFF; --chip-fg:#3A4656; --chip-bg:#FFFFFF;
+  --estrella:#D99A0B; --sombra:0 12px 30px rgba(15,31,58,.08);
+  /* Categorías: color del ícono y tono suave de su cuadrito */
+  --t-licitacion:#1D4E89;  --t-licitacion-suave:#E4EDF8;
+  --t-consultoria:#0E6F6A; --t-consultoria-suave:#DFF2F0;
+  --t-convocatoria:#5B3FA8; --t-convocatoria-suave:#ECE7F8;
+  --t-subvencion:#9A5B0B;  --t-subvencion-suave:#FBEFDC;
+  --t-fondo:#2E6B3A;       --t-fondo-suave:#E3F1E6;
+  --t-otro:#5B6878;        --t-otro-suave:#EEF2F7;
 }
-:root[data-tema="claro"] {
-  --fondo:#F4F6F9; --cabecera:#FFFFFF; --superficie:#FFFFFF; --borde:#E1E6EE; --borde-campo:#CBD3DE;
-  --texto:#0B1B33; --suave:#5B6573; --suave2:#4A5566; --etiqueta:#DCE3EC; --tenue:#5B6573;
-  --enlace:#0B7F80; --enlace-hover:#075E5F; --naranja:#E07510; --urgente:#C2560C;
-  --plazo-bg:#EEF2F7; --plazo-fg:#4A5566; --plazo-urg-bg:#FDEBDC; --plazo-urg-fg:#A2470A;
-  --heroe-bg:#0B1B33; --heroe-borde:#0B1B33; --heroe-texto:#FFFFFF; --campo-bg:#FFFFFF; --campo-texto:#0B1B33;
-  --boton-bg:#F28C28; --boton-texto:#0B1B33; --nav-activo:#E8F4F4;
-  --chip-on-bg:#0B1B33; --chip-on-fg:#FFFFFF; --chip-fg:#24344F;
-  --logo-anillo:#0B1B33; --logo-centro:#0B1B33;
-  --t-licitacion:#2F66C9; --t-consultoria:#0B7F80; --t-convocatoria:#7C4BC2; --t-subvencion:#8C6500; --t-fondo:#2E7D32; --t-otro:#5B6573;
+:root[data-tema="oscuro"] {
+  --fondo:#0B1626; --superficie:#12213A; --superficie2:#0F1C31; --borde:#22344F; --borde-campo:#2E4566;
+  --texto:#F2F5FA; --texto2:#C9D3E0; --suave:#9DABBE; --tenue:#8E9DB2;
+  --enlace:#8EC5FF; --enlace-hover:#B9DBFF; --urgente:#FF8A80;
+  --plazo-bg:#1A2C47; --plazo-fg:#C9D3E0; --plazo-urg-bg:#4A1D1B; --plazo-urg-fg:#FFB4AB;
+  --franja:#081224; --franja-texto:#FFFFFF; --franja-suave:#B7C5D9; --celeste:#8EC5FF;
+  --boton-bg:#8EC5FF; --boton-texto:#0B1626;
+  --chip-on-bg:#F2F5FA; --chip-on-fg:#0B1626; --chip-fg:#C9D3E0; --chip-bg:transparent;
+  --estrella:#F2C35B; --sombra:none;
+  --t-licitacion:#8EB8F0;  --t-licitacion-suave:#1C3352;
+  --t-consultoria:#6FD0C8; --t-consultoria-suave:#123A3A;
+  --t-convocatoria:#C2B0F2; --t-convocatoria-suave:#2C2550;
+  --t-subvencion:#E8BE74;  --t-subvencion-suave:#3D2E14;
+  --t-fondo:#8FD19B;       --t-fondo-suave:#173A22;
+  --t-otro:#B7C5D9;        --t-otro-suave:#1A2C47;
 }
 
 * { box-sizing:border-box; }
-body { margin:0; background:var(--fondo); color:var(--texto); font-family:'Sora',system-ui,sans-serif; }
+body { margin:0; background:var(--fondo); color:var(--texto); font-family:'Inter',system-ui,sans-serif; font-weight:400; }
 a { color:var(--enlace); } a:hover { color:var(--enlace-hover); }
-.contenedor { max-width:1280px; margin:0 auto; padding:0 32px; }
+.contenedor { max-width:1240px; margin:0 auto; padding:0 32px; }
 @media (max-width:640px) { .contenedor { padding:0 16px; } }
-.titulo-fuente { font-family:'Outfit',sans-serif; font-weight:600; }
+.titulo-fuente { font-family:'Sora',sans-serif; font-weight:500; letter-spacing:-.3px; }
+.solo-lector { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
-/* --- Cabecera --- */
-header { background:var(--cabecera); border-bottom:1px solid var(--borde); }
-header .contenedor { padding-top:14px; padding-bottom:14px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }
+/* --- Franja superior: cabecera + buscador sobre azul noche --- */
+.franja { background:var(--franja); color:var(--franja-texto); overflow:hidden; }
+header .contenedor { padding-top:20px; padding-bottom:20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }
 .marca { display:flex; align-items:center; gap:10px; }
-.marca .nombre { font-family:'Outfit',sans-serif; font-size:22px; font-weight:600; letter-spacing:-.4px; }
-.marca .punto { color:var(--naranja); padding:0 3px; }
-nav { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
-nav a { padding:10px 14px; border-radius:8px; color:var(--suave2); text-decoration:none; font-size:14px; }
-nav a.activo { background:var(--nav-activo); color:var(--texto); font-weight:600; }
-nav a.pronto { opacity:.55; cursor:default; }
-.boton-icono { margin-left:8px; width:44px; height:44px; border-radius:10px; border:1px solid var(--borde-campo); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.avatar { margin-left:4px; width:40px; height:40px; border-radius:50%; border:1px solid var(--borde-campo); background:var(--nav-activo); color:var(--texto); font:600 13px 'Sora',sans-serif; }
+.marca .nombre { font-family:'Sora',sans-serif; font-size:20px; font-weight:600; letter-spacing:-.3px; }
+.marca .punto { color:var(--celeste); padding:0 2px; }
+nav { display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+nav a { padding:10px 14px; border-radius:8px; color:var(--franja-suave); text-decoration:none; font-size:15px; }
+nav a.activo { color:#FFFFFF; font-weight:500; }
+nav a.pronto { opacity:.6; cursor:default; }
+.boton-icono { margin-left:8px; width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,.24); background:rgba(255,255,255,.08); cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.avatar { margin-left:4px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.24); background:rgba(255,255,255,.08); color:#FFFFFF; font:500 13px 'Inter',sans-serif; cursor:pointer; }
 
-/* --- Héroe de búsqueda --- */
-main.contenedor { padding-top:32px; padding-bottom:56px; display:flex; flex-direction:column; gap:28px; }
-.heroe { position:relative; overflow:hidden; padding:28px; border-radius:16px; background:var(--heroe-bg); border:1px solid var(--heroe-borde); color:var(--heroe-texto); display:flex; flex-direction:column; gap:18px; }
-.heroe > * { position:relative; }
-.heroe .radar-fondo { position:absolute; right:-120px; top:-150px; opacity:.5; pointer-events:none; }
-.heroe-arriba { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
-.heroe h1 { margin:0; font-size:28px; }
-.sello { padding:6px 10px; border-radius:999px; border:1px dashed #6A82A8; font-size:12px; color:#DCE3EC; }
-.buscador { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; }
-.buscador .campo { flex:1 1 420px; min-width:0; display:flex; flex-direction:column; gap:8px; }
-.buscador label { font-size:13px; font-weight:600; color:var(--etiqueta); }
-.buscador input { height:52px; padding:0 18px; border-radius:12px; border:1px solid var(--borde-campo); background:var(--campo-bg); color:var(--campo-texto); font:16px 'Sora',sans-serif; }
-.buscador button { height:52px; padding:0 26px; border:none; border-radius:12px; background:var(--boton-bg); color:var(--boton-texto); font:600 15px 'Sora',sans-serif; cursor:pointer; }
+.heroe { padding-top:32px; padding-bottom:64px; display:flex; flex-wrap:wrap; align-items:center; gap:40px; }
+.heroe-texto { flex:999 1 480px; min-width:0; display:flex; flex-direction:column; gap:18px; }
+.antetitulo { margin:0; font-size:15px; color:var(--celeste); }
+.heroe h1 { margin:0; font-size:52px; line-height:1.1; letter-spacing:-1.2px; }
+@media (max-width:640px) { .heroe h1 { font-size:36px; } }
+.heroe .bajada { margin:0; font-size:18px; line-height:1.55; color:var(--franja-suave); max-width:560px; }
+.buscador { margin-top:8px; max-width:660px; background:#FFFFFF; border-radius:14px; padding:8px; display:flex; flex-wrap:wrap; gap:8px; }
+.buscador .campo { flex:999 1 280px; min-width:0; display:flex; align-items:center; gap:10px; padding:0 12px; }
+.buscador input { width:100%; height:52px; border:none; outline:none; background:transparent; color:#15202E; font:17px 'Inter',sans-serif; }
+.buscador input::placeholder { color:#7C8796; }
+.buscador button { flex:1 0 auto; height:52px; padding:0 28px; border:none; border-radius:10px; background:#1D4E89; color:#FFFFFF; font:500 16px 'Inter',sans-serif; cursor:pointer; }
 .buscador button:disabled { opacity:.6; cursor:wait; }
-.tambien { margin:0; font-size:13px; line-height:1.7; color:#B8C4D4; }
+.tambien { margin:0; font-size:14px; line-height:1.7; color:var(--franja-suave); }
 .tambien span { color:#FFFFFF; }
-:root[data-tema="oscuro"] .tambien, :root:not([data-tema]) .tambien { color:var(--suave); }
-:root[data-tema="oscuro"] .tambien span, :root:not([data-tema]) .tambien span { color:var(--etiqueta); }
+.sello { font-size:13px; color:var(--franja-suave); opacity:.85; }
+.heroe-radar { flex:1 1 320px; display:flex; justify-content:center; }
+.heroe-radar svg { width:100%; max-width:400px; height:auto; }
+@media (max-width:820px) { .heroe-radar { display:none; } }
+
+/* --- Zona principal --- */
+main.contenedor { padding-top:36px; padding-bottom:64px; display:flex; flex-direction:column; gap:28px; }
 
 /* --- Chips de tipo --- */
 .chips { display:flex; flex-wrap:wrap; gap:8px; }
-.chip { min-height:40px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--chip-fg); font:600 13px 'Sora',sans-serif; cursor:pointer; display:flex; align-items:center; gap:8px; }
-:root[data-tema="claro"] .chip { background:#FFFFFF; }
-.chip .punto { width:8px; height:8px; border-radius:50%; }
+.chip { min-height:40px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--chip-fg); font:500 13px 'Inter',sans-serif; cursor:pointer; display:flex; align-items:center; gap:8px; }
+.chip { background:var(--chip-bg); }
+.chip svg { flex:none; }
 .chip[aria-pressed="true"], :root[data-tema="claro"] .chip[aria-pressed="true"] { background:var(--chip-on-bg); color:var(--chip-on-fg); border-color:var(--chip-on-bg); }
 .chip .cuenta { font-weight:400; opacity:.75; }
 
@@ -85,7 +103,7 @@ main.contenedor { padding-top:32px; padding-bottom:56px; display:flex; flex-dire
 .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
 .kpi { padding:20px 22px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); display:flex; flex-direction:column; gap:6px; }
 .kpi span:first-child { font-size:13px; color:var(--suave); }
-.kpi b { font-family:'Outfit',sans-serif; font-size:36px; font-weight:600; }
+.kpi b { font-family:'Sora',sans-serif; font-size:34px; font-weight:500; }
 .kpi b.urgente { color:var(--urgente); }
 .kpi small { font-size:18px; color:var(--suave); font-weight:400; }
 
@@ -94,74 +112,101 @@ main.contenedor { padding-top:32px; padding-bottom:56px; display:flex; flex-dire
 .resultados-cabeza h2 { margin:0; font-size:22px; }
 .orden { display:flex; align-items:center; gap:10px; }
 .orden label { font-size:13px; color:var(--suave); }
-.orden select { height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--superficie); color:var(--texto); font:13px 'Sora',sans-serif; }
-.rejilla { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; }
+.orden select { height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--superficie); color:var(--texto); font:13px 'Inter',sans-serif; }
+.rejilla { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; align-items:start; }
 @media (max-width:420px) { .rejilla { grid-template-columns:1fr; } }
-.tarjeta { padding:20px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); display:flex; flex-direction:column; gap:14px; }
-:root[data-tema="claro"] .tarjeta { box-shadow:0 1px 2px rgba(11,27,51,.04); }
+/* --- Tarjeta de resultado (se despliega al hacer clic) --- */
+.tarjeta { border-radius:16px; background:var(--superficie); border:1px solid var(--borde); transition:box-shadow .15s, border-color .15s; }
+.tarjeta.abierta { border-color:var(--borde-campo); box-shadow:var(--sombra); }
+.tarjeta-cuerpo { padding:20px 22px; display:flex; flex-direction:column; gap:14px; }
 .tarjeta-arriba { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-.tipo { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; }
-.tipo .punto { width:8px; height:8px; border-radius:50%; background:currentColor; }
-.estrella { width:44px; height:44px; margin:-10px -10px -10px 0; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.tarjeta h3 { margin:0; font-size:16px; font-weight:600; line-height:1.4; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-.entidad { font-size:13px; color:var(--suave2); }
-.nota { font-size:12px; color:var(--urgente); }
-dl { margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-dl div { display:flex; flex-direction:column; gap:2px; }
-dt { font-size:11px; color:var(--tenue); }
-dd { margin:0; font-size:14px; font-weight:600; }
-.tarjeta-pie { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:12px; border-top:1px solid var(--borde); }
-.plazo { padding:5px 10px; border-radius:999px; background:var(--plazo-bg); color:var(--plazo-fg); font-size:12px; font-weight:600; }
-.plazo.urgente { background:var(--plazo-urg-bg); color:var(--plazo-urg-fg); }
-.tarjeta-pie a { font-size:13px; font-weight:600; }
-.tarjeta-pie .sin-enlace { font-size:13px; color:var(--suave); }
+.categoria { display:flex; align-items:center; gap:12px; min-width:0; }
+.categoria .icono { width:38px; height:38px; border-radius:10px; flex:none; display:flex; align-items:center; justify-content:center; }
+.categoria .nombre-cat { font-size:13px; font-weight:500; }
+.categoria .fuente { font-size:13px; color:var(--suave); }
+.estrella { width:44px; height:44px; margin:-8px -10px -8px 0; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:10px; }
+.abrir { all:unset; box-sizing:border-box; cursor:pointer; display:flex; flex-direction:column; gap:14px; border-radius:8px; }
+.abrir:focus-visible { outline:2px solid var(--enlace); outline-offset:4px; }
+.objeto { margin:0; font-size:16px; font-weight:500; line-height:1.45; color:var(--texto); }
+.tarjeta:not(.abierta) .objeto { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.datos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.entidad-linea { font-size:14px; color:var(--suave); margin-top:-6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dato { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.dato .et { font-size:13px; color:var(--tenue); }
+.dato .va { font-size:14px; color:var(--texto2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dato .va.urgente { color:var(--urgente); font-weight:500; }
+.ver-ficha { display:flex; align-items:center; gap:6px; font-size:14px; font-weight:500; color:var(--enlace); }
+.ver-ficha svg { transition:transform .15s; }
+.tarjeta.abierta .ver-ficha svg { transform:rotate(180deg); }
+.detalle { display:none; border-top:1px solid var(--borde); background:var(--superficie2); padding:20px 22px 22px; border-radius:0 0 16px 16px; flex-direction:column; gap:16px; }
+.tarjeta.abierta .detalle { display:flex; }
+.detalle-datos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 20px; }
+.detalle-datos .va { white-space:normal; }
+.detalle-datos .ancho { grid-column:1/-1; }
+.nota { font-size:13px; color:var(--urgente); line-height:1.4; }
+.acciones { display:flex; flex-wrap:wrap; gap:10px; }
+.acciones a, .acciones button { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border-radius:10px; font:500 14px 'Inter',sans-serif; text-decoration:none; cursor:pointer; }
+.acciones .portal { background:var(--boton-bg); color:var(--boton-texto); border:none; }
+.acciones .portal:hover { color:var(--boton-texto); opacity:.92; }
+.acciones .guardar { background:var(--superficie); color:var(--texto); border:1px solid var(--borde-campo); }
+.acciones .sin-enlace { font-size:14px; color:var(--suave); align-self:center; }
+.plazo { font-size:13px; color:var(--suave); }
+.plazo.urgente { color:var(--urgente); }
 
 /* --- Mensajes (inicio, cargando, error, vacío) --- */
 .mensaje { padding:40px 24px; border-radius:14px; background:var(--superficie); border:1px solid var(--borde); text-align:center; color:var(--suave2); line-height:1.6; }
-.mensaje b { color:var(--texto); }
+.mensaje b { color:var(--texto); font-weight:500; }
 .mensaje.error b { color:var(--urgente); }
 .barrido { animation:girar 2.4s linear infinite; transform-origin:60px 60px; }
+.barrido.lento { animation-duration:6s; }
 @keyframes girar { to { transform:rotate(360deg); } }
 @media (prefers-reduced-motion:reduce) { .barrido { animation:none; } }
-.ver-mas { align-self:center; height:44px; padding:0 22px; border-radius:10px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:600 14px 'Sora',sans-serif; cursor:pointer; }
+.ver-mas { align-self:center; height:44px; padding:0 22px; border-radius:10px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:500 14px 'Inter',sans-serif; cursor:pointer; }
 .oculto { display:none !important; }
 
 /* --- Panel de filtros --- */
 .filtros { background:var(--superficie); border:1px solid var(--borde); border-radius:14px; }
 .filtros summary { padding:16px 20px; cursor:pointer; list-style:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
 .filtros summary::-webkit-details-marker { display:none; }
-.filtros summary .rotulo-panel { font-family:'Outfit',sans-serif; font-size:17px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.filtros summary .rotulo-panel { font-family:'Sora',sans-serif; font-size:17px; font-weight:500; display:flex; align-items:center; gap:8px; }
 .filtros summary .rotulo-panel::before { content:"▸"; color:var(--suave); transition:transform .15s; }
 .filtros[open] summary .rotulo-panel::before { transform:rotate(90deg); }
 .filtros summary .resumen { font-size:13px; color:var(--suave); }
-.contador { background:var(--naranja); color:#0B1B33; border-radius:999px; padding:2px 9px; font:600 12px 'Sora',sans-serif; }
+.contador { background:var(--enlace); color:var(--superficie); border-radius:999px; padding:2px 9px; font:500 12px 'Inter',sans-serif; }
 .filtros-cuerpo { padding:4px 20px 20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px 24px; }
 .filtro { display:flex; flex-direction:column; gap:8px; min-width:0; }
-.filtro .rotulo, .filtro > label:not(.casilla) { font-size:12px; font-weight:600; color:var(--suave); text-transform:uppercase; letter-spacing:.04em; }
-.filtro select, .filtro input[type=text], .filtro input[type=number] { width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--fondo); color:var(--texto); font:13px 'Sora',sans-serif; }
+.filtro .rotulo, .filtro > label:not(.casilla) { font-size:13px; font-weight:500; color:var(--suave); }
+.filtro select, .filtro input[type=text], .filtro input[type=number] { width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid var(--borde-campo); background:var(--fondo); color:var(--texto); font:13px 'Inter',sans-serif; }
 .casilla { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--suave2); cursor:pointer; line-height:1.3; }
-.casilla input { width:18px; height:18px; margin:0; flex:none; accent-color:#0FA3A3; }
+.casilla input { width:18px; height:18px; margin:0; flex:none; accent-color:#1D4E89; }
 .casilla .n { color:var(--tenue); }
 .dos { display:flex; gap:8px; } .dos input { flex:1; min-width:0; }
-.atajo { align-self:flex-start; min-height:34px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:600 12px 'Sora',sans-serif; cursor:pointer; }
+.atajo { align-self:flex-start; min-height:34px; padding:0 14px; border-radius:999px; border:1px solid var(--borde-campo); background:transparent; color:var(--texto); font:500 12px 'Inter',sans-serif; cursor:pointer; }
 .atajo[aria-pressed="true"] { background:var(--chip-on-bg); color:var(--chip-on-fg); border-color:var(--chip-on-bg); }
 .lista-modalidades { display:flex; flex-direction:column; gap:7px; max-height:180px; overflow:auto; padding-right:4px; }
 .ayuda-f { font-size:12px; color:var(--tenue); line-height:1.4; }
 .filtros-pie { grid-column:1/-1; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid var(--borde); padding-top:14px; font-size:13px; color:var(--suave); }
+
+/* --- Pie de página --- */
+.pie { border-top:1px solid var(--borde); }
+.pie .contenedor { padding-top:22px; padding-bottom:28px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-size:13px; color:var(--suave); }
+.pie .firma { display:flex; align-items:center; gap:8px; }
+.pie b { font-weight:500; color:var(--texto2); }
 </style>
 </head>
 <body>
 
+<div class="franja">
 <header>
   <div class="contenedor">
     <div class="marca">
-      <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true">
-        <circle cx="60" cy="60" r="16" fill="none" stroke="var(--logo-anillo)" stroke-width="3" opacity=".3"/>
-        <circle cx="60" cy="60" r="33" fill="none" stroke="var(--logo-anillo)" stroke-width="4" opacity=".45"/>
-        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--logo-anillo)" stroke-width="6" opacity=".65"/>
-        <path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="8" stroke-linecap="round"/>
-        <circle cx="83.1" cy="32.4" r="11" fill="var(--naranja)"/>
-        <circle cx="60" cy="60" r="7" fill="var(--logo-centro)"/>
+      <svg width="32" height="32" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="16" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".35"/>
+        <circle cx="60" cy="60" r="33" fill="none" stroke="#FFFFFF" stroke-width="5" opacity=".5"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#FFFFFF" stroke-width="6" opacity=".7"/>
+        <path d="M60 60 L103.3 35" stroke="#8EC5FF" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="83.1" cy="32.4" r="10" fill="#8EC5FF"/>
+        <circle cx="60" cy="60" r="7" fill="#FFFFFF"/>
       </svg>
       <div class="nombre"><span>radar</span><span class="punto">·</span><span>pacífico</span></div>
     </div>
@@ -175,28 +220,43 @@ dd { margin:0; font-size:14px; font-weight:600; }
   </div>
 </header>
 
-<main class="contenedor">
-  <section class="heroe">
-    <svg class="radar-fondo" width="420" height="420" viewBox="0 0 120 120" aria-hidden="true">
-      <circle cx="60" cy="60" r="16" fill="none" stroke="#FFFFFF" stroke-width=".4" opacity=".3"/>
-      <circle cx="60" cy="60" r="33" fill="none" stroke="#FFFFFF" stroke-width=".6" opacity=".35"/>
-      <circle cx="60" cy="60" r="50" fill="none" stroke="#FFFFFF" stroke-width=".9" opacity=".4"/>
-      <path d="M60 60 L60 10 A50 50 0 0 1 103.3 35 Z" fill="#0FA3A3" opacity=".25"/>
-      <path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
-    <div class="heroe-arriba">
-      <h1 class="titulo-fuente">¿Qué oportunidad buscas hoy?</h1>
-      <span class="sello" id="sello">Prototipo · datos reales</span>
-    </div>
-    <form class="buscador" id="formulario">
-      <div class="campo">
-        <label for="clave">Palabras clave</label>
-        <input id="clave" type="search" placeholder="Ej.: cctv · apicultura · mejora de procesos" autocomplete="off">
-      </div>
-      <button type="submit" id="botonBuscar">Buscar en el radar</button>
+<section class="contenedor heroe">
+  <div class="heroe-texto">
+    <p class="antetitulo">Pacífico Consultores · uso interno</p>
+    <h1 class="titulo-fuente">Todas las oportunidades, en un solo radar.</h1>
+    <p class="bajada">Escribe una idea y el radar la amplía en español, inglés y portugués, la busca en fuentes curadas y te trae cada resultado en una ficha clara.</p>
+    <form class="buscador" id="formulario" role="search">
+      <label class="campo" for="clave">
+        <span class="solo-lector">Palabras clave</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6878" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="clave" type="search" placeholder="¿Qué buscas? Ej.: cctv, apicultura" autocomplete="off">
+      </label>
+      <button type="submit" id="botonBuscar">Buscar</button>
     </form>
     <p class="tambien" id="tambien">Varias ideas se separan con coma: <span>apicultura, cctv</span></p>
-  </section>
+    <span class="sello" id="sello">Cargando los datos del día…</span>
+  </div>
+  <div class="heroe-radar">
+    <svg viewBox="0 0 120 120" role="img" aria-label="Radar con oportunidades detectadas">
+      <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".4"/>
+      <circle cx="60" cy="60" r="41" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".4"/>
+      <circle cx="60" cy="60" r="27" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".4"/>
+      <circle cx="60" cy="60" r="13" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".4"/>
+      <path d="M5 60H115M60 5V115" stroke="rgba(255,255,255,.08)" stroke-width=".4"/>
+      <g class="barrido lento"><path d="M60 60 L60 5 A55 55 0 0 1 99 21 Z" fill="rgba(142,197,255,.16)"/><path d="M60 60 L99 21" stroke="#8EC5FF" stroke-width=".5"/></g>
+      <circle cx="81" cy="34" r="1.7" fill="#8EC5FF"/>
+      <circle cx="39" cy="46" r="1.2" fill="#FFFFFF" opacity=".8"/>
+      <circle cx="76" cy="83" r="1.4" fill="#FFFFFF" opacity=".8"/>
+      <circle cx="34" cy="78" r="1" fill="#8EC5FF" opacity=".8"/>
+      <circle cx="95" cy="64" r="1" fill="#FFFFFF" opacity=".6"/>
+      <circle cx="53" cy="25" r="1" fill="#FFFFFF" opacity=".6"/>
+      <circle cx="60" cy="60" r="1.5" fill="#FFFFFF"/>
+    </svg>
+  </div>
+</section>
+</div>
+
+<main class="contenedor">
 
   <div class="chips oculto" role="group" aria-label="Tipo de oportunidad" id="chips"></div>
 
@@ -279,6 +339,16 @@ dd { margin:0; font-size:14px; font-weight:600; }
     <button type="button" class="ver-mas oculto" id="verMas">Ver más resultados</button>
   </section>
 </main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <span class="firma">
+      <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="8" opacity=".6"/><circle cx="60" cy="60" r="26" fill="none" stroke="currentColor" stroke-width="8" opacity=".4"/><circle cx="60" cy="60" r="9" fill="currentColor"/></svg>
+      radar·pacífico · Desarrollado por <b>Pacífico Consultores SAS</b>
+    </span>
+    <span>Bogotá, Colombia · Uso interno del equipo y sus aliados</span>
+  </div>
+</footer>
 
 <script>
 /* ===== diccionario.js ===== */
@@ -510,13 +580,16 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const TIPOS = [
-  { id:"Licitación",   color:"var(--t-licitacion)" },
-  { id:"Consultoría",  color:"var(--t-consultoria)" },
-  { id:"Convocatoria", color:"var(--t-convocatoria)" },
-  { id:"Subvención",   color:"var(--t-subvencion)" },
-  { id:"Fondo de financiamiento", color:"var(--t-fondo)" }
+  { id:"Licitación",   color:"var(--t-licitacion)",  suave:"var(--t-licitacion-suave)",  icono:"M4 21V8l8-5 8 5v13M9 21v-6h6v6M3 21h18" },
+  { id:"Consultoría",  color:"var(--t-consultoria)", suave:"var(--t-consultoria-suave)", icono:"M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 7h18v12H3zM3 13h18" },
+  { id:"Convocatoria", color:"var(--t-convocatoria)",suave:"var(--t-convocatoria-suave)",icono:"M4 10v4h3l6 4V6L7 10zM17 9a4 4 0 0 1 0 6" },
+  { id:"Subvención",   color:"var(--t-subvencion)",  suave:"var(--t-subvencion-suave)",  icono:"M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6" },
+  { id:"Fondo de financiamiento", color:"var(--t-fondo)", suave:"var(--t-fondo-suave)", icono:"M3 10h18M12 3l9 5H3zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18" }
 ];
-const colorTipo = t => (TIPOS.find(x => x.id === t) || { color:"var(--t-otro)" }).color;
+const TIPO_OTRO = { color:"var(--t-otro)", suave:"var(--t-otro-suave)", icono:"M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8v5M12 16v.5" };
+const datosTipo = t => TIPOS.find(x => x.id === t) || TIPO_OTRO;
+const colorTipo = t => datosTipo(t).color;
+const icono = (d, tam = 18) => `<svg width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
 let FUENTES_ACTIVAS = 0;            // se lee del archivo diario
 
 /* ============================================================
@@ -555,11 +628,11 @@ async function cargarDatos() {
 }
 const POR_PAGINA = 30;
 
-const estado = { fichas: [], tipo: "todas", orden: "cierre", mostrar: POR_PAGINA, favs: {} };
+const estado = { fichas: [], tipo: "todas", orden: "cierre", mostrar: POR_PAGINA, favs: {}, abiertas: {} };
 
 /* --- Tema claro / oscuro (recuerda la elección) --- */
-const SOL  = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="#F28C28" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="#F28C28" stroke-width="1.8" stroke-linecap="round"/></svg>';
-const LUNA = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z" fill="none" stroke="#0B1B33" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+const SOL  = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const LUNA = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/></svg>';
 function ponerTema(t) {
   document.documentElement.dataset.tema = t;
   $("tema").innerHTML = t === "oscuro" ? SOL : LUNA;
@@ -568,7 +641,7 @@ function ponerTema(t) {
 (function () {
   let guardado = null;
   try { guardado = localStorage.getItem("radar-tema"); } catch (e) {}
-  const delSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "claro" : "oscuro";
+  const delSistema = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "oscuro" : "claro";
   ponerTema(guardado || delSistema);
 })();
 $("tema").addEventListener("click", () => {
@@ -596,6 +669,14 @@ function legible(texto, tipo) {
 /* --- Formatos --- */
 const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 const fechaCorta = d => d ? `${d.getDate()} ${MESES[d.getMonth()]} ${d.getFullYear()}` : "No informado";
+const fechaLarga = d => d ? d.toLocaleDateString("es-CO", { weekday:"long", day:"numeric", month:"long", year:"numeric" }) : "No informado";
+function montoCorto(f) {
+  if (f.monto == null) return "No informado";
+  const m = f.monto;
+  if (m >= 1e9) return f.moneda + " " + (m / 1e9).toLocaleString("es-CO", { maximumFractionDigits: 1 }) + " mil M";
+  if (m >= 1e6) return f.moneda + " " + (m / 1e6).toLocaleString("es-CO", { maximumFractionDigits: 1 }) + " M";
+  return f.moneda + " " + Math.round(m).toLocaleString("es-CO");
+}
 function montoTexto(f) {
   if (f.monto == null) return "No informado";
   return f.moneda + " " + Math.round(f.monto).toLocaleString("es-CO");
@@ -615,7 +696,7 @@ const RADAR_GIRANDO = `<svg width="72" height="72" viewBox="0 0 120 120" aria-hi
   <circle cx="60" cy="60" r="16" fill="none" stroke="currentColor" stroke-width="3" opacity=".3"/>
   <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="4" opacity=".45"/>
   <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="6" opacity=".6"/>
-  <g class="barrido"><path d="M60 60 L60 10 A50 50 0 0 1 103.3 35 Z" fill="#0FA3A3" opacity=".3"/><path d="M60 60 L103.3 35" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/></g>
+  <g class="barrido"><path d="M60 60 L60 10 A50 50 0 0 1 103.3 35 Z" fill="#1D4E89" opacity=".3"/><path d="M60 60 L103.3 35" stroke="#1D4E89" stroke-width="6" stroke-linecap="round"/></g>
   <circle cx="60" cy="60" r="6" fill="currentColor"/></svg>`;
 
 function visibles() {
@@ -631,11 +712,11 @@ function visibles() {
 function dibujarChips() {
   const base = filtradas();
   const cuenta = t => base.filter(f => t === "todas" || f.tipo === t).length;
-  const defs = [{ id:"todas", label:"Todas", color:"currentColor" }]
-    .concat(TIPOS.map(t => ({ id:t.id, label:t.id, color:t.color })));
+  const defs = [{ id:"todas", label:"Todas", icono:null }]
+    .concat(TIPOS.map(t => ({ id:t.id, label:t.id, icono:t.icono, color:t.color })));
   $("chips").innerHTML = defs.map(c =>
     `<button type="button" class="chip" data-tipo="${esc(c.id)}" aria-pressed="${estado.tipo === c.id}">
-      <span class="punto" style="background:${c.color}"></span>${esc(c.label)} <span class="cuenta">${cuenta(c.id)}</span></button>`).join("");
+      ${c.icono ? `<span style="color:${estado.tipo === c.id ? "inherit" : c.color};display:flex">${icono(c.icono, 15)}</span>` : ""}${esc(c.label)} <span class="cuenta">${cuenta(c.id)}</span></button>`).join("");
 }
 
 function dibujarKpis(lista) {
@@ -651,32 +732,60 @@ function dibujarKpis(lista) {
 
 function tarjeta(f) {
   const dias = diasParaCierre(f);
-  const urg = dias != null && dias <= 7;
-  const plazo = f.estado === "Próximamente" ? "Próximamente"
+  const prox = f.estado === "Próximamente";
+  const urg = !prox && dias != null && dias <= 7;
+  const plazo = prox ? "Próximamente"
     : dias == null ? "Cierre no informado"
     : dias === 0 ? "Cierra hoy" : dias === 1 ? "Cierra mañana" : `Cierra en ${dias} días`;
   const fav = !!estado.favs[f.id];
-  return `<article class="tarjeta">
-    <div class="tarjeta-arriba">
-      <span class="tipo" style="color:${colorTipo(f.tipo)}"><span class="punto"></span>${esc(f.tipo)}</span>
-      <button type="button" class="estrella" data-fav="${esc(f.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de favoritos" : "Guardar en favoritos"}">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="${fav ? "var(--naranja)" : "none"}" stroke="${fav ? "var(--naranja)" : "var(--tenue)"}" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  const abierta = !!estado.abiertas[f.id];
+  const T = datosTipo(f.tipo);
+  const objeto = legible(f.objeto || f.titulo);
+  const titulo = legible(f.titulo);
+  const entidad = legible(f.entidad, "nombre");
+  const lugar = [f.pais, f.departamento ? legible(f.departamento, "nombre") : ""].filter(Boolean).join(" · ");
+  const mismoTexto = normalizar(titulo) === normalizar(objeto) || normalizar(objeto).startsWith(normalizar(titulo));
+  const estrella = `<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="${fav ? "var(--estrella)" : "none"}" stroke="${fav ? "var(--estrella)" : "var(--tenue)"}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+  return `<article class="tarjeta${abierta ? " abierta" : ""}">
+    <div class="tarjeta-cuerpo">
+      <div class="tarjeta-arriba">
+        <div class="categoria">
+          <span class="icono" style="background:${T.suave};color:${T.color}">${icono(T.icono)}</span>
+          <span style="display:flex;flex-direction:column;gap:1px;min-width:0">
+            <span class="nombre-cat" style="color:${T.color}">${esc(f.tipo || "Sin clasificar")}</span>
+            <span class="fuente">${esc(f.fuente)}</span>
+          </span>
+        </div>
+        <button type="button" class="estrella" data-fav="${esc(f.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de favoritos" : "Guardar en favoritos"}">${estrella}</button>
+      </div>
+      <button type="button" class="abrir" data-abrir="${esc(f.id)}" aria-expanded="${abierta}">
+        <p class="objeto">${esc(objeto)}</p>
+        <span class="entidad-linea" title="${esc(entidad)}">${esc(entidad)}</span>
+        <span class="datos">
+          <span class="dato"><span class="et">Monto</span><span class="va">${esc(montoCorto(f))}</span></span>
+          <span class="dato"><span class="et">Cierre</span><span class="va${urg ? " urgente" : ""}">${prox ? "Próximamente" : esc(fechaCorta(f.fecha_cierre))}</span></span>
+        </span>
+        <span class="ver-ficha">${abierta ? "Ocultar detalle" : "Ver ficha completa"}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
       </button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <h3 title="${esc(legible(f.objeto || f.titulo))}">${esc(legible(f.titulo))}</h3>
-      <span class="entidad">${esc(legible(f.entidad, "nombre"))}${f.modalidad ? " · " + esc(f.modalidad) : ""}</span>
-      ${f.nota ? `<span class="nota">⚠ ${esc(f.nota)}</span>` : ""}
-    </div>
-    <dl>
-      <div><dt>Monto</dt><dd>${esc(montoTexto(f))}</dd></div>
-      <div><dt>País</dt><dd>${esc(f.pais)}</dd></div>
-      <div><dt>Cierre</dt><dd>${esc(fechaCorta(f.fecha_cierre))}</dd></div>
-      <div><dt>Fuente</dt><dd>${esc(f.fuente)}</dd></div>
-    </dl>
-    <div class="tarjeta-pie">
-      <span class="plazo${urg && f.estado !== "Próximamente" ? " urgente" : ""}">${plazo}</span>
-      ${f.enlace ? `<a href="${esc(f.enlace)}" target="_blank" rel="noopener">Ver en el portal</a>` : `<span class="sin-enlace">Aún sin enlace</span>`}
+    <div class="detalle">
+      <div class="detalle-datos">
+        ${mismoTexto ? "" : `<div class="dato ancho"><span class="et">Título en el portal</span><span class="va">${esc(titulo)}</span></div>`}
+        <div class="dato ancho"><span class="et">Entidad</span><span class="va">${esc(entidad)}</span></div>
+        <div class="dato"><span class="et">País</span><span class="va">${esc(lugar || "No informado")}</span></div>
+        <div class="dato"><span class="et">Monto</span><span class="va">${esc(montoTexto(f))}</span></div>
+        <div class="dato"><span class="et">Modalidad</span><span class="va">${esc(f.modalidad || "No informada")}</span></div>
+        <div class="dato"><span class="et">Publicado</span><span class="va">${esc(fechaLarga(f.fecha_publicacion))}</span></div>
+        <div class="dato"><span class="et">Fecha de cierre</span><span class="va">${prox ? "Próximamente" : esc(fechaLarga(f.fecha_cierre))}<br><span class="plazo${urg ? " urgente" : ""}">${plazo}</span></span></div>
+        <div class="dato"><span class="et">Referencia en ${esc(f.fuente)}</span><span class="va">${esc(f.id_fuente || "No informada")}</span></div>
+      </div>
+      ${f.nota ? `<span class="nota">${esc(f.nota)}</span>` : ""}
+      <div class="acciones">
+        ${f.enlace ? `<a class="portal" href="${esc(f.enlace)}" target="_blank" rel="noopener">Ir al portal ${icono("M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5", 16)}</a>` : `<span class="sin-enlace">Aún sin enlace al portal</span>`}
+        <button type="button" class="guardar" data-fav="${esc(f.id)}" aria-pressed="${fav}">${estrella} ${fav ? "En favoritos" : "Guardar en favoritos"}</button>
+      </div>
     </div>
   </article>`;
 }
@@ -729,6 +838,7 @@ async function buscar(e) {
       if (encontrados.length) fichas.push({ ...o, encontrados });
     }
     estado.fichas = fichas;
+    estado.abiertas = {};
     estado.tipo = "todas";
     estado.mostrar = POR_PAGINA;
     if (!fichas.length) {
@@ -868,12 +978,14 @@ $("chips").addEventListener("click", e => {
   estado.tipo = b.dataset.tipo; estado.mostrar = POR_PAGINA; dibujarResultados();
 });
 $("rejilla").addEventListener("click", e => {
+  const a = e.target.closest("[data-abrir]");
+  if (a) { const id = a.dataset.abrir; estado.abiertas[id] = !estado.abiertas[id]; dibujarResultados(); const v = document.querySelector(`[data-abrir="${CSS.escape(id)}"]`); if (v) v.focus(); return; }
   const b = e.target.closest("[data-fav]"); if (!b) return;
   estado.favs[b.dataset.fav] = !estado.favs[b.dataset.fav]; dibujarResultados();
 });
 $("verMas").addEventListener("click", () => { estado.mostrar += POR_PAGINA; dibujarResultados(); });
 
-mensaje(`<b>Escriba una o varias palabras y pulse «Buscar en el radar».</b><br>Buscamos en las oportunidades abiertas que el recolector reúne cada mañana.`);
+mensaje(`<b>Escriba una o varias palabras y pulse «Buscar».</b><br>Buscamos en las oportunidades abiertas que el recolector reúne cada mañana.`);
 cargarDatos().catch(() => {});   // descarga los datos en segundo plano mientras usted escribe
 </script>
 </body>
