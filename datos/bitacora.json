@@ -1,5 +1,104 @@
 [
  {
+  "fecha": "2026-11-22T18:17:13.697Z",
+  "segundos": 184,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2215,
+    "segundos": 4,
+    "informe": {
+     "recibidos": 2428,
+     "directa": 0,
+     "adjudicado": 102,
+     "cerrado": 0,
+     "yaCerro": 33,
+     "enCurso": 56,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 22,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Estimate Phase": 4,
+      "Pré-Calificación de competidores": 2,
+      "Clarification submission": 15
+     },
+     "mostrados": 2215
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 22,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1760,
+     "yaCerro": 294,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 22
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 175,
+    "segundos": 167,
+    "informe": {
+     "paginas": 78,
+     "recibidos": 1154,
+     "otrasRegiones": 920,
+     "variasLocalizaciones": 59,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 0,
+     "tipos": {
+      "Invitation to bid": 49,
+      "Request for quotation": 69,
+      "Call for individual consultants": 6,
+      "Request for proposal": 42,
+      "Request for EOI": 5,
+      "Grant support-call for proposal": 1,
+      "Call for implementing partners": 1,
+      "Request for information": 2
+     },
+     "paisesVistos": {
+      "Syrian Arab Republic": 38,
+      "Ukraine": 37,
+      "Philippines": 28,
+      "Uganda": 26,
+      "Ethiopia": 24,
+      "Egypt": 22,
+      "Palestine, State of": 21,
+      "Bangladesh": 20,
+      "Afghanistan": 20,
+      "Pakistan": 20,
+      "Jordan": 19,
+      "Lebanon": 19,
+      "Chad": 19,
+      "Tunisia": 19,
+      "Moldova, Republic of": 18,
+      "Congo, The Democratic Republic of the": 18,
+      "Kenya": 18,
+      "Switzerland": 17,
+      "Madagascar": 16,
+      "Nigeria": 16,
+      "Cameroon": 16,
+      "Sudan": 15,
+      "Somalia": 14,
+      "Thailand": 14,
+      "South Sudan": 14
+     },
+     "mostrados": 175
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-21T11:41:52.243Z",
   "segundos": 176,
   "fuentes": [
