@@ -1,5 +1,241 @@
 [
  {
+  "fecha": "2026-11-23T19:16:43.166Z",
+  "segundos": 236,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 3283,
+    "segundos": 17,
+    "informe": {
+     "recibidos": 3385,
+     "directa": 0,
+     "adjudicado": 2,
+     "cerrado": 0,
+     "yaCerro": 11,
+     "enCurso": 80,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 9,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 17,
+      "Estimate Phase": 8,
+      "Pré-Calificación de competidores": 1
+     },
+     "mostrados": 3283
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 22,
+    "segundos": 12,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1760,
+     "yaCerro": 294,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 22
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 158,
+    "segundos": 161,
+    "informe": {
+     "paginas": 74,
+     "recibidos": 1092,
+     "otrasRegiones": 878,
+     "variasLocalizaciones": 54,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 2,
+     "tipos": {
+      "Invitation to bid": 49,
+      "Request for quotation": 56,
+      "Request for proposal": 39,
+      "Call for individual consultants": 6,
+      "Request for EOI": 4,
+      "Grant support-call for proposal": 1,
+      "Call for implementing partners": 1,
+      "Request for information": 2
+     },
+     "paisesVistos": {
+      "Ukraine": 36,
+      "Syrian Arab Republic": 36,
+      "Uganda": 27,
+      "Philippines": 26,
+      "Pakistan": 24,
+      "Ethiopia": 23,
+      "Palestine, State of": 23,
+      "Bangladesh": 22,
+      "Jordan": 21,
+      "Afghanistan": 20,
+      "Egypt": 20,
+      "Lebanon": 18,
+      "Madagascar": 17,
+      "Congo, The Democratic Republic of the": 17,
+      "Tunisia": 16,
+      "Switzerland": 16,
+      "Nigeria": 16,
+      "Moldova, Republic of": 16,
+      "Cameroon": 15,
+      "Kenya": 13,
+      "South Sudan": 13,
+      "Chad": 13,
+      "Sudan": 12,
+      "Somalia": 12,
+      "India": 12
+     },
+     "mostrados": 158
+    }
+   },
+   {
+    "fuente": "Empleos.hn",
+    "estado": "ok",
+    "oportunidades": 29,
+    "segundos": 41,
+    "informe": {
+     "paginas": 7,
+     "categoria": 28,
+     "porPalabra": 56,
+     "descartadasPorPalabra": 26,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "ruido": 6,
+     "duplicado": 23,
+     "fichasSinLeer": 0,
+     "tipos": {
+      "Consultoría": 25,
+      "Licitación": 4
+     },
+     "mostrados": 29
+    }
+   },
+   {
+    "fuente": "HonduCompras (ONCAE)",
+    "estado": "ok",
+    "oportunidades": 0,
+    "segundos": 5,
+    "informe": {
+     "sonda": true,
+     "getStatus": 200,
+     "getLargo": 124837,
+     "campos": [
+      "ctl00_tkSM_HiddenField:0",
+      "__EVENTTARGET:0",
+      "__EVENTARGUMENT:0",
+      "__LASTFOCUS:0",
+      "__VIEWSTATE:39148",
+      "__VIEWSTATEGENERATOR:8",
+      "__EVENTVALIDATION:4484",
+      "ctl00$cphCuerpo$wpParametros_hidden:0",
+      "ctl00_cphCuerpo_wpParametros_wdInicio_DrpPnl1_DP_CAL_ID_1:0",
+      "ctl00$cphCuerpo$wpParametros$wdInicio_hidden:0",
+      "ctl00_cphCuerpo_wpParametros_wdInicio_input:7",
+      "ctl00_cphCuerpo_wpParametros_wdFin_DrpPnl2_DP_CAL_ID_2:0",
+      "ctl00$cphCuerpo$wpParametros$wdFin_hidden:0",
+      "ctl00_cphCuerpo_wpParametros_wdFin_input:7",
+      "ctl00$cphCuerpo$wpParametros$txtExpediente:0",
+      "ctl00$_IG_CSS_LINKS_:151",
+      "ctl00$cphCuerpo$wpParametros$ddlEntidades:1",
+      "ctl00$cphCuerpo$wpParametros$ddlUC:1",
+      "ctl00$cphCuerpo$wpParametros$ddlModalidad:1",
+      "ctl00$cphCuerpo$wpParametros$ddlTipoAdquisicion:1",
+      "ctl00$cphCuerpo$wpParametros$ddlEtapas:1",
+      "ctl00$cphCuerpo$wpParametros$ddlFteFinanciamiento:1"
+     ],
+     "postStatus": 200,
+     "postLargo": 211879,
+     "filasConCeldas": 31,
+     "muestraFilas": [
+      [
+       "Expediente: LPN-GC-INPREUNAH-002-2026 Entidad : Instituto de Previsión Social de los Empleados de la Universidad Naciona",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 16/11/2026 Fecha Cierre: 15/01/2027",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: INJUPEMP-LPN-02-2026 Entidad : Instituto Nacional de Jubilaciones y Pensiones de los Empleados Públicos (INJ",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 23/11/2026 Fecha Cierre: 04/01/2027",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LPN-012-2026 Entidad : Instituto Hondureño de Seguridad Social (IHSS) Unidad Compra: Unidad Central Objeto C",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 17/11/2026 Fecha Cierre: 29/12/2026",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LP-MSRC-08-2025 Entidad : Municipalidad de Santa Rosa de Copán, Copán Unidad Compra: Alcaldía Municipal de S",
+       "Recepci&#243;n de Ofertas",
+       "Concurso privado",
+       "Fecha Inicio: 12/12/2025 Fecha Cierre: 23/12/2026",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LPN-013-2026 Entidad : Instituto Hondureño de Seguridad Social (IHSS) Unidad Compra: Unidad Central Objeto C",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 10/11/2026 Fecha Cierre: 21/12/2026",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LPN-UNAG-GC-2027-001 Entidad : Universidad Nacional de Agricultura (UNA) Unidad Compra: Unidad Central Objet",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 10/11/2026 Fecha Cierre: 21/12/2026",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LPN No. 09-2026-SEAPI-UNAH Entidad : Universidad Nacional Autónoma de Honduras (UNAH) Unidad Compra: Secreta",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 30/09/2026 Fecha Cierre: 17/12/2026",
+       "Ver Detalle"
+      ],
+      [
+       "Expediente: LPN-005-BANADESA-2027 Entidad : Banco Nacional de Desarrollo Agrícola (BANADESA) Unidad Compra: Unidad Centr",
+       "Recepci&#243;n de Ofertas",
+       "Licitaci&#243;n p&#250;blica nacional",
+       "Fecha Inicio: 04/11/2026 Fecha Cierre: 14/12/2026",
+       "Ver Detalle"
+      ]
+     ],
+     "enlaces": [
+      "https://www.honducompras.gob.hn/",
+      "https://www.stlcc.gob.hn",
+      "http://h1.honducompras.gob.hn/Entidades/Default.aspx?Id=1",
+      "http://sicc.honducompras.gob.hn/HC/Procesos/BusquedaHistorico.aspx",
+      "javascript:__doPostBack('ctl00$cphCuerpo$gvResultados','Sort$Entidad')",
+      "javascript:__doPostBack('ctl00$cphCuerpo$gvResultados','Sort$Etapa')",
+      "javascript:__doPostBack('ctl00$cphCuerpo$gvResultados','Sort$Modalidad')",
+      "javascript:__doPostBack('ctl00$cphCuerpo$gvResultados','Sort$FechaInicio')",
+      "ProcesoHistorico.aspx?Id0=MwAAADIAAAA2AAAA-u5e7m6BNqdA%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAABOAAAALQAAAEcAAABDAAAALQAAAEkAAABOAAAAUAAAAFIAAABFAAAAVQAAAE4AAABBAAAASAAAAC0AAAAwAAAAMAAAADIAAAAtAAAAMgAAADAAAAAyAAAANgAAAA%3d%3d-a4kUayguy0w%3d",
+      "ProcesoHistorico.aspx?Id0=MQAAADcAAAA1AAAA-0xJxXoMcY38%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=SQAAAE4AAABKAAAAVQAAAFAAAABFAAAATQAAAFAAAAAtAAAATAAAAFAAAABOAAAALQAAADAAAAAyAAAALQAAADIAAAAwAAAAMgAAADYAAAA%3d-RAz7TU%2fT4j8%3d",
+      "ProcesoHistorico.aspx?Id0=MQAAADEAAAA3AAAA-p2fyCf7jC3I%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAABOAAAALQAAADAAAAAxAAAAMgAAAC0AAAAyAAAAMAAAADIAAAA2AAAA-wlu%2fPLWhTHA%3d",
+      "ProcesoHistorico.aspx?Id0=MgAAADQAAAAxAAAA-IPh993xe9FU%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAAAtAAAATQAAAFMAAABSAAAAQwAAAC0AAAAwAAAAOAAAAC0AAAAyAAAAMAAAADIAAAA1AAAA-0M0Olp1huFk%3d",
+      "ProcesoHistorico.aspx?Id0=MQAAADEAAAA3AAAA-p2fyCf7jC3I%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAABOAAAALQAAADAAAAAxAAAAMwAAAC0AAAAyAAAAMAAAADIAAAA2AAAA-w47IyzLC0j0%3d",
+      "ProcesoHistorico.aspx?Id0=MQAAADUAAAAyAAAA-Jo8nEYtMOtU%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAABOAAAALQAAAFUAAABOAAAAQQAAAEcAAAAtAAAARwAAAEMAAAAtAAAAMgAAADAAAAAyAAAANwAAAC0AAAAwAAAAMAAAADEAAAA%3d-QPTlW3tEas4%3d",
+      "ProcesoHistorico.aspx?Id0=OAAAADcAAAAyAAAA-1rKykAr89vs%3d&amp;Id1=MQAAAA%3d%3d-OFoziWLXW%2fg%3d&amp;Id2=TAAAAFAAAABOAAAAIAAAAE4AAABvAAAALgAAACAAAAAwAAAAOQAAAC0AAAAyAAAAMAAAADIAAAA2AAAALQAAAFMAAABFAAAAQQAAAFAAAABJAAAALQAAAFUAAABOAAAAQQAAAEgAAAA%3d-D5i4LXcErcQ%3d"
+     ],
+     "postbacks": [],
+     "textoTotales": "encia y Tecnolog&#237;a Agropecuaria (DICTA) Direcci&#243;n de Gesti&#243;n por Resultados (DIGER) Direccion de Investigacion y Evaluacion de la Carrera Policial Direcci&"
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-23T19:12:02.712Z",
   "segundos": 232,
   "fuentes": [
