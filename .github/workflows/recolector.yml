@@ -21,7 +21,7 @@ permissions:
 jobs:
   recolectar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - name: Traer el código del Radar
         uses: actions/checkout@v5

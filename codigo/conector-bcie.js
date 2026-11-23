@@ -4,15 +4,20 @@
 // ============================================================
 // El BCIE no tiene API, pero sus tablas vienen completas en la
 // página (sin paginar). El conector lee dos tablas:
-//   1. Avisos de adquisición en PROYECTOS financiados por el BCIE
-//      (pestaña "Nuevo proceso"): licitaciones y consultorías que
-//      ejecutan los gobiernos (Honduras, Nicaragua, Guatemala…).
+//   1. Avisos de adquisición en PROYECTOS financiados por el BCIE:
+//      licitaciones y consultorías que ejecutan los gobiernos
+//      (Honduras, Nicaragua, Guatemala…). La página trae todos los
+//      avisos como datos dentro de su código (en español, con
+//      entidad ejecutora, objeto, categoría y fecha de recepción);
+//      se dejan los de fecha de recepción vigente.
 //   2. Adquisiciones INSTITUCIONALES en curso (del propio banco):
 //      solo las de categoría Consultoría; el resto son servicios
 //      internos (mantenimiento, vigilancia…).
 //
 // Reglas:
-//  - Proyectos: el código termina en -CI/-CF (consultor individual
+//  - Proyectos: tipo según la categoría del BCIE (Consultorías
+//    individuales/firmas → Consultoría; bienes, obras, servicios →
+//    Licitación). Si no trae categoría: el código termina en -CI/-CF (consultor individual
 //    o firma) → Consultoría; en -O/-B (obras o bienes) → Licitación;
 //    si no trae sufijo, el título habla de diseño, supervisión, estudio o
 //    consultoría → Consultoría; si no → Licitación.
@@ -47,6 +52,12 @@ const MESES_BCIE = { enero:1, january:1, febrero:2, february:2, marzo:3, march:3
   noviembre:11, november:11, diciembre:12, december:12 };
 // "October 23, 2026" o "23 de octubre de 2026" o "23/10/2026"
 function fechaBCIE(t) {
+  if (!t) return null;
+  const iso = String(t).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2})/);
+  if (iso) {                                    // "2026-12-15T06:00:00.000Z": hora de Centroamérica → ese día
+    const d = new Date(String(t)); d.setUTCHours(d.getUTCHours() - 6);
+    return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  }
   const n = sinTildesBCIE(t);
   let m = n.match(/([a-z]+) (\d{1,2}),? (\d{4})/);
   if (m && MESES_BCIE[m[1]]) return new Date(Date.UTC(+m[3], MESES_BCIE[m[1]] - 1, +m[2]));
@@ -79,6 +90,30 @@ function filasBCIE(html) {
     filas.push({ celdas: celdas.map(textoBCIE), enlace: (fila.match(/href="([^"]*avisos-de-adquisicion\/[^"]+)"/) || [])[1] || "" });
   }
   return filas;
+}
+
+// Los avisos vienen como objetos JSON dentro del código de la página
+// (escapados como texto de JavaScript: \"campo\":\"valor\")
+function avisosEnDatosBCIE(html) {
+  const avisos = [];
+  const re = /\{\\"id\\":\d+,\\"address\\":[\s\S]*?\\"createdAt\\":\\"[^"\\]*\\"\}/g;
+  for (const m of String(html).matchAll(re)) {
+    let obj = null;
+    try { obj = JSON.parse(JSON.parse('"' + m[0] + '"')); }          // quita el escape de JavaScript y lee el JSON
+    catch (e) {
+      try { obj = JSON.parse(m[0].replace(/\\"/g, '"').replace(/\\\\/g, "\\")); } catch (e2) { obj = null; }
+    }
+    if (obj && obj.process_number !== undefined && obj.reception_date !== undefined) avisos.push(obj);
+  }
+  return avisos;
+}
+function limpiarBCIE(t) { return String(t || "").replace(/\s+/g, " ").trim(); }
+
+function tipoBCIE(categoria, codigo, texto) {
+  const c = sinTildesBCIE(categoria);
+  if (c.startsWith("consultoria")) return "Consultoría";
+  if (c.startsWith("bienes") || c.startsWith("obras") || c.startsWith("servicios")) return "Licitación";
+  return tipoProyectoBCIE(codigo, texto);
 }
 
 function tipoProyectoBCIE(id, titulo) {
@@ -119,24 +154,36 @@ async function descargarBCIE({ hoy = new Date() } = {}) {
     fichas.push(f);
   };
 
-  // 1. Proyectos: [código, título, país, publicación, recepción, días]
+  // 1. Proyectos. La tabla la arma el navegador con JavaScript, pero la
+  //    página trae TODOS los avisos (vigentes y viejos) como datos dentro
+  //    de su código: se leen de ahí y se dejan los de recepción vigente.
   const htmlProyectos = await traerBCIE(BCIE.proyectos);
-  informe.diagnostico = { largo: htmlProyectos.length, tr: (htmlProyectos.match(/<tr\b/gi) || []).length,
-    td: (htmlProyectos.match(/<td\b/gi) || []).length, avisos: (htmlProyectos.match(/avisos-de-adquisicion\/\d/g) || []).length,
-    titulo: (htmlProyectos.match(/<title>([^<]*)/) || [])[1] };
-  for (const { celdas: c, enlace } of filasBCIE(htmlProyectos)) {
+  const avisos = avisosEnDatosBCIE(htmlProyectos);
+  informe.avisosEnPagina = avisos.length;
+  if (!avisos.length) {
+    // Respaldo: si algún día la tabla viene armada, se lee la tabla
+    for (const { celdas: c, enlace } of filasBCIE(htmlProyectos))
+      avisos.push({ process_number: c[0], title_project: c[1], country: c[2], start_date_sale: c[3], reception_date: c[4], _enlace: enlace });
+  }
+  for (const a of avisos) {
     informe.proyectos++;
-    const [codigo, titulo, pais, publicado, recepcion] = c;
+    const codigo = String(a.process_number || "").trim() || ("bcie-" + a.id);
+    const pais = PAISES_BCIE[sinTildesBCIE(a.country)] || (/^rep\.? dominicana/i.test(a.country || "") ? "República Dominicana" : (a.country || "Regional"));
+    const titulo = limpiarBCIE(a.title_project) || limpiarBCIE(a.object).slice(0, 200) || codigo;
     agregar(base({
       id: "bcie:" + codigo, fuente: BCIE.nombre, id_fuente: codigo,
-      tipo: tipoProyectoBCIE(codigo, titulo), modalidad: "Proyecto financiado por el BCIE",
-      entidad: "Proyecto financiado por el BCIE · " + (PAISES_BCIE[sinTildesBCIE(pais)] || pais),
-      titulo, objeto: "", pais: PAISES_BCIE[sinTildesBCIE(pais)] || pais,
-      fecha_cierre: fechaBCIE(recepcion), fecha_publicacion: fechaBCIE(publicado),
-      enlace: enlace || BCIE.proyectos
+      tipo: tipoBCIE(a.category, codigo, titulo + " " + (a.object || "")),
+      modalidad: limpiarBCIE(a.modality_description) || "Proyecto financiado por el BCIE",
+      entidad: limpiarBCIE(a.executor) ? limpiarBCIE(a.executor) + " · BCIE" : "Proyecto financiado por el BCIE",
+      titulo,
+      objeto: [limpiarBCIE(a.object), limpiarBCIE(a.name) && "Programa: " + limpiarBCIE(a.name)].filter(Boolean).join(" · ").slice(0, 600),
+      pais,
+      fecha_cierre: fechaBCIE(a.reception_date) || fechaBCIE(a.end_date_sale),
+      fecha_publicacion: fechaBCIE(a.start_date_sale),
+      enlace: a._enlace || (a.id ? BCIE.proyectos + "/" + a.id + "-" + encodeURIComponent(codigo) : BCIE.proyectos)
     }));
   }
-  if (informe.proyectos === 0) throw new Error("La tabla de avisos de proyectos llegó vacía: " + JSON.stringify(informe.diagnostico));
+  if (informe.proyectos === 0) throw new Error("No se encontraron avisos de proyectos en la página (¿cambió?)");
 
   // 2. Institucionales: [bien o servicio, método, categoría, publicación, vencimiento, tiempo]
   try {
@@ -161,4 +208,4 @@ async function descargarBCIE({ hoy = new Date() } = {}) {
 }
 
 if (typeof module !== "undefined")
-  module.exports = { BCIE, filasBCIE, fechaBCIE, tipoProyectoBCIE, paisBCIE, descargarBCIE };
+  module.exports = { BCIE, avisosEnDatosBCIE, filasBCIE, fechaBCIE, tipoProyectoBCIE, paisBCIE, descargarBCIE };

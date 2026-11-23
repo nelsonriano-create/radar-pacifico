@@ -2,7 +2,8 @@
 // RADAR PACÍFICO — Recolector diario (v1, PMV)
 // ============================================================
 // Lo ejecuta GitHub todos los días (ver .github/workflows).
-//  1. Llama a cada conector (SECOP II, Banco Mundial, UNGM, Empleos.hn…).
+//  1. Llama a todos los conectores a la vez (SECOP II, Banco Mundial,
+//     UNGM, Empleos.hn, HonduCompras, BCIE…).
 //  2. Junta todas las oportunidades ABIERTAS en un solo archivo:
 //     datos/oportunidades.json  ← esto es lo que lee el buscador.
 //  3. Anota en una bitácora cómo le fue a cada fuente.
@@ -78,10 +79,19 @@ function conservarDeAyer(anterior, nombre) {
   const todas = [];
   const resumen = [];
 
-  for (const fuente of FUENTES) {
+  // Todas las fuentes se consultan AL MISMO TIEMPO (cada una a su ritmo);
+  // así el total dura lo que la fuente más lenta, no la suma de todas.
+  const resultados = await Promise.all(FUENTES.map(async fuente => {
     const t0 = Date.now();
+    try { return { ok: true, valor: await fuente.correr(), segundos: Math.round((Date.now() - t0) / 1000) }; }
+    catch (error) { return { ok: false, error, segundos: Math.round((Date.now() - t0) / 1000) }; }
+  }));
+
+  for (const [i, fuente] of FUENTES.entries()) {
+    const res = resultados[i];
     try {
-      const { fichas, informe } = await fuente.correr();
+      if (!res.ok) throw res.error;
+      const { fichas, informe } = res.valor;
       const deAyer = conservarDeAyer(anterior, fuente.nombre);
       const sospechosa = deAyer.length >= MINIMO_PARA_COMPARAR && fichas.length < deAyer.length * UMBRAL_CAIDA;
       if (sospechosa) {
@@ -90,12 +100,12 @@ function conservarDeAyer(anterior, nombre) {
         resumen.push({ fuente: fuente.nombre, estado: "advertencia",
           mensaje: `Trajo ${fichas.length} y ayer había ${deAyer.length}: posible daño en la fuente; se conservan las de ayer`,
           oportunidades: deAyer.length, recibidasHoy: fichas.length, conservadasDeAyer: true,
-          segundos: Math.round((Date.now() - t0) / 1000), informe });
+          segundos: res.segundos, informe });
         console.log(`⚠ ${fuente.nombre}: trajo ${fichas.length} (ayer ${deAyer.length}); se conservan las de ayer`);
       } else {
         todas.push(...fichas.map(liviana));
         resumen.push({ fuente: fuente.nombre, estado: "ok", oportunidades: fichas.length,
-          segundos: Math.round((Date.now() - t0) / 1000), informe });
+          segundos: res.segundos, informe });
         console.log(`✔ ${fuente.nombre}: ${fichas.length} oportunidades abiertas`);
       }
     } catch (e) {
@@ -103,7 +113,7 @@ function conservarDeAyer(anterior, nombre) {
       const deAyer = conservarDeAyer(anterior, fuente.nombre);
       todas.push(...deAyer);
       resumen.push({ fuente: fuente.nombre, estado: "error", mensaje: String(e.message || e).slice(0, 300),
-        oportunidades: deAyer.length, conservadasDeAyer: true });
+        oportunidades: deAyer.length, conservadasDeAyer: true, segundos: res.segundos });
       console.log(`✘ ${fuente.nombre}: ${e.message} (se conservan ${deAyer.length} de ayer)`);
     }
   }
