@@ -2,7 +2,7 @@
 // RADAR PACÍFICO — Recolector diario (v1, PMV)
 // ============================================================
 // Lo ejecuta GitHub todos los días (ver .github/workflows).
-//  1. Llama a cada conector (SECOP II, Banco Mundial…).
+//  1. Llama a cada conector (SECOP II, Banco Mundial, UNGM, Empleos.hn…).
 //  2. Junta todas las oportunidades ABIERTAS en un solo archivo:
 //     datos/oportunidades.json  ← esto es lo que lee el buscador.
 //  3. Anota en una bitácora cómo le fue a cada fuente.
@@ -21,6 +21,7 @@ Object.assign(global, require("../codigo/expansor.js"));
 const { descargarSecop } = require("../codigo/conector-secop.js");
 const { descargarBancoMundial } = require("../codigo/conector-bancomundial.js");
 const { descargarUNGM } = require("../codigo/conector-ungm.js");
+const { descargarEmpleosHN } = require("../codigo/conector-empleoshn.js");
 
 const CARPETA = path.join(__dirname, "..", "datos");
 const ARCHIVO = path.join(CARPETA, "oportunidades.json");
@@ -30,7 +31,8 @@ const BITACORA = path.join(CARPETA, "bitacora.json");
 const FUENTES = [
   { nombre: "SECOP II",      correr: () => descargarSecop({ token: process.env.SECOP_TOKEN || "" }) },
   { nombre: "Banco Mundial", correr: () => descargarBancoMundial() },
-  { nombre: "UNGM (ONU)",    correr: () => descargarUNGM() }
+  { nombre: "UNGM (ONU)",    correr: () => descargarUNGM() },
+  { nombre: "Empleos.hn",    correr: () => descargarEmpleosHN() }
 ];
 
 // La ficha que se guarda (sin los datos originales, para que el archivo sea liviano)
