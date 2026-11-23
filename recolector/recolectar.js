@@ -1,5 +1,5 @@
 // ============================================================
-// RADAR PACÍFICO — Recolector diario (v1, PMV)
+// RADAR PACÍFICO — Recolector diario (v1.1)
 // ============================================================
 // Lo ejecuta GitHub todos los días (ver .github/workflows).
 //  1. Llama a todos los conectores a la vez (SECOP II, Banco Mundial,
