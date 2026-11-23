@@ -36,7 +36,7 @@ const HONDUCOMPRAS = {
   tipoConsultoria: "3",
   maxPaginas: 60,
   pausaMs: 1200,
-  limitePedidoMs: 60000,       // cada pedido: máximo 1 minuto
+  limitePedidoMs: 90000,       // cada pedido: máximo 1,5 minutos
   limiteTotalMs: 25 * 60000,   // toda la fuente: máximo 25 minutos (el portal es lento: 30-100 s por página)
   // Ojo: los filtros de modalidad y de tipo de adquisición del portal
   // IGNORAN la etapa (devuelven todo el histórico); solo se usa la etapa.
@@ -120,9 +120,9 @@ function paginasOfrecidasHC(html) {
 }
 
 // Pedido con tiempo límite; si la conexión se cae o el servidor falla, reintenta
-async function pedirHC(opciones) {
+async function pedirHC(opciones, intentos = 3) {
   let ultimo;
-  for (let intento = 1; intento <= 3; intento++) {
+  for (let intento = 1; intento <= intentos; intento++) {
     try {
       const r = await fetch(HONDUCOMPRAS.url, { ...opciones, signal: AbortSignal.timeout(HONDUCOMPRAS.limitePedidoMs) });
       if (r.ok) return r;
@@ -132,50 +132,86 @@ async function pedirHC(opciones) {
       ultimo = e;
       if (/HTTP 4/.test(String(e.message))) throw e;
     }
-    await esperarHC(8000 * intento);
+    if (intento < intentos) await esperarHC(8000 * intento);
   }
-  throw new Error("HonduCompras no respondió tras 3 intentos (" + (ultimo && (ultimo.cause && ultimo.cause.code || ultimo.message)) + ")");
+  throw new Error("HonduCompras no respondió tras " + intentos + " intento(s) (" + (ultimo && (ultimo.cause && ultimo.cause.code || ultimo.message)) + ")");
 }
 
-async function postHC(campos, galletas) {
+async function postHC(campos, galletas, intentos = 3) {
   const r = await pedirHC({ method: "POST",
     headers: { ...CAB_HC, "Content-Type": "application/x-www-form-urlencoded", "Cookie": galletas, "Referer": HONDUCOMPRAS.url },
-    body: new URLSearchParams(campos).toString() });
+    body: new URLSearchParams(campos).toString() }, intentos);
   return r.text();
 }
 
-// Una búsqueda completa (todas las páginas) con los filtros dados
-async function buscarHC(filtros, informe) {
+// Abre el buscador y hace la búsqueda: devuelve la página 1 y la sesión
+async function abrirBusquedaHC(filtros) {
   const r = await pedirHC({ headers: CAB_HC });
   const galletas = (r.headers.getSetCookie ? r.headers.getSetCookie() : []).map(c => c.split(";")[0]).join("; ");
-  let campos = camposFormularioHC(await r.text());
+  const campos = camposFormularioHC(await r.text());
   if (!campos.__VIEWSTATE) throw new Error("El buscador no entregó el formulario (¿cambió la página?)");
   Object.assign(campos, filtros, { [C + "btnBuscar"]: "Buscar" });
+  return { html: await postHC(campos, galletas), galletas };
+}
 
-  let html = await postHC(campos, galletas);
+// Pide la página n a partir del estado de la página actual
+async function irAPaginaHC(sesion, n) {
+  const campos = camposFormularioHC(sesion.html);       // el formulario cambia en cada página
+  delete campos[C + "btnBuscar"];
+  campos.__EVENTTARGET = "ctl00$cphCuerpo$gvResultados";
+  campos.__EVENTARGUMENT = "Page$" + n;
+  return { html: await postHC(campos, sesion.galletas, 1), galletas: sesion.galletas };   // 1 intento: si falla, se reabre
+}
+
+// Una búsqueda completa (todas las páginas) con los filtros dados.
+// Si una página no responde: se abre una sesión nueva y se salta directo
+// a esa página desde la página 1 (el paginador lo permite); si tampoco,
+// se salta esa página y se sigue con la siguiente.
+async function buscarHC(filtros, informe) {
+  let sesion = await abrirBusquedaHC(filtros);
   const filas = [];
   let actual = 1;
+  informe.paginasSaltadas = [];
   for (let i = 0; i < HONDUCOMPRAS.maxPaginas; i++) {
     informe.paginas++;
-    const deEsta = leerFilasHC(html);
+    const deEsta = leerFilasHC(sesion.html);
     filas.push(...deEsta);
-    // Diagnóstico del paginador: página pedida, primera fila y páginas que ofrece
     informe.recorrido = informe.recorrido || [];
-    if (informe.recorrido.length < 12) informe.recorrido.push(actual + ":" + deEsta.length + ":" +
-      ((deEsta[0] || {}).expediente || "-").slice(0, 25) + ":[" + paginasOfrecidasHC(html).join(",") + "]");
-    const siguiente = paginasOfrecidasHC(html).filter(n => n > actual).sort((a, b) => a - b)[0];
-    if (!siguiente) break;
-    if (Date.now() > informe.limite) { informe.incompleta = "se alcanzó el tope de tiempo en la página " + actual; break; }
-    await esperarHC(HONDUCOMPRAS.pausaMs);
-    campos = camposFormularioHC(html);                   // el formulario cambia en cada página
-    delete campos[C + "btnBuscar"];
-    campos.__EVENTTARGET = "ctl00$cphCuerpo$gvResultados";
-    campos.__EVENTARGUMENT = "Page$" + siguiente;
-    try { html = await postHC(campos, galletas); }
-    catch (e) {                                           // se conserva lo ya leído
-      informe.incompleta = "falló la página " + siguiente + ": " + String(e.message).slice(0, 120);
-      break;
+    if (informe.recorrido.length < 30) informe.recorrido.push(actual + ":" + deEsta.length);
+
+    let siguiente = paginasOfrecidasHC(sesion.html).filter(n => n > actual).sort((a, b) => a - b)[0];
+    let listo = false;
+    while (siguiente && !listo) {
+      if (Date.now() > informe.limite) { informe.incompleta = "se alcanzó el tope de tiempo en la página " + actual; return filas; }
+      await esperarHC(HONDUCOMPRAS.pausaMs);
+      try {
+        sesion = await irAPaginaHC(sesion, siguiente);
+        listo = true;
+      } catch (e) {
+        // Sesión nueva y salto directo a la página que falló
+        try {
+          const nueva = await abrirBusquedaHC(filtros);
+          if (!paginasOfrecidasHC(nueva.html).includes(siguiente)) throw new Error("la página " + siguiente + " no se ofrece desde la primera");
+          sesion = await irAPaginaHC(nueva, siguiente);
+          informe.reaperturas = (informe.reaperturas || 0) + 1;
+          listo = true;
+        } catch (e2) {
+          informe.paginasSaltadas.push(siguiente);
+          // Se intenta seguir con la página que viene, desde una sesión nueva
+          const prox = siguiente + 1;
+          try {
+            const nueva = await abrirBusquedaHC(filtros);
+            if (!paginasOfrecidasHC(nueva.html).includes(prox)) { informe.incompleta = "falló la página " + siguiente + " y no se pudo seguir"; return filas; }
+            sesion = nueva; actual = 1; siguiente = prox;      // el próximo intento pide "prox" desde la página 1
+            continue;
+          } catch (e3) {
+            informe.incompleta = "falló la página " + siguiente + ": " + String(e2.message).slice(0, 100);
+            return filas;
+          }
+        }
+      }
     }
+    if (!siguiente) break;
     actual = siguiente;
   }
   return filas;
