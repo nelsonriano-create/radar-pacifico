@@ -1,5 +1,179 @@
 [
  {
+  "fecha": "2026-11-23T20:59:48.380Z",
+  "segundos": 1510,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "error",
+    "mensaje": "SECOP II respondió 503: {\"message\":\"Service unavailable\",\"errorCode\":\"service-unavailable\",\"data\":{}}",
+    "oportunidades": 3283,
+    "conservadasDeAyer": true,
+    "segundos": 26
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 22,
+    "segundos": 15,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1760,
+     "yaCerro": 294,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 22
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 158,
+    "segundos": 164,
+    "informe": {
+     "paginas": 74,
+     "recibidos": 1088,
+     "otrasRegiones": 872,
+     "variasLocalizaciones": 55,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 3,
+     "tipos": {
+      "Request for quotation": 57,
+      "Invitation to bid": 51,
+      "Request for proposal": 36,
+      "Call for individual consultants": 5,
+      "Request for EOI": 5,
+      "Grant support-call for proposal": 1,
+      "Call for implementing partners": 1,
+      "Request for information": 2
+     },
+     "paisesVistos": {
+      "Syrian Arab Republic": 36,
+      "Ukraine": 33,
+      "Uganda": 27,
+      "Philippines": 26,
+      "Pakistan": 24,
+      "Ethiopia": 23,
+      "Palestine, State of": 23,
+      "Jordan": 21,
+      "Bangladesh": 21,
+      "Egypt": 21,
+      "Lebanon": 18,
+      "Madagascar": 17,
+      "Congo, The Democratic Republic of the": 17,
+      "Afghanistan": 17,
+      "Tunisia": 16,
+      "Switzerland": 16,
+      "Nigeria": 16,
+      "Moldova, Republic of": 16,
+      "Kenya": 16,
+      "Cameroon": 14,
+      "Sudan": 13,
+      "Thailand": 13,
+      "South Sudan": 13,
+      "Chad": 13,
+      "Somalia": 12
+     },
+     "mostrados": 158
+    }
+   },
+   {
+    "fuente": "Empleos.hn",
+    "estado": "ok",
+    "oportunidades": 29,
+    "segundos": 45,
+    "informe": {
+     "paginas": 7,
+     "categoria": 28,
+     "porPalabra": 57,
+     "descartadasPorPalabra": 27,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "ruido": 6,
+     "duplicado": 23,
+     "fichasSinLeer": 0,
+     "tipos": {
+      "Consultoría": 25,
+      "Licitación": 4
+     },
+     "mostrados": 29
+    }
+   },
+   {
+    "fuente": "HonduCompras (ONCAE)",
+    "estado": "ok",
+    "oportunidades": 362,
+    "segundos": 1510,
+    "informe": {
+     "paginas": 114,
+     "recibidos": 3420,
+     "consultorias": 11,
+     "sinFecha": 0,
+     "yaCerro": 3050,
+     "duplicado": 8,
+     "modalidades": {
+      "Licitación pública nacional": 26,
+      "Concurso privado": 4,
+      "Licitación pública internacional": 3,
+      "Licitación privada": 13,
+      "Concurso público nacional": 6,
+      "Contratación directa": 6,
+      "Concurso público internacional": 2,
+      "Precalificación": 1,
+      "Compra Menor": 301
+     },
+     "porModalidad": {
+      "Licitación o Concurso": "1800",
+      "Precalificación": "360",
+      "Compra Menor": "1260 (incompleta: se alcanzó el tope de tiempo en la página 42)"
+     },
+     "recorrido": [
+      "1:30:LPN-GC-INPREUNAH-002-2026:[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "2:30:HO-L1227-P00142:[1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "3:30:LPrNO-AMDC-008-2026:[1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "4:30:CPR-CREE-03-2026:[1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "5:30:ENEE-UCP-BID-CCIN-HO-L120:[1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "6:30:LP-009-2026-HO-SESAL:[1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "7:30:CPN-SIT-070-2026:[1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "8:30:CONSULTORIA-002-2026:[1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "9:30:CPN-SIT-048-2026:[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21]",
+      "10:30:SIT-CD-CO-005-2026:[1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21]",
+      "11:30:GESALUD-BID-4713-BL-HO-L :[1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21]",
+      "12:30:PRONADERS-CD-052-2026-OBR:[1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21]"
+     ],
+     "mostrados": 362
+    }
+   },
+   {
+    "fuente": "BCIE",
+    "estado": "ok",
+    "oportunidades": 11,
+    "segundos": 2,
+    "informe": {
+     "proyectos": 241,
+     "institucionales": 0,
+     "institucionalesNoConsultoria": 0,
+     "sinFecha": 0,
+     "yaCerro": 230,
+     "duplicado": 0,
+     "paises": {
+      "Argentina": 2,
+      "Belice": 1,
+      "Costa Rica": 2,
+      "Guatemala": 2,
+      "El Salvador": 1,
+      "Honduras": 1,
+      "Nicaragua": 2
+     },
+     "avisosEnPagina": 241,
+     "mostrados": 11
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-23T20:33:48.838Z",
   "segundos": 865,
   "fuentes": [
