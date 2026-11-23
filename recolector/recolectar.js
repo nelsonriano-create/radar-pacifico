@@ -22,6 +22,7 @@ const { descargarSecop } = require("../codigo/conector-secop.js");
 const { descargarBancoMundial } = require("../codigo/conector-bancomundial.js");
 const { descargarUNGM } = require("../codigo/conector-ungm.js");
 const { descargarEmpleosHN } = require("../codigo/conector-empleoshn.js");
+const { descargarHonduCompras } = require("../codigo/conector-honducompras.js");
 
 const CARPETA = path.join(__dirname, "..", "datos");
 const ARCHIVO = path.join(CARPETA, "oportunidades.json");
@@ -32,7 +33,8 @@ const FUENTES = [
   { nombre: "SECOP II",      correr: () => descargarSecop({ token: process.env.SECOP_TOKEN || "" }) },
   { nombre: "Banco Mundial", correr: () => descargarBancoMundial() },
   { nombre: "UNGM (ONU)",    correr: () => descargarUNGM() },
-  { nombre: "Empleos.hn",    correr: () => descargarEmpleosHN() }
+  { nombre: "Empleos.hn",    correr: () => descargarEmpleosHN() },
+  { nombre: "HonduCompras (ONCAE)", correr: () => descargarHonduCompras() }
 ];
 
 // La ficha que se guarda (sin los datos originales, para que el archivo sea liviano)
