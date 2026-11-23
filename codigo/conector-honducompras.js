@@ -10,15 +10,14 @@
 //      (ASP.NET: __VIEWSTATE, __EVENTVALIDATION…).
 //   2. Busca la etapa "Recepción de Ofertas" (= procesos abiertos).
 //   3. Recorre todas las páginas de resultados.
-//   4. Antes, hace la misma búsqueda solo con tipo "Consultoría"
-//      para marcar cuáles de esos procesos son consultorías.
+//   4. Marca como Consultoría los que lo dicen en el objeto
+//      (consultoría, supervisión, diseño, estudio, auditoría…).
 //   El portal es lento (~25 s por página, ~20 páginas): la fuente
 //   tiene un tope de 14 minutos y, si se agota o falla una página,
 //   se guarda lo ya leído.
 //
 // Reglas:
-//  - Tipo: Consultoría si aparece en la búsqueda de consultorías;
-//    si no, Licitación.
+//  - Tipo: Consultoría si el objeto lo indica; si no, Licitación.
 //  - Modalidad: la del portal (licitación pública nacional,
 //    concurso privado, compra menor…).
 //  - Cierre: "Fecha Cierre" (solo el día). País: Honduras, HNL.
@@ -178,6 +177,13 @@ async function buscarHC(filtros, informe) {
   return filas;
 }
 
+// Consultoría: se reconoce por las palabras del objeto (el filtro "Tipo de
+// adquisición" del portal no respeta la etapa y devuelve todo el histórico)
+function esConsultoriaHC(f) {
+  const n = (f.objeto + " " + f.expediente).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  return /consultor|supervision|\bdiseno|estudio|auditoria|asesor|evaluacion|diagnostico|elaboracion de(l)? (plan|manual|politica|estrategia)|servicios profesionales|\bcs-|-cs-|sbcc|scc\b/.test(n);
+}
+
 // Identificador del proceso: expediente + entidad (Id0 del enlace identifica a la
 // entidad, no al proceso; dos entidades pueden usar el mismo número de expediente)
 const claveHC = f => (f.expediente || "") + "|" + (f.id || f.entidad || "");
@@ -213,18 +219,7 @@ async function descargarHonduCompras({ hoy = new Date() } = {}) {
   const informe = { paginas: 0, recibidos: 0, consultorias: 0, sinFecha: 0, yaCerro: 0, duplicado: 0, modalidades: {} };
   Object.defineProperty(informe, "limite", { value: Date.now() + HONDUCOMPRAS.limiteTotalMs, enumerable: false });
 
-  // 1. Primero las consultorías (búsqueda corta): así quedan marcadas aunque
-  //    la búsqueda general no alcance a recorrer todas las páginas
-  const consultorias = new Set();
-  try {
-    for (const f of await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion, [C + "ddlTipoAdquisicion"]: HONDUCOMPRAS.tipoConsultoria }, informe))
-      consultorias.add(claveHC(f));
-  } catch (e) { informe.avisoConsultorias = String(e.message || e).slice(0, 150); }
-  informe.paginasConsultorias = informe.paginas;
-  informe.encontradasConsultorias = consultorias.size;
-
-  // 2. Todos los procesos en Recepción de Ofertas
-  await esperarHC(HONDUCOMPRAS.pausaMs);
+  // Todos los procesos en Recepción de Ofertas
   const todas = await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion }, informe);
   if (!todas.length) throw new Error("HonduCompras respondió, pero sin procesos en Recepción de Ofertas (¿cambió la página?)");
 
@@ -237,7 +232,7 @@ async function descargarHonduCompras({ hoy = new Date() } = {}) {
     const clave = claveHC(f);
     if (vistos.has(clave)) { informe.duplicado++; continue; }
     vistos.add(clave);
-    const esC = consultorias.has(clave);
+    const esC = esConsultoriaHC(f);
     if (esC) informe.consultorias++;
     informe.modalidades[f.modalidad] = (informe.modalidades[f.modalidad] || 0) + 1;
     fichas.push(fichaHC(f, esC));
@@ -247,4 +242,4 @@ async function descargarHonduCompras({ hoy = new Date() } = {}) {
 }
 
 if (typeof module !== "undefined")
-  module.exports = { HONDUCOMPRAS, camposFormularioHC, leerFilasHC, paginasOfrecidasHC, fichaHC, descargarHonduCompras };
+  module.exports = { HONDUCOMPRAS, esConsultoriaHC, camposFormularioHC, leerFilasHC, paginasOfrecidasHC, fichaHC, descargarHonduCompras };
