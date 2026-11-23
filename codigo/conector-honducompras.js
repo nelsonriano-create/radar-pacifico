@@ -151,7 +151,12 @@ async function buscarHC(filtros, informe) {
   let actual = 1;
   for (let i = 0; i < HONDUCOMPRAS.maxPaginas; i++) {
     informe.paginas++;
-    filas.push(...leerFilasHC(html));
+    const deEsta = leerFilasHC(html);
+    filas.push(...deEsta);
+    // Diagnóstico del paginador: página pedida, primera fila y páginas que ofrece
+    informe.recorrido = informe.recorrido || [];
+    if (informe.recorrido.length < 12) informe.recorrido.push(actual + ":" + deEsta.length + ":" +
+      ((deEsta[0] || {}).expediente || "-").slice(0, 25) + ":[" + paginasOfrecidasHC(html).join(",") + "]");
     const siguiente = paginasOfrecidasHC(html).filter(n => n > actual).sort((a, b) => a - b)[0];
     if (!siguiente) break;
     if (Date.now() > informe.limite) { informe.incompleta = "se alcanzó el tope de tiempo en la página " + actual; break; }

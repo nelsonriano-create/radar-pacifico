@@ -120,7 +120,11 @@ async function descargarBCIE({ hoy = new Date() } = {}) {
   };
 
   // 1. Proyectos: [código, título, país, publicación, recepción, días]
-  for (const { celdas: c, enlace } of filasBCIE(await traerBCIE(BCIE.proyectos))) {
+  const htmlProyectos = await traerBCIE(BCIE.proyectos);
+  informe.diagnostico = { largo: htmlProyectos.length, tr: (htmlProyectos.match(/<tr\b/gi) || []).length,
+    td: (htmlProyectos.match(/<td\b/gi) || []).length, avisos: (htmlProyectos.match(/avisos-de-adquisicion\/\d/g) || []).length,
+    titulo: (htmlProyectos.match(/<title>([^<]*)/) || [])[1] };
+  for (const { celdas: c, enlace } of filasBCIE(htmlProyectos)) {
     informe.proyectos++;
     const [codigo, titulo, pais, publicado, recepcion] = c;
     agregar(base({
@@ -132,7 +136,7 @@ async function descargarBCIE({ hoy = new Date() } = {}) {
       enlace: enlace || BCIE.proyectos
     }));
   }
-  if (informe.proyectos === 0) throw new Error("La tabla de avisos de proyectos llegó vacía (¿cambió la página?)");
+  if (informe.proyectos === 0) throw new Error("La tabla de avisos de proyectos llegó vacía: " + JSON.stringify(informe.diagnostico));
 
   // 2. Institucionales: [bien o servicio, método, categoría, publicación, vencimiento, tiempo]
   try {
