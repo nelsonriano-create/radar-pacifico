@@ -23,6 +23,7 @@ const { descargarBancoMundial } = require("../codigo/conector-bancomundial.js");
 const { descargarUNGM } = require("../codigo/conector-ungm.js");
 const { descargarEmpleosHN } = require("../codigo/conector-empleoshn.js");
 const { descargarHonduCompras } = require("../codigo/conector-honducompras.js");
+const { descargarBCIE } = require("../codigo/conector-bcie.js");
 
 const CARPETA = path.join(__dirname, "..", "datos");
 const ARCHIVO = path.join(CARPETA, "oportunidades.json");
@@ -34,7 +35,8 @@ const FUENTES = [
   { nombre: "Banco Mundial", correr: () => descargarBancoMundial() },
   { nombre: "UNGM (ONU)",    correr: () => descargarUNGM() },
   { nombre: "Empleos.hn",    correr: () => descargarEmpleosHN() },
-  { nombre: "HonduCompras (ONCAE)", correr: () => descargarHonduCompras() }
+  { nombre: "HonduCompras (ONCAE)", correr: () => descargarHonduCompras() },
+  { nombre: "BCIE",          correr: () => descargarBCIE() }
 ];
 
 // La ficha que se guarda (sin los datos originales, para que el archivo sea liviano)

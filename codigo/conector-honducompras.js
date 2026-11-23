@@ -31,7 +31,9 @@ const HONDUCOMPRAS = {
   etapaRecepcion: "3",
   tipoConsultoria: "3",
   maxPaginas: 60,
-  pausaMs: 1200
+  pausaMs: 1200,
+  limitePedidoMs: 60000,       // cada pedido: máximo 1 minuto
+  limiteTotalMs: 6 * 60000     // toda la fuente: máximo 6 minutos
 };
 const CAB_HC = { "User-Agent": "Mozilla/5.0 (RadarPacifico; recolector diario)", "Accept-Language": "es" };
 const C = "ctl00$cphCuerpo$wpParametros$";
@@ -111,24 +113,34 @@ function paginasOfrecidasHC(html) {
   return [...new Set([...decodHC(html).matchAll(/Page\$(\d+)/g)].map(m => Number(m[1])))];
 }
 
-async function postHC(campos, galletas) {
+// Pedido con tiempo límite; si la conexión se cae o el servidor falla, reintenta
+async function pedirHC(opciones) {
+  let ultimo;
   for (let intento = 1; intento <= 3; intento++) {
-    const r = await fetch(HONDUCOMPRAS.url, {
-      method: "POST",
-      headers: { ...CAB_HC, "Content-Type": "application/x-www-form-urlencoded", "Cookie": galletas, "Referer": HONDUCOMPRAS.url },
-      body: new URLSearchParams(campos).toString()
-    });
-    if (r.ok) return r.text();
-    if (r.status >= 500) { await esperarHC(5000 * intento); continue; }
-    throw new Error("HTTP " + r.status + " al buscar");
+    try {
+      const r = await fetch(HONDUCOMPRAS.url, { ...opciones, signal: AbortSignal.timeout(HONDUCOMPRAS.limitePedidoMs) });
+      if (r.ok) return r;
+      ultimo = new Error("HTTP " + r.status);
+      if (r.status < 500) throw ultimo;
+    } catch (e) {
+      ultimo = e;
+      if (/HTTP 4/.test(String(e.message))) throw e;
+    }
+    await esperarHC(8000 * intento);
   }
-  throw new Error("HonduCompras no respondió tras 3 intentos");
+  throw new Error("HonduCompras no respondió tras 3 intentos (" + (ultimo && (ultimo.cause && ultimo.cause.code || ultimo.message)) + ")");
+}
+
+async function postHC(campos, galletas) {
+  const r = await pedirHC({ method: "POST",
+    headers: { ...CAB_HC, "Content-Type": "application/x-www-form-urlencoded", "Cookie": galletas, "Referer": HONDUCOMPRAS.url },
+    body: new URLSearchParams(campos).toString() });
+  return r.text();
 }
 
 // Una búsqueda completa (todas las páginas) con los filtros dados
 async function buscarHC(filtros, informe) {
-  const r = await fetch(HONDUCOMPRAS.url, { headers: CAB_HC });
-  if (!r.ok) throw new Error("No abre el buscador (HTTP " + r.status + ")");
+  const r = await pedirHC({ headers: CAB_HC });
   const galletas = (r.headers.getSetCookie ? r.headers.getSetCookie() : []).map(c => c.split(";")[0]).join("; ");
   let campos = camposFormularioHC(await r.text());
   if (!campos.__VIEWSTATE) throw new Error("El buscador no entregó el formulario (¿cambió la página?)");
@@ -142,12 +154,17 @@ async function buscarHC(filtros, informe) {
     filas.push(...leerFilasHC(html));
     const siguiente = paginasOfrecidasHC(html).filter(n => n > actual).sort((a, b) => a - b)[0];
     if (!siguiente) break;
+    if (Date.now() > informe.limite) { informe.incompleta = "se alcanzó el tope de tiempo en la página " + actual; break; }
     await esperarHC(HONDUCOMPRAS.pausaMs);
     campos = camposFormularioHC(html);                   // el formulario cambia en cada página
     delete campos[C + "btnBuscar"];
     campos.__EVENTTARGET = "ctl00$cphCuerpo$gvResultados";
     campos.__EVENTARGUMENT = "Page$" + siguiente;
-    html = await postHC(campos, galletas);
+    try { html = await postHC(campos, galletas); }
+    catch (e) {                                           // se conserva lo ya leído
+      informe.incompleta = "falló la página " + siguiente + ": " + String(e.message).slice(0, 120);
+      break;
+    }
     actual = siguiente;
   }
   return filas;
@@ -182,6 +199,7 @@ function fichaHC(f, esConsultoria) {
 async function descargarHonduCompras({ hoy = new Date() } = {}) {
   const inicioHoy = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth(), hoy.getUTCDate()));
   const informe = { paginas: 0, recibidos: 0, consultorias: 0, sinFecha: 0, yaCerro: 0, duplicado: 0, modalidades: {} };
+  Object.defineProperty(informe, "limite", { value: Date.now() + HONDUCOMPRAS.limiteTotalMs, enumerable: false });
 
   const todas = await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion }, informe);
   if (!todas.length) throw new Error("HonduCompras respondió, pero sin procesos en Recepción de Ofertas (¿cambió la página?)");
@@ -189,6 +207,7 @@ async function descargarHonduCompras({ hoy = new Date() } = {}) {
   // Consultorías: si esta segunda búsqueda falla, se sigue sin marcarlas
   const consultorias = new Set();
   try {
+    if (Date.now() > informe.limite) throw new Error("sin tiempo para la búsqueda de consultorías");
     await esperarHC(HONDUCOMPRAS.pausaMs);
     for (const f of await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion, [C + "ddlTipoAdquisicion"]: HONDUCOMPRAS.tipoConsultoria }, informe))
       consultorias.add(f.id || f.expediente);
