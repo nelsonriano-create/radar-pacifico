@@ -8,9 +8,9 @@
 // El conector hace lo mismo que una persona en el buscador:
 //   1. Abre el buscador y toma los datos ocultos del formulario
 //      (ASP.NET: __VIEWSTATE, __EVENTVALIDATION…).
-//   2. Busca la etapa "Recepción de Ofertas" (= procesos abiertos),
-//      modalidad por modalidad: primero licitaciones y concursos,
-//      luego precalificación y al final compras menores.
+//   2. Busca la etapa "Recepción de Ofertas" (= procesos abiertos).
+//      (Los filtros de modalidad y tipo del portal ignoran la etapa:
+//      no se usan.)
 //   3. Recorre todas las páginas de resultados.
 //   4. Marca como Consultoría los que lo dicen en el objeto
 //      (consultoría, supervisión, diseño, estudio, auditoría…).
@@ -38,9 +38,8 @@ const HONDUCOMPRAS = {
   pausaMs: 1200,
   limitePedidoMs: 60000,       // cada pedido: máximo 1 minuto
   limiteTotalMs: 25 * 60000,   // toda la fuente: máximo 25 minutos (el portal es lento: 30-100 s por página)
-  // Orden de búsqueda por modalidad: primero lo importante; las compras
-  // menores (montos pequeños, la mayoría) van al final con el tiempo que sobre
-  modalidades: [["1", "Licitación o Concurso"], ["3", "Precalificación"], ["2", "Compra Menor"]]
+  // Ojo: los filtros de modalidad y de tipo de adquisición del portal
+  // IGNORAN la etapa (devuelven todo el histórico); solo se usa la etapa.
 };
 const CAB_HC = { "User-Agent": "Mozilla/5.0 (RadarPacifico; recolector diario)", "Accept-Language": "es" };
 const C = "ctl00$cphCuerpo$wpParametros$";
@@ -226,23 +225,9 @@ async function descargarHonduCompras({ hoy = new Date() } = {}) {
   const informe = { paginas: 0, recibidos: 0, consultorias: 0, sinFecha: 0, yaCerro: 0, duplicado: 0, modalidades: {} };
   Object.defineProperty(informe, "limite", { value: Date.now() + HONDUCOMPRAS.limiteTotalMs, enumerable: false });
 
-  // Procesos en Recepción de Ofertas, por modalidad (ver orden arriba)
-  const todas = [];
-  informe.porModalidad = {};
-  for (const [valor, nombre] of HONDUCOMPRAS.modalidades) {
-    if (Date.now() > informe.limite) { informe.porModalidad[nombre] = "sin tiempo"; continue; }
-    const antes = todas.length;
-    delete informe.incompleta;
-    try {
-      todas.push(...await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion, [C + "ddlModalidad"]: valor }, informe));
-      informe.porModalidad[nombre] = (todas.length - antes) + (informe.incompleta ? " (incompleta: " + informe.incompleta + ")" : "");
-    } catch (e) {
-      informe.porModalidad[nombre] = "error: " + String(e.message || e).slice(0, 120);
-    }
-    await esperarHC(HONDUCOMPRAS.pausaMs);
-  }
-  delete informe.incompleta;
-  if (!todas.length) throw new Error("HonduCompras sin procesos en Recepción de Ofertas: " + JSON.stringify(informe.porModalidad));
+  // Todos los procesos en Recepción de Ofertas (~20 páginas de 30)
+  const todas = await buscarHC({ [C + "ddlEtapas"]: HONDUCOMPRAS.etapaRecepcion }, informe);
+  if (!todas.length) throw new Error("HonduCompras respondió, pero sin procesos en Recepción de Ofertas (¿cambió la página?)");
 
   const fichas = [];
   const vistos = new Set();
