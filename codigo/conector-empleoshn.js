@@ -22,6 +22,8 @@
 //  - Entidad: la que muestra el aviso; si dice "Empleos HN"
 //    (publicado por el portal a nombre de otro) → No informado.
 //  - Departamento: el del aviso; si trae los 18 → "Nacional".
+//  - Se descartan ofertas de servicios ("Ofrecemos…", freelance),
+//    pasantías y avisos con cierre a más de un año.
 //  - Pausa de 1 s entre páginas para no sobrecargar el portal.
 // ============================================================
 
@@ -61,7 +63,7 @@ function leerTarjetasEHN(html) {
       enlace: enlace.startsWith("http") ? enlace : EMPLEOSHN.base + enlace,
       titulo: textoEHN((p.match(/class="nombre-empresa">([\s\S]*?)<\/div>/) || [])[1]),
       entidad: textoEHN((p.match(/class="nombre-posicion">([\s\S]*?)<br/) || [])[1]),
-      ubicacion: textoEHN((p.match(/class="ubicacion">([\s\S]*?)<\/div>/) || [])[1]).replace(/^📍\s*/, ""),
+      ubicacion: textoEHN((p.match(/class="ubicacion">([\s\S]*?)<\/div>/) || [])[1]).replace(/^\s*📍\s*/u, "").trim(),
       cierre: (p.match(/datetime="(\d{4}-\d{2}-\d{2})/) || [])[1] || null
     });
   }
@@ -115,6 +117,16 @@ function pareceOportunidadEHN(t) {
   return /consultor|terminos de referencia|\btdr\b|licitacion|cotizacion|adquisicion|propuesta|servicios profesionales|auditoria|evaluacion/
     .test(sinTildesEHN(t));
 }
+
+// Avisos que NO son oportunidades: personas o empresas que ofrecen sus
+// servicios, pasantías, o "avisos permanentes" con cierre a años vista.
+function esRuidoEHN(t) {
+  const n = sinTildesEHN(t.titulo);
+  if (/^(ofrecemos|ofrezco|brindo|brindamos|se ofrece|servicios? de freelance)|freelance|\bpasant/.test(n)) return true;
+  if (/^consultor(a|es|as)? independientes?$/.test(n)) return true;
+  return false;
+}
+const MAX_DIAS_CIERRE = 365;   // un cierre a más de un año suele ser un aviso permanente
 
 function fichaEHN(t, aviso) {
   const slug = t.enlace.split("/jobs/")[1] || t.enlace;
@@ -171,7 +183,7 @@ async function recorrerEHN(parametros, informe) {
 async function descargarEmpleosHN({ hoy = new Date() } = {}) {
   const hoyTxt = hoy.toISOString().slice(0, 10);
   const informe = { paginas: 0, categoria: 0, porPalabra: 0, descartadasPorPalabra: 0,
-    sinFecha: 0, yaCerro: 0, duplicado: 0, fichasSinLeer: 0, tipos: {} };
+    sinFecha: 0, yaCerro: 0, ruido: 0, duplicado: 0, fichasSinLeer: 0, tipos: {} };
   const candidatas = new Map();           // enlace → tarjeta
 
   // 1. Categoría "Consultorías"
@@ -197,6 +209,7 @@ async function descargarEmpleosHN({ hoy = new Date() } = {}) {
   for (const t of candidatas.values()) {
     if (!t.cierre) { informe.sinFecha++; continue; }
     if (t.cierre < hoyTxt) { informe.yaCerro++; continue; }
+    if (esRuidoEHN(t) || (new Date(t.cierre) - hoy) / 864e5 > MAX_DIAS_CIERRE) { informe.ruido++; continue; }
     let aviso = null;
     try { aviso = leerAvisoEHN(await traerEHN(t.enlace)); }
     catch (e) { informe.fichasSinLeer++; }       // si falla, se usa lo del listado
@@ -210,4 +223,4 @@ async function descargarEmpleosHN({ hoy = new Date() } = {}) {
 }
 
 if (typeof module !== "undefined")
-  module.exports = { EMPLEOSHN, leerTarjetasEHN, leerAvisoEHN, fichaEHN, tipoEHN, departamentoEHN, descargarEmpleosHN };
+  module.exports = { EMPLEOSHN, esRuidoEHN, leerTarjetasEHN, leerAvisoEHN, fichaEHN, tipoEHN, departamentoEHN, descargarEmpleosHN };
