@@ -1,5 +1,159 @@
 [
  {
+  "fecha": "2026-11-24T21:04:13.746Z",
+  "segundos": 288,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2754,
+    "segundos": 7,
+    "informe": {
+     "recibidos": 2847,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 10,
+     "enCurso": 75,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 8,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 19,
+      "Estimate Phase": 6,
+      "Pré-Calificación de competidores": 1
+     },
+     "mostrados": 2754
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 20,
+    "segundos": 11,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1759,
+     "yaCerro": 297,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 20
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 156,
+    "segundos": 160,
+    "informe": {
+     "paginas": 75,
+     "recibidos": 1102,
+     "otrasRegiones": 893,
+     "variasLocalizaciones": 51,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 2,
+     "tipos": {
+      "Request for quotation": 57,
+      "Request for proposal": 38,
+      "Request for EOI": 6,
+      "Invitation to bid": 48,
+      "Call for individual consultants": 4,
+      "Grant support-call for proposal": 1,
+      "Not set": 1,
+      "Call for implementing partners": 1
+     },
+     "paisesVistos": {
+      "Ukraine": 37,
+      "Syrian Arab Republic": 32,
+      "Philippines": 30,
+      "Jordan": 24,
+      "Afghanistan": 23,
+      "Ethiopia": 23,
+      "Nigeria": 21,
+      "Palestine, State of": 21,
+      "Pakistan": 20,
+      "Egypt": 19,
+      "Uganda": 18,
+      "Bangladesh": 17,
+      "Lebanon": 17,
+      "Switzerland": 17,
+      "Somalia": 15,
+      "Cameroon": 14,
+      "India": 14,
+      "Madagascar": 14,
+      "Morocco": 13,
+      "Chad": 13,
+      "Congo, The Democratic Republic of the": 13,
+      "Moldova, Republic of": 13,
+      "South Sudan": 12,
+      "Cambodia": 12,
+      "Viet Nam": 12
+     },
+     "mostrados": 156
+    }
+   },
+   {
+    "fuente": "Empleos.hn",
+    "estado": "ok",
+    "oportunidades": 24,
+    "segundos": 39,
+    "informe": {
+     "paginas": 8,
+     "categoria": 24,
+     "porPalabra": 61,
+     "descartadasPorPalabra": 32,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "ruido": 6,
+     "duplicado": 23,
+     "fichasSinLeer": 0,
+     "tipos": {
+      "Consultoría": 21,
+      "Licitación": 3
+     },
+     "mostrados": 24
+    }
+   },
+   {
+    "fuente": "HonduCompras (ONCAE)",
+    "estado": "error",
+    "mensaje": "HonduCompras no respondió tras 3 intento(s) (The operation was aborted due to timeout)",
+    "oportunidades": 191,
+    "conservadasDeAyer": true,
+    "segundos": 288
+   },
+   {
+    "fuente": "BCIE",
+    "estado": "ok",
+    "oportunidades": 11,
+    "segundos": 1,
+    "informe": {
+     "proyectos": 241,
+     "institucionales": 0,
+     "institucionalesNoConsultoria": 0,
+     "sinFecha": 0,
+     "yaCerro": 230,
+     "duplicado": 0,
+     "paises": {
+      "Argentina": 2,
+      "Belice": 1,
+      "Costa Rica": 2,
+      "Guatemala": 2,
+      "El Salvador": 1,
+      "Honduras": 1,
+      "Nicaragua": 2
+     },
+     "avisosEnPagina": 241,
+     "mostrados": 11
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-23T22:54:26.232Z",
   "segundos": 1626,
   "fuentes": [
