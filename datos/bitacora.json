@@ -1,5 +1,212 @@
 [
  {
+  "fecha": "2026-11-27T20:01:33.855Z",
+  "segundos": 797,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2351,
+    "segundos": 5,
+    "informe": {
+     "recibidos": 2444,
+     "directa": 0,
+     "adjudicado": 0,
+     "cerrado": 0,
+     "yaCerro": 11,
+     "enCurso": 72,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 10,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 29,
+      "Pré-Calificación de competidores": 4,
+      "Estimate Phase": 2
+     },
+     "mostrados": 2351
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 21,
+    "segundos": 11,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1755,
+     "yaCerro": 300,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 21
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 175,
+    "segundos": 169,
+    "informe": {
+     "paginas": 82,
+     "recibidos": 1208,
+     "otrasRegiones": 970,
+     "variasLocalizaciones": 53,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 10,
+     "tipos": {
+      "Request for quotation": 66,
+      "Request for proposal": 42,
+      "Invitation to bid": 49,
+      "Call for individual consultants": 7,
+      "Not set": 4,
+      "Request for information": 1,
+      "Request for EOI": 5,
+      "Grant support-call for proposal": 1
+     },
+     "paisesVistos": {
+      "Ukraine": 43,
+      "Syrian Arab Republic": 34,
+      "Philippines": 29,
+      "Jordan": 29,
+      "Afghanistan": 25,
+      "Ethiopia": 23,
+      "Lebanon": 22,
+      "Nigeria": 21,
+      "Egypt": 20,
+      "Pakistan": 19,
+      "Central African Republic": 19,
+      "India": 19,
+      "Palestine, State of": 18,
+      "Uganda": 18,
+      "Chad": 17,
+      "Bangladesh": 17,
+      "Somalia": 17,
+      "Congo, The Democratic Republic of the": 15,
+      "Moldova, Republic of": 15,
+      "Kenya": 14,
+      "Switzerland": 14,
+      "Thailand": 14,
+      "Austria": 14,
+      "Sudan": 14,
+      "Côte d'Ivoire": 13
+     },
+     "mostrados": 175
+    }
+   },
+   {
+    "fuente": "Empleos.hn",
+    "estado": "ok",
+    "oportunidades": 22,
+    "segundos": 51,
+    "informe": {
+     "paginas": 7,
+     "categoria": 22,
+     "porPalabra": 61,
+     "descartadasPorPalabra": 36,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "ruido": 6,
+     "duplicado": 19,
+     "fichasSinLeer": 0,
+     "tipos": {
+      "Consultoría": 19,
+      "Licitación": 3
+     },
+     "mostrados": 22
+    }
+   },
+   {
+    "fuente": "HonduCompras (ONCAE)",
+    "estado": "ok",
+    "oportunidades": 227,
+    "segundos": 797,
+    "informe": {
+     "paginas": 52,
+     "recibidos": 1560,
+     "consultorias": 6,
+     "sinFecha": 0,
+     "yaCerro": 1333,
+     "duplicado": 0,
+     "modalidades": {
+      "Licitación pública nacional": 35,
+      "Concurso público nacional": 3,
+      "Concurso privado": 3,
+      "Compra Menor": 164,
+      "Contratación directa": 9,
+      "Licitación pública internacional": 3,
+      "Licitación privada": 10
+     },
+     "paginasSaltadas": [
+      53
+     ],
+     "recorrido": [
+      "1:30",
+      "2:30",
+      "3:30",
+      "4:30",
+      "5:30",
+      "6:30",
+      "7:30",
+      "8:30",
+      "9:30",
+      "10:30",
+      "11:30",
+      "12:30",
+      "13:30",
+      "14:30",
+      "15:30",
+      "16:30",
+      "17:30",
+      "18:30",
+      "19:30",
+      "20:30",
+      "21:30",
+      "22:30",
+      "23:30",
+      "24:30",
+      "25:30",
+      "26:30",
+      "27:30",
+      "28:30",
+      "29:30",
+      "30:30"
+     ],
+     "reaperturas": 2,
+     "incompleta": "falló la página 53 y no se pudo seguir",
+     "mostrados": 227
+    }
+   },
+   {
+    "fuente": "BCIE",
+    "estado": "ok",
+    "oportunidades": 13,
+    "segundos": 1,
+    "informe": {
+     "proyectos": 243,
+     "institucionales": 0,
+     "institucionalesNoConsultoria": 0,
+     "sinFecha": 0,
+     "yaCerro": 230,
+     "duplicado": 0,
+     "paises": {
+      "Guatemala": 3,
+      "El Salvador": 2,
+      "Argentina": 2,
+      "Belice": 1,
+      "Costa Rica": 2,
+      "Honduras": 1,
+      "Nicaragua": 2
+     },
+     "avisosEnPagina": 243,
+     "mostrados": 13
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-26T20:17:05.159Z",
   "segundos": 1081,
   "fuentes": [
