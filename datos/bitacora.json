@@ -1,5 +1,195 @@
 [
  {
+  "fecha": "2026-11-28T18:56:17.479Z",
+  "segundos": 929,
+  "fuentes": [
+   {
+    "fuente": "SECOP II",
+    "estado": "ok",
+    "oportunidades": 2148,
+    "segundos": 7,
+    "informe": {
+     "recibidos": 2245,
+     "directa": 0,
+     "adjudicado": 8,
+     "cerrado": 0,
+     "yaCerro": 13,
+     "enCurso": 66,
+     "sinFecha": 0,
+     "sinCoincidencia": 0,
+     "duplicado": 10,
+     "incompleto": 0,
+     "otrosEstados": {},
+     "otrasFases": {
+      "Clarification submission": 33,
+      "Pré-Calificación de competidores": 5,
+      "Estimate Phase": 7
+     },
+     "mostrados": 2148
+    }
+   },
+   {
+    "fuente": "Banco Mundial",
+    "estado": "ok",
+    "oportunidades": 24,
+    "segundos": 14,
+    "informe": {
+     "recibidos": 2077,
+     "adjudicado": 1754,
+     "yaCerro": 298,
+     "sinFecha": 1,
+     "duplicado": 0,
+     "paisesConError": [],
+     "mostrados": 24
+    }
+   },
+   {
+    "fuente": "UNGM (ONU)",
+    "estado": "ok",
+    "oportunidades": 176,
+    "segundos": 169,
+    "informe": {
+     "paginas": 81,
+     "recibidos": 1197,
+     "otrasRegiones": 959,
+     "variasLocalizaciones": 52,
+     "sinFecha": 0,
+     "yaCerro": 0,
+     "duplicado": 10,
+     "tipos": {
+      "Request for quotation": 66,
+      "Request for proposal": 43,
+      "Invitation to bid": 49,
+      "Call for individual consultants": 7,
+      "Not set": 3,
+      "Request for information": 1,
+      "Request for EOI": 6,
+      "Grant support-call for proposal": 1
+     },
+     "paisesVistos": {
+      "Ukraine": 44,
+      "Syrian Arab Republic": 32,
+      "Philippines": 29,
+      "Jordan": 28,
+      "Afghanistan": 23,
+      "Ethiopia": 22,
+      "Uganda": 21,
+      "Lebanon": 20,
+      "Nigeria": 19,
+      "Egypt": 19,
+      "Bangladesh": 19,
+      "India": 19,
+      "Chad": 18,
+      "Sudan": 17,
+      "Pakistan": 17,
+      "Somalia": 17,
+      "Austria": 16,
+      "Palestine, State of": 16,
+      "Sri Lanka": 15,
+      "Congo, The Democratic Republic of the": 15,
+      "Kenya": 15,
+      "Central African Republic": 15,
+      "Viet Nam": 14,
+      "Moldova, Republic of": 13,
+      "Switzerland": 13
+     },
+     "mostrados": 176
+    }
+   },
+   {
+    "fuente": "Empleos.hn",
+    "estado": "error",
+    "mensaje": "La categoría Consultorías llegó vacía (¿cambió la página?)",
+    "oportunidades": 19,
+    "conservadasDeAyer": true,
+    "segundos": 5
+   },
+   {
+    "fuente": "HonduCompras (ONCAE)",
+    "estado": "ok",
+    "oportunidades": 155,
+    "segundos": 929,
+    "informe": {
+     "paginas": 60,
+     "recibidos": 1800,
+     "consultorias": 5,
+     "sinFecha": 0,
+     "yaCerro": 1645,
+     "duplicado": 0,
+     "modalidades": {
+      "Licitación pública nacional": 37,
+      "Concurso público nacional": 3,
+      "Concurso privado": 3,
+      "Compra Menor": 96,
+      "Contratación directa": 4,
+      "Concurso público internacional": 1,
+      "Licitación pública internacional": 3,
+      "Licitación privada": 8
+     },
+     "paginasSaltadas": [],
+     "recorrido": [
+      "1:30",
+      "2:30",
+      "3:30",
+      "4:30",
+      "5:30",
+      "6:30",
+      "7:30",
+      "8:30",
+      "9:30",
+      "10:30",
+      "11:30",
+      "12:30",
+      "13:30",
+      "14:30",
+      "15:30",
+      "16:30",
+      "17:30",
+      "18:30",
+      "19:30",
+      "20:30",
+      "21:30",
+      "22:30",
+      "23:30",
+      "24:30",
+      "25:30",
+      "26:30",
+      "27:30",
+      "28:30",
+      "29:30",
+      "30:30"
+     ],
+     "mostrados": 155
+    }
+   },
+   {
+    "fuente": "BCIE",
+    "estado": "ok",
+    "oportunidades": 13,
+    "segundos": 1,
+    "informe": {
+     "proyectos": 243,
+     "institucionales": 0,
+     "institucionalesNoConsultoria": 0,
+     "sinFecha": 0,
+     "yaCerro": 230,
+     "duplicado": 0,
+     "paises": {
+      "Guatemala": 3,
+      "El Salvador": 2,
+      "Argentina": 2,
+      "Belice": 1,
+      "Costa Rica": 2,
+      "Honduras": 1,
+      "Nicaragua": 2
+     },
+     "avisosEnPagina": 243,
+     "mostrados": 13
+    }
+   }
+  ]
+ },
+ {
   "fecha": "2026-11-27T20:01:33.855Z",
   "segundos": 797,
   "fuentes": [
